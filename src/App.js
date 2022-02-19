@@ -1,20 +1,25 @@
-import Home from './routes/home';
-import Invoices from './routes/invoices';
+// import Home from './modules/home/home';
 import Expenses from './routes/expenses';
 import NotFound from './routes/notfound';
+
+import Home from './modules/home/home';
+import Menu from './modules/home/menu';
+import Contacto from './modules/home/contact';
+
+
 import { Routes, Route, Link } from "react-router-dom";
 
 
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="main-body">
     {/* <nav>...</nav> */}
     <div className="main">
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="invoices" element={<Invoices />}></Route>
-        <Route path="expenses" element={<Expenses />}></Route>
+        <Route path="/menu" element={<Menu />}></Route>
+        <Route path="/contact" element={<Contacto />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>

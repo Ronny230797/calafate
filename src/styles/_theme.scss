@@ -1,7 +1,64 @@
-$background-color: #000000;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@1,200&display=swap');
+
+$background-color: #1C1B1B;
 $text-white-color: #ffffff;
 $text-black-color: #000000;
 $secondary-color: 	#C0C0C0;
 $component-color: #097969;
 $component-hover-color: #AFE1AF;
 
+$max-mobile: 320px;
+$max-tablet: 768px;
+$min-desktop: 769px;
+
+
+body{
+    background-color: $background-color;
+    font-family: 'Roboto Serif', sans-serif;
+
+    img{
+        border-radius: 4px;
+    }
+
+    h1, h2, h3, span, p {
+        color: $text-white-color;
+    }
+
+    .row{
+        --bs-gutter-y: 2vw;
+    }
+
+}
+
+//Card Container
+.card-cotainer{
+    border: solid 0.5px $secondary-color;
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+    padding: 1vw;
+}
+
+//Button Primary
+.button-primary{
+    background-color: $component-color;
+    color: $text-black-color;
+    margin-top: 1vw;
+}
+
+
+//Button Secondary
+.button-secondary{
+    background-color: transparent;
+    color: $text-white-color;
+}
+
+//App-Bar
+.navbar{
+    background-color: $secondary-color !important;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border-radius: 4px;
+}
