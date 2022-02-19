@@ -1,0 +1,23 @@
+@import "../_theme.scss";
+
+.login {
+    .login-card {
+        border-radius: 4px;
+        border: solid 1px $component-color;
+        margin-top: 10%;
+        text-align: center;
+        padding-top: 5vw;
+        padding-bottom: 5vw;
+
+        .input-group{
+            width: 80%;
+            margin-left: 20%;
+
+            .form-control{
+                background-color: transparent;
+            }
+
+        }
+
+    }
+}

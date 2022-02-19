@@ -42,8 +42,15 @@ body{
 //Button Primary
 .button-primary{
     background-color: $component-color;
+    border-color: $component-color;
     color: $text-black-color;
     margin-top: 1vw;
+}
+
+.button-primary:hover {
+    background-color: $component-hover-color;
+    border-color: $component-hover-color;
+    font-weight: bold;
 }
 
 
