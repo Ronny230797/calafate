@@ -71,3 +71,16 @@ body{
     padding-right: 2vw;
     border-radius: 4px;
 }
+
+//Input-Group
+.input-group{
+    input{
+        caret-color: $text-white-color;
+        color: $text-white-color;
+    }
+
+    input:focus{
+        caret-color: $text-white-color;
+        color: $text-white-color;
+    }
+}
