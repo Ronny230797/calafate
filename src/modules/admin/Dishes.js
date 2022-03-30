@@ -7,15 +7,15 @@ export default function Dishes() {
 
   const [resData, setresData] = useState([]);
 
-  const loginRequest = async () => {
+  const getDishRequest = async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
     setresData(data);
   };
 
   useEffect(() => {
-    loginRequest();
-  });
+    getDishRequest();
+  },[]);
 
   return (
     <React.Fragment>
@@ -30,7 +30,7 @@ export default function Dishes() {
           <Col xs={6} md={6}>
             <div className="card-cotainer">
               <p>Modificar existentes</p>
-              <Link to="/InsertDish"><Button>Acceder</Button></Link>
+              <Link to="/"><Button>Acceder</Button></Link>
             </div>
           </Col>
         </Row>

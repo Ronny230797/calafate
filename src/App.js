@@ -5,6 +5,8 @@ import Contacto from './modules/home/contact';
 import Login from './modules/admin/login';
 import Admin from './modules/admin/admin';
 import Dishes from './modules/admin/Dishes';
+import InsertDish from './modules/admin/InsertDish';
+import AllDishes from './modules/admin/AllDishes';
 import { Routes, Route } from "react-router-dom";
 
 
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="/logincalafate" element={<Login />}></Route>
         <Route path="/admin" element={<Admin />}></Route>
         <Route path="/Dishes" element={<Dishes />}></Route>
+        <Route path="/InsertDish" element={<InsertDish />}></Route>
+        <Route path="/AllDishes" element={<AllDishes />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
