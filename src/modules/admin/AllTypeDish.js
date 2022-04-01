@@ -9,31 +9,33 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function AllDishes() {
-  const API_URL_GET_Dish = "http://localhost:4000/waiter/Dishes/GetAllDishes";
-  const API_URL_DELETE_Dish = "http://localhost:4000/Administration/Admin/DeleteDish";
+export default function AllTypeDish() {
+  const API_URL_GET_TYPE_Dish = "http://localhost:4000/Administration/Admin/GetAllTypeDishDrink";
+  const API_URL_DELETE_TYPE_Dish = "http://localhost:4000/Administration/Admin/DeleteTypeDishDrink";
   const [resData, setresData] = useState([]);
   const [objSelect, setObjSelect] = useState([]);
 
-  const getDishRequest = async () => {
-    const response = await fetch(API_URL_GET_Dish);
+  const getTypeDishRequest = async () => {
+    const response = await fetch(API_URL_GET_TYPE_Dish);
     const data = await response.json();
     setresData(data);
   };
 
-  const deleteDish = async (ID) => {
+  const deleteTypeDish = async (ID) => {
     console.log(ID)
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(ID),
     };
-    const response = await fetch(API_URL_DELETE_Dish, requestOptions);
-    const data = await response.json();
+    const response = await fetch(API_URL_DELETE_TYPE_Dish, requestOptions);
+    if(response.status == 200) {
+        alert("Se elimino correctamente");
+    }
   };
 
   useEffect(() => {
-    getDishRequest();
+    getTypeDishRequest();
   }, []);
 
   return (
@@ -42,18 +44,18 @@ export default function AllDishes() {
         <Row>
           <Col xs={12} md={12}>
             <ListGroup>
-              {resData.map((Alldishes) => (
-                <Row key={Alldishes.platoID}>
+              {resData.map((AllTypedishes) => (
+                <Row key={AllTypedishes.tipo_Plato_Bebida_ID}>
                   <Col xs={8} md={8}>
                     <ListGroup.Item>
-                      {Alldishes.plato_Bebida_Nombre}
+                      {AllTypedishes.tipo_Plato_Bebida_Name}
                     </ListGroup.Item>
                   </Col>
                   <Col xs={4} md={4}>
-                    <Link to="/InsertDish" state={Alldishes.platoID}>
+                    <Link to="/InsertDish" state={AllTypedishes.tipo_Plato_Bebida_ID}>
                       <Button>Modificar</Button>
                     </Link>
-                    <Button value={Alldishes.platoID} onClick={(event) => deleteDish(event.target.value)}>Eliminar</Button>
+                    <Button value={AllTypedishes.tipo_Plato_Bebida_ID} onClick={(event) => deleteTypeDish(event.target.value)}>Eliminar</Button>
                   </Col>
                 </Row>
               ))}

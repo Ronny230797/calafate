@@ -13,6 +13,8 @@ import "../../styles/admin/InsertDish.scss";
 
 export default function InsertDish(props) {
   const API_URL = "http://localhost:4000/Administration/Admin/InsertDish";
+  const API_URL_Modify =
+    "http://localhost:4000/Administration/Admin/ModifyDish";
   const API_URL_GET_Type =
     "http://localhost:4000/Administration/Admin/GetAllTypeDishDrink";
 
@@ -22,10 +24,12 @@ export default function InsertDish(props) {
   const [resData, setresData] = useState([]);
   const [typeDishData, setTypeDishData] = useState([]);
   const [typeNewDish, setTypeNewDish] = useState(0);
+  const [IDNewDish, setIDNewDish] = useState([]);
   const [nameNewDish, setNameNewDish] = useState([]);
   const [descriptionNewDish, setDescriptionNewDish] = useState([]);
   const [priceNewDish, setPriceNewDish] = useState([]);
   const [dishModify, setdishModify] = useState([]);
+  const [isModify, setisModify] = useState(false);
   const location = useLocation();
   const objSelect = location.state;
 
@@ -35,14 +39,25 @@ export default function InsertDish(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     };
-    const response = await fetch(API_URL, requestOptions);
-    setresData(response);
-
-    console.log(response);
-    if (response.OK) {
-      alert("Se ingreso correctamente");
+    if (isModify) {
+      const response = await fetch(API_URL_Modify, requestOptions);
+      const data = await response.json();
+      setresData(data);
+      if (response.status == 200) {
+        alert("Se ingreso correctamente");
+      } else {
+        alert("Ocurrio un error: " + response.status);
+      }
     } else {
-      alert("Ocurrio un error: " + response);
+      const response = await fetch(API_URL, requestOptions);
+      const data = await response.json();
+      setresData(data);
+      console.log(data.status);
+      if (data.status == 200) {
+        alert("Se ingreso correctamente");
+      } else {
+        alert("Ocurrio un error: " + response.status);
+      }
     }
   };
 
@@ -59,46 +74,51 @@ export default function InsertDish(props) {
       body: JSON.stringify(ID),
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
-    setdishModify(response);
+    const data = await response.json();
+    setIDNewDish(data.platoID);
+    setTypeNewDish(data.tipo_Plato_Bebida);
+    setNameNewDish(data.plato_Bebida_Nombre);
+    setDescriptionNewDish(data.plato_Bebida_Descripcion);
+    setPriceNewDish(data.precio);
   };
 
   const InsertEvent = async () => {
     if (typeNewDish == 0) {
       alert("No se selecciono el tipo de platillo");
     } else {
-      let obj = {
-        Tipo_Plato_Bebida: typeNewDish,
-        Plato_Bebida_Nombre: nameNewDish,
-        Plato_Bebida_Descripcion: descriptionNewDish,
-        Precio: priceNewDish,
-      };
-      /**InsertRequest(obj);**/
+      if (isModify) {
+        let obj = {
+          PlatoID: IDNewDish,
+          Tipo_Plato_Bebida: typeNewDish,
+          Plato_Bebida_Nombre: nameNewDish,
+          Plato_Bebida_Descripcion: descriptionNewDish,
+          Precio: priceNewDish,
+        };
+        console.log(obj);
+        InsertRequest(obj);
+      } else {
+        let obj = {
+          Tipo_Plato_Bebida: typeNewDish,
+          Plato_Bebida_Nombre: nameNewDish,
+          Plato_Bebida_Descripcion: descriptionNewDish,
+          Precio: priceNewDish,
+        };
+        console.log(obj);
+        InsertRequest(obj);
+      }
     }
   };
 
   useEffect(() => {
     if (objSelect != null) {
-      let ID = {
-        dishID: objSelect,
-      };
-      getDishByIDRequest(ID);
-
-      if (dishModify != null) {
-        console.log(dishModify);
-        setTypeNewDish(dishModify.Tipo_Plato_Bebida);
-        setNameNewDish(dishModify.Plato_Bebida_Nombre);
-        setDescriptionNewDish(dishModify.Plato_Bebida_Descripcion);
-        setPriceNewDish(dishModify.Precio);
-        console.log("Si trae parametro");
-        getTypeDishRequest();
-      }else { 
-        alert("Ocurrio un error al cargar los datos...")
-      }
+      setisModify(true);
+      getDishByIDRequest(objSelect);
+      getTypeDishRequest();
     } else {
-      console.log("No trae parametro");
+      setisModify(false);
       getTypeDishRequest();
     }
-  }, [objSelect]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -114,7 +134,10 @@ export default function InsertDish(props) {
                   >
                     <option value={0}>Seleccione el tipo</option>
                     {typeDishData.map((TypeDishes) => (
-                      <option value={TypeDishes.tipo_Plato_Bebida_ID}>
+                      <option
+                        key={TypeDishes.tipo_Plato_Bebida_ID}
+                        value={TypeDishes.tipo_Plato_Bebida_ID}
+                      >
                         {TypeDishes.tipo_Plato_Bebida_Name}
                       </option>
                     ))}
@@ -168,7 +191,9 @@ export default function InsertDish(props) {
                   </InputGroup>
                 </Col>
               </Row>
-              <Button onClick={InsertEvent}>Ingresar</Button>
+              <Button onClick={InsertEvent}>
+                {isModify ? "Modificar" : "Ingresar"}
+              </Button>
             </div>
           </Col>
         </Row>
