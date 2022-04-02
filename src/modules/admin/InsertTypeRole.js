@@ -11,14 +11,17 @@ import {
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
-export default function InsertTypeDish(props) {
-  const API_URL_INSERT_TYPE = "http://localhost:4000/Administration/Admin/InsertTypeDishDrink";
-  const API_URL_Modify_TYPE = "http://localhost:4000/Administration/Admin/ModifyDish";
-  const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetTypeDishDrinkByID";
+export default function InsertTypeRole() {
+  const API_URL_INSERT_TYPE_ROLE =
+    "http://localhost:4000/Administration/Admin/InsertTypeRole";
+  const API_URL_Modify_TYPE_ROLE =
+    "http://localhost:4000/Administration/Admin/ModifyTypeRole";
+  const API_URL_GET_ByID =
+    "http://localhost:4000/Administration/Admin/GetTypeRoleByID";
 
-  const [newTypeDishName, setnewTypeDishName] = useState("");
-  const [newTypeDishID, setnewTypeDishID] = useState(0);
-  const [newTypeDescriptionDish, setnewTypeDescriptionDish] = useState("");
+  const [newTypeRoleName, setnewTypeRoleName] = useState("");
+  const [newTypeRoleID, setnewTypeRoleID] = useState(0);
+  const [newTypeDescriptionRole, setnewTypeDescriptionRole] = useState("");
   const [isModify, setisModify] = useState(false);
   const location = useLocation();
   const objSelect = location.state;
@@ -30,14 +33,14 @@ export default function InsertTypeDish(props) {
       body: JSON.stringify(obj),
     };
     if (isModify) {
-      const response = await fetch(API_URL_Modify_TYPE, requestOptions);
+      const response = await fetch(API_URL_Modify_TYPE_ROLE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
       } else {
         alert("Ocurrio un error: " + response.status);
       }
     } else {
-      const response = await fetch(API_URL_INSERT_TYPE, requestOptions);
+      const response = await fetch(API_URL_INSERT_TYPE_ROLE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
       } else {
@@ -46,7 +49,7 @@ export default function InsertTypeDish(props) {
     }
   };
 
-  const getTypeDishByIDRequest = async (ID) => {
+  const getTypeRoleByIDRequest = async (ID) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -54,43 +57,43 @@ export default function InsertTypeDish(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data)
-    setnewTypeDishID(data.tipo_Plato_Bebida_ID);
-    setnewTypeDishName(data.tipo_Plato_Bebida_Name);
-    setnewTypeDescriptionDish(data.tipo_Plato_Bebida_Description);
+    console.log(data);
+    setnewTypeRoleID(data.tipo_Role_ID);
+    setnewTypeRoleName(data.tipo_Role_Name);
+    setnewTypeDescriptionRole(data.tipo_Role_Description);
   };
 
   const InsertEvent = async () => {
-    if(isModify) {
-      if(newTypeDishName == "") {
-        alert("Por favor ingrese el nombre")
-      }else {
-        if(newTypeDishID == 0) {
-          alert("Ocurrio un error al cargar los datos...")
-        }else {
-          if(newTypeDescriptionDish == "") {
-            alert("Por favor ingrese la descripción...")
-          }else {
+    if (isModify) {
+      if (newTypeRoleName == "") {
+        alert("Por favor ingrese el nombre");
+      } else {
+        if (newTypeRoleID == 0) {
+          alert("Ocurrio un error al cargar los datos...");
+        } else {
+          if (newTypeDescriptionRole == "") {
+            alert("Por favor ingrese la descripción...");
+          } else {
             let obj = {
-              tipo_Plato_Bebida_ID : newTypeDishID,
-              tipo_Plato_Bebida_Name : newTypeDishName,
-              tipo_Plato_Bebida_Description : newTypeDescriptionDish
-            }
+              tipo_Role_ID: newTypeRoleID,
+              tipo_Role_Name: newTypeRoleName,
+              tipo_role_Description: newTypeDescriptionRole,
+            };
             InsertRequest(obj);
           }
         }
       }
-    }else {
-      if(newTypeDishName == "") {
-        alert("Por favor ingrese el nombre")
-      }else {
-        if(newTypeDescriptionDish == "") {
-          alert("Por favor ingrese la descripción...")
-        }else {
+    } else {
+      if (newTypeRoleName == "") {
+        alert("Por favor ingrese el nombre");
+      } else {
+        if (newTypeDescriptionRole == "") {
+          alert("Por favor ingrese la descripción...");
+        } else {
           let obj = {
-            tipo_Plato_Bebida_Name : newTypeDishName,
-            tipo_Plato_Bebida_Description : newTypeDescriptionDish
-          }
+            tipo_Role_Name: newTypeRoleName,
+            tipo_role_Description: newTypeDescriptionRole,
+          };
           InsertRequest(obj);
         }
       }
@@ -100,12 +103,11 @@ export default function InsertTypeDish(props) {
   useEffect(() => {
     if (objSelect != null) {
       setisModify(true);
-      getTypeDishByIDRequest(objSelect);
+      getTypeRoleByIDRequest(objSelect);
     } else {
       setisModify(false);
     }
   }, []);
-
   return (
     <React.Fragment>
       <Container className="InsertDish">
@@ -116,13 +118,15 @@ export default function InsertTypeDish(props) {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Nombre del tipo de platillo/Bebida
+                      Nombre del tipo de role
                     </InputGroup.Text>
                     <FormControl
-                      aria-label="TipoPlatillo/BebidaNombre"
-                      value={newTypeDishName}
+                      aria-label="TypeRoleName"
+                      value={newTypeRoleName}
                       type="text"
-                      onChange={(event) => setnewTypeDishName(event.target.value)}
+                      onChange={(event) =>
+                        setnewTypeRoleName(event.target.value)
+                      }
                     />
                   </InputGroup>
                 </Col>
@@ -131,14 +135,14 @@ export default function InsertTypeDish(props) {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Descripcion del platillo/Bebida
+                      Descripcion del tipo de role
                     </InputGroup.Text>
                     <FormControl
-                      aria-label="TipoPlatoDescripción"
-                      value={newTypeDescriptionDish}
+                      aria-label="TypeRoleDescription"
+                      value={newTypeDescriptionRole}
                       type="text"
                       onChange={(event) =>
-                        setnewTypeDescriptionDish(event.target.value)
+                        setnewTypeDescriptionRole(event.target.value)
                       }
                     />
                   </InputGroup>

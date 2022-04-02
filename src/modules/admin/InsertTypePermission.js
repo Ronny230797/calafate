@@ -11,14 +11,18 @@ import {
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
-export default function InsertTypeDish(props) {
-  const API_URL_INSERT_TYPE = "http://localhost:4000/Administration/Admin/InsertTypeDishDrink";
-  const API_URL_Modify_TYPE = "http://localhost:4000/Administration/Admin/ModifyDish";
-  const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetTypeDishDrinkByID";
+export default function InsertTypePermission() {
+  const API_URL_INSERT_TYPE_PERMISSION =
+    "http://localhost:4000/Administration/Admin/InsertTypePermission";
+  const API_URL_Modify_TYPE_PERMISSION =
+    "http://localhost:4000/Administration/Admin/ModifyTypePermission";
+  const API_URL_GET_ByID =
+    "http://localhost:4000/Administration/Admin/GetTypePermissionByID";
 
-  const [newTypeDishName, setnewTypeDishName] = useState("");
-  const [newTypeDishID, setnewTypeDishID] = useState(0);
-  const [newTypeDescriptionDish, setnewTypeDescriptionDish] = useState("");
+  const [newTypePermissionName, setnewTypePermissionName] = useState([]);
+  const [newTypePermissionDescription, setnewTypePermissionDescription] =
+    useState([]);
+  const [newTypePermissionID, setnewTypePermissionID] = useState([]);
   const [isModify, setisModify] = useState(false);
   const location = useLocation();
   const objSelect = location.state;
@@ -30,14 +34,20 @@ export default function InsertTypeDish(props) {
       body: JSON.stringify(obj),
     };
     if (isModify) {
-      const response = await fetch(API_URL_Modify_TYPE, requestOptions);
+      const response = await fetch(
+        API_URL_Modify_TYPE_PERMISSION,
+        requestOptions
+      );
       if (response.status == 200) {
         alert("Se ingreso correctamente");
       } else {
         alert("Ocurrio un error: " + response.status);
       }
     } else {
-      const response = await fetch(API_URL_INSERT_TYPE, requestOptions);
+      const response = await fetch(
+        API_URL_INSERT_TYPE_PERMISSION,
+        requestOptions
+      );
       if (response.status == 200) {
         alert("Se ingreso correctamente");
       } else {
@@ -46,7 +56,7 @@ export default function InsertTypeDish(props) {
     }
   };
 
-  const getTypeDishByIDRequest = async (ID) => {
+  const getTypePermissionByIDRequest = async (ID) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -54,43 +64,43 @@ export default function InsertTypeDish(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data)
-    setnewTypeDishID(data.tipo_Plato_Bebida_ID);
-    setnewTypeDishName(data.tipo_Plato_Bebida_Name);
-    setnewTypeDescriptionDish(data.tipo_Plato_Bebida_Description);
+    console.log(data);
+    setnewTypePermissionID(data.tipo_Permiso_ID);
+    setnewTypePermissionName(data.tipo_Permiso_Name);
+    setnewTypePermissionDescription(data.tipo_Permiso_Description);
   };
 
   const InsertEvent = async () => {
-    if(isModify) {
-      if(newTypeDishName == "") {
-        alert("Por favor ingrese el nombre")
-      }else {
-        if(newTypeDishID == 0) {
-          alert("Ocurrio un error al cargar los datos...")
-        }else {
-          if(newTypeDescriptionDish == "") {
-            alert("Por favor ingrese la descripción...")
-          }else {
+    if (isModify) {
+      if (newTypeDishName == "") {
+        alert("Por favor ingrese el nombre");
+      } else {
+        if (newTypeDishID == 0) {
+          alert("Ocurrio un error al cargar los datos...");
+        } else {
+          if (newTypeDescriptionDish == "") {
+            alert("Por favor ingrese la descripción...");
+          } else {
             let obj = {
-              tipo_Plato_Bebida_ID : newTypeDishID,
-              tipo_Plato_Bebida_Name : newTypeDishName,
-              tipo_Plato_Bebida_Description : newTypeDescriptionDish
-            }
+              Tipo_Permiso_ID: newTypePermissionID,
+              Tipo_Permiso_Name: newTypePermissionName,
+              Tipo_Permiso_Description: newTypePermissionDescription,
+            };
             InsertRequest(obj);
           }
         }
       }
-    }else {
-      if(newTypeDishName == "") {
-        alert("Por favor ingrese el nombre")
-      }else {
-        if(newTypeDescriptionDish == "") {
-          alert("Por favor ingrese la descripción...")
-        }else {
+    } else {
+      if (newTypeDishName == "") {
+        alert("Por favor ingrese el nombre");
+      } else {
+        if (newTypeDescriptionDish == "") {
+          alert("Por favor ingrese la descripción...");
+        } else {
           let obj = {
-            tipo_Plato_Bebida_Name : newTypeDishName,
-            tipo_Plato_Bebida_Description : newTypeDescriptionDish
-          }
+            Tipo_Permiso_Name: newTypePermissionName,
+            Tipo_Permiso_Description: newTypePermissionDescription,
+          };
           InsertRequest(obj);
         }
       }
@@ -116,13 +126,15 @@ export default function InsertTypeDish(props) {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Nombre del tipo de platillo/Bebida
+                      Nombre del tipo de permiso
                     </InputGroup.Text>
                     <FormControl
-                      aria-label="TipoPlatillo/BebidaNombre"
+                      aria-label="TypePermissionName"
                       value={newTypeDishName}
                       type="text"
-                      onChange={(event) => setnewTypeDishName(event.target.value)}
+                      onChange={(event) =>
+                        setnewTypePermissionName(event.target.value)
+                      }
                     />
                   </InputGroup>
                 </Col>
@@ -131,14 +143,14 @@ export default function InsertTypeDish(props) {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Descripcion del platillo/Bebida
+                      Descripcion del tipo de permiso
                     </InputGroup.Text>
                     <FormControl
-                      aria-label="TipoPlatoDescripción"
+                      aria-label="TypePermissionDescription"
                       value={newTypeDescriptionDish}
                       type="text"
                       onChange={(event) =>
-                        setnewTypeDescriptionDish(event.target.value)
+                        setnewTypePermissionDescription(event.target.value)
                       }
                     />
                   </InputGroup>

@@ -4,8 +4,7 @@ import {
   Row,
   Col,
   Button,
-  ListGroup,
-  ListGroupItem,
+  ListGroup
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -52,7 +51,7 @@ export default function AllTypeDish() {
                     </ListGroup.Item>
                   </Col>
                   <Col xs={4} md={4}>
-                    <Link to="/InsertDish" state={AllTypedishes.tipo_Plato_Bebida_ID}>
+                    <Link to="/InsertTypeDish" state={AllTypedishes.tipo_Plato_Bebida_ID}>
                       <Button>Modificar</Button>
                     </Link>
                     <Button value={AllTypedishes.tipo_Plato_Bebida_ID} onClick={(event) => deleteTypeDish(event.target.value)}>Eliminar</Button>

@@ -7,6 +7,9 @@ import Admin from './modules/admin/admin';
 import Dishes from './modules/admin/Dishes';
 import InsertDish from './modules/admin/InsertDish';
 import AllDishes from './modules/admin/AllDishes';
+import TypeDish from './modules/admin/TypeDish';
+import InsertTypeDish from './modules/admin/InsertTypeDish';
+import AllTypeDish from './modules/admin/AllTypeDish';
 import { Routes, Route } from "react-router-dom";
 
 
@@ -24,6 +27,9 @@ export default function App() {
         <Route path="/Dishes" element={<Dishes />}></Route>
         <Route path="/InsertDish" element={<InsertDish />}></Route>
         <Route path="/AllDishes" element={<AllDishes />}></Route>
+        <Route path="/TypeDish" element={<TypeDish />}></Route>
+        <Route path="/InsertTypeDish" element={<InsertTypeDish />}></Route>
+        <Route path="/AllTypeDish" element={<AllTypeDish />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
