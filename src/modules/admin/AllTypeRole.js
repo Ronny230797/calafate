@@ -48,7 +48,7 @@ export default function AllTypeRole() {
                   </Col>
                   <Col xs={4} md={4}>
                     <Link
-                      to="/InsertTypeDish"
+                      to="/InsertTypeRole"
                       state={AllTypeRole.tipo_Role_ID}
                     >
                       <Button>Modificar</Button>

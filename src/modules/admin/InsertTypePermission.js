@@ -72,13 +72,13 @@ export default function InsertTypePermission() {
 
   const InsertEvent = async () => {
     if (isModify) {
-      if (newTypeDishName == "") {
+      if (newTypePermissionName == "") {
         alert("Por favor ingrese el nombre");
       } else {
-        if (newTypeDishID == 0) {
+        if (newTypePermissionID == 0) {
           alert("Ocurrio un error al cargar los datos...");
         } else {
-          if (newTypeDescriptionDish == "") {
+          if (newTypePermissionDescription == "") {
             alert("Por favor ingrese la descripción...");
           } else {
             let obj = {
@@ -91,10 +91,10 @@ export default function InsertTypePermission() {
         }
       }
     } else {
-      if (newTypeDishName == "") {
+      if (newTypePermissionName == "") {
         alert("Por favor ingrese el nombre");
       } else {
-        if (newTypeDescriptionDish == "") {
+        if (newTypePermissionDescription == "") {
           alert("Por favor ingrese la descripción...");
         } else {
           let obj = {
@@ -110,7 +110,7 @@ export default function InsertTypePermission() {
   useEffect(() => {
     if (objSelect != null) {
       setisModify(true);
-      getTypeDishByIDRequest(objSelect);
+      getTypePermissionByIDRequest(objSelect);
     } else {
       setisModify(false);
     }
@@ -130,7 +130,7 @@ export default function InsertTypePermission() {
                     </InputGroup.Text>
                     <FormControl
                       aria-label="TypePermissionName"
-                      value={newTypeDishName}
+                      value={newTypePermissionName}
                       type="text"
                       onChange={(event) =>
                         setnewTypePermissionName(event.target.value)
@@ -147,7 +147,7 @@ export default function InsertTypePermission() {
                     </InputGroup.Text>
                     <FormControl
                       aria-label="TypePermissionDescription"
-                      value={newTypeDescriptionDish}
+                      value={newTypePermissionDescription}
                       type="text"
                       onChange={(event) =>
                         setnewTypePermissionDescription(event.target.value)
