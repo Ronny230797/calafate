@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function PermissionRole() {
+export default function BusinessUnit() {
   return (
     <React.Fragment>
-      <Container className="menu">
+      <Container>
         <Row>
           <Col xs={6} md={6}>
             <div className="card-cotainer">
-              <p>Insertar nuevo Permiso</p>
-              <Link to="/InsertPermissionRole">
+              <p>Insertar un nuevo local</p>
+              <Link to="/InsertBusinessUnit">
                 <Button>Acceder</Button>
               </Link>
             </div>
           </Col>
           <Col xs={6} md={6}>
             <div className="card-cotainer">
-              <p>Modificar o Eliminar existentes</p>
-              <Link to="/AllPermissionRole">
+              <p>Modificar o Eliminar un local existente.</p>
+              <Link to="/AllBusinessUnit">
                 <Button>Acceder</Button>
               </Link>
             </div>

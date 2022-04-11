@@ -10,7 +10,7 @@ export default function TypePermission() {
           <Col xs={6} md={6}>
             <div className="card-cotainer">
               <p>Insertar nuevo tipo de permiso</p>
-              <Link to="/">
+              <Link to="/InsertTypePermission">
                 <Button>Acceder</Button>
               </Link>
             </div>
@@ -18,7 +18,7 @@ export default function TypePermission() {
           <Col xs={6} md={6}>
             <div className="card-cotainer">
               <p>Modificar o Eliminar existentes</p>
-              <Link to="/">
+              <Link to="/AllTypePermission">
                 <Button>Acceder</Button>
               </Link>
             </div>

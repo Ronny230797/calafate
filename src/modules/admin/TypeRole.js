@@ -10,7 +10,7 @@ export default function TypeRole() {
           <Col xs={6} md={6}>
             <div className="card-cotainer">
               <p>Insertar nuevo tipo de role</p>
-              <Link to="/">
+              <Link to="/InsertTypeRole">
                 <Button>Acceder</Button>
               </Link>
             </div>
@@ -18,7 +18,7 @@ export default function TypeRole() {
           <Col xs={6} md={6}>
             <div className="card-cotainer">
               <p>Modificar o Eliminar existentes</p>
-              <Link to="/">
+              <Link to="/AllTypeRole">
                 <Button>Acceder</Button>
               </Link>
             </div>

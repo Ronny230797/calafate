@@ -2,15 +2,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function PermissionRole() {
+export default function Product() {
   return (
     <React.Fragment>
       <Container className="menu">
         <Row>
           <Col xs={6} md={6}>
             <div className="card-cotainer">
-              <p>Insertar nuevo Permiso</p>
-              <Link to="/InsertPermissionRole">
+              <p>Insertar nuevo Producto</p>
+              <Link to="/InsertProduct">
                 <Button>Acceder</Button>
               </Link>
             </div>
@@ -18,7 +18,7 @@ export default function PermissionRole() {
           <Col xs={6} md={6}>
             <div className="card-cotainer">
               <p>Modificar o Eliminar existentes</p>
-              <Link to="/AllPermissionRole">
+              <Link to="/AllProduct">
                 <Button>Acceder</Button>
               </Link>
             </div>

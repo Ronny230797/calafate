@@ -24,6 +24,24 @@ import AllRole from './modules/admin/AllRole';
 import OrderState from './modules/admin/OrderState';
 import InsertOrderState from './modules/admin/InsertOrderState';
 import AllOrderState from './modules/admin/AllOrderState';
+import BusinessUnit from './modules/admin/BusinessUnit';
+import InsertBusinessUnit from './modules/admin/InsertBusinessUnit';
+import AllBusinessUnit from './modules/admin/AllBusinessUnit';
+import TypeUser from './modules/admin/TypeUser';
+import InsertTypeUser from './modules/admin/InsertTypeUser';
+import AllTypeUser from './modules/admin/AllTypeUser';
+import User from './modules/admin/User';
+import InsertUser from './modules/admin/InsertUser';
+import AllUser from './modules/admin/AllUser';
+import UserBusinessUnit from './modules/admin/UserBusinessUnit';
+import InsertUserBusinessUnit from './modules/admin/InsertUserBusinessUnit';
+import AllUserBusinessUnit from './modules/admin/AllUserBusinessUnit';
+import Product from './modules/admin/Product';
+import InsertProduct from './modules/admin/InsertProduct';
+import AllProduct from './modules/admin/AllProduct';
+import Extra from './modules/admin/Extra';
+import InsertExtra from './modules/admin/InsertExtra';
+import AllExtra from './modules/admin/AllExtra';
 import { Routes, Route } from "react-router-dom";
 
 
@@ -58,6 +76,24 @@ export default function App() {
         <Route path="/OrderState" element={<OrderState />}></Route>
         <Route path="/InsertOrderState" element={<InsertOrderState />}></Route>
         <Route path="/AllOrderState" element={<AllOrderState />}></Route>
+        <Route path="/BusinessUnit" element={<BusinessUnit />}></Route>
+        <Route path="/InsertBusinessUnit" element={<InsertBusinessUnit />}></Route>
+        <Route path="/AllBusinessUnit" element={<AllBusinessUnit />}></Route>
+        <Route path="/TypeUser" element={<TypeUser />}></Route>
+        <Route path="/InsertUserType" element={<InsertTypeUser />}></Route>
+        <Route path="/AllTypeUser" element={<AllTypeUser />}></Route>
+        <Route path="/User" element={<User />}></Route>
+        <Route path="/InsertUser" element={<InsertUser />}></Route>
+        <Route path="/AllUser" element={<AllUser />}></Route>
+        <Route path="/UserBusinessUnit" element={<UserBusinessUnit />}></Route>
+        <Route path="/InsertUserBusinessUnit" element={<InsertUserBusinessUnit />}></Route>
+        <Route path="/AllUserBusinessUnit" element={<AllUserBusinessUnit />}></Route>
+        <Route path="/Product" element={<Product />}></Route>
+        <Route path="/InsertProduct" element={<InsertProduct />}></Route>
+        <Route path="/AllProduct" element={<AllProduct />}></Route>
+        <Route path="/Extra" element={<Extra />}></Route>
+        <Route path="/InsertExtra" element={<InsertExtra />}></Route>
+        <Route path="/AllExtra" element={<AllExtra />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
