@@ -178,7 +178,7 @@ export default function InsertUser(props) {
                     onChange={(event) => setnewTypeUserUser(event.target.value)}
                     aria-label="Tipo de platillo"
                   >
-                    <option value={0}>Seleccione el tipo</option>
+                    <option value={0}>Seleccione el tipo usuario</option>
                     {restypeUserData.map((TypeUser) => (
                       <option
                         key={TypeUser.tipo_Usuario_ID}

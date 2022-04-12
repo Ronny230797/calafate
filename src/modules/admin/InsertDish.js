@@ -132,7 +132,7 @@ export default function InsertDish(props) {
                     onChange={(event) => setTypeNewDish(event.target.value)}
                     aria-label="Tipo de platillo"
                   >
-                    <option value={0}>Seleccione el tipo</option>
+                    <option value={0}>Seleccione el tipo platillo</option>
                     {typeDishData.map((TypeDishes) => (
                       <option
                         key={TypeDishes.tipo_Plato_Bebida_ID}

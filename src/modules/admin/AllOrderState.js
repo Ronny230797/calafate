@@ -6,14 +6,15 @@ export default function AllOrderState() {
   const API_URL_GET_ORDER_STATE =
     "http://localhost:4000/Administration/Admin/GetAllOrderState";
   const [resData, setresData] = useState([]);
-  const [isError, setisError] = useState(false);
+  const [isError, setisError] = useState(true);
 
   const getOrderStateRequest = async () => {
-    const response = await fetch(API_URL_GET_ORDER_STATE);
-    if (response.status === 200) {
+    try {
+      const response = await fetch(API_URL_GET_ORDER_STATE);
       const data = await response.json();
       setresData(data);
-    }else {
+    } catch (err) {
+      alert("Ocurrio un error al cargar los datos... " + err);
       setisError(true);
     }
   };
@@ -22,20 +23,7 @@ export default function AllOrderState() {
     getOrderStateRequest();
   }, []);
 
-
-  if(isError) {
-    return(
-      <React.Fragment>
-        <Container>
-          <Row>
-            <Col xs={12} md={12}>
-              <h1>No se encuentran estados de orden registradas, u ocurrio un error.</h1>
-            </Col>
-          </Row>
-        </Container>
-      </React.Fragment>
-    );
-  }else {
+  if (isError) {
     return (
       <React.Fragment>
         <Container>
@@ -61,6 +49,21 @@ export default function AllOrderState() {
                   </Row>
                 ))}
               </ListGroup>
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <Container>
+          <Row>
+            <Col xs={12} md={12}>
+              <h1>
+                No se encuentran estados de orden registradas, u ocurrio un
+                error.
+              </h1>
             </Col>
           </Row>
         </Container>

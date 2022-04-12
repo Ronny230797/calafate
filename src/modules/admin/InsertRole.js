@@ -215,7 +215,7 @@ export default function InsertRole() {
               <Row>
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
-                    <InputGroup.Text>Agrega una descripción</InputGroup.Text>
+                    <InputGroup.Text>Agrega una descripción que le permita identifar esta asignación.</InputGroup.Text>
                     <FormControl
                       aria-label="Description"
                       value={newRoleDescription}

@@ -18,11 +18,12 @@ export default function AllExtra() {
   const [dataExists, setdataExists] = useState(true);
 
   const getExtraRequest = async () => {
-    const response = await fetch(API_URL_GET_PRODUCT);
-    if (response.status === 200) {
+    try {
+      const response = await fetch(API_URL_GET_PRODUCT);
       const data = await response.json();
       setresData(data);
-    } else {
+    } catch (err) {
+      console.log("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };

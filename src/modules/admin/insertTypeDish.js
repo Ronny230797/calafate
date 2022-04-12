@@ -131,7 +131,7 @@ export default function InsertTypeDish(props) {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Descripcion del platillo/Bebida
+                      Descripcion del tipo platillo/Bebida
                     </InputGroup.Text>
                     <FormControl
                       aria-label="TipoPlatoDescripción"

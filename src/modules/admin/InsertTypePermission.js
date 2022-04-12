@@ -126,7 +126,7 @@ export default function InsertTypePermission() {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Nombre del tipo de permiso
+                      Nombre del tipo de permiso.
                     </InputGroup.Text>
                     <FormControl
                       aria-label="TypePermissionName"
@@ -143,7 +143,7 @@ export default function InsertTypePermission() {
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
                     <InputGroup.Text>
-                      Descripcion del tipo de permiso
+                      Descripcion del tipo de permiso.
                     </InputGroup.Text>
                     <FormControl
                       aria-label="TypePermissionDescription"

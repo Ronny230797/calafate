@@ -185,7 +185,7 @@ export default function InsertUserBusinessUnit() {
                     }
                     aria-label="AllBusinessUnit"
                   >
-                    <option value={0}>Seleccione el local que desae asignar.</option>
+                    <option value={0}>Seleccione el local que desea asignar.</option>
                     {resBusinessUnitData.map((AllBusinessUnit) => (
                       <option
                         key={AllBusinessUnit.unidad_Negocio_ID}
@@ -200,7 +200,7 @@ export default function InsertUserBusinessUnit() {
               <Row>
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
-                    <InputGroup.Text>Agregue una descripción.</InputGroup.Text>
+                    <InputGroup.Text>Agregue una descripción del local.</InputGroup.Text>
                     <FormControl
                       aria-label="DescriptionBusinessUnit"
                       value={newDescription}
