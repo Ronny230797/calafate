@@ -4,8 +4,7 @@ import {
   Row,
   Col,
   Button,
-  ListGroup,
-  ListGroupItem,
+  ListGroup
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -76,7 +75,7 @@ export default function AllBusinessUnit() {
                 ))}
               </ListGroup>
             </Col>
-          </Row>
+          </Row>  
         </Container>
       </React.Fragment>
     );

@@ -42,6 +42,7 @@ import AllProduct from './modules/admin/AllProduct';
 import Extra from './modules/admin/Extra';
 import InsertExtra from './modules/admin/InsertExtra';
 import AllExtra from './modules/admin/AllExtra';
+import DishesDisplay from './modules/waiter/dishesDisplay';
 import { Routes, Route } from "react-router-dom";
 
 
@@ -94,6 +95,7 @@ export default function App() {
         <Route path="/Extra" element={<Extra />}></Route>
         <Route path="/InsertExtra" element={<InsertExtra />}></Route>
         <Route path="/AllExtra" element={<AllExtra />}></Route>
+        <Route path="/DishesDisplay" element={<DishesDisplay />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
