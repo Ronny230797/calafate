@@ -1,0 +1,22 @@
+@import "../_theme.scss";
+
+.admin{
+
+    .card-cotainer{
+        text-align: center;
+        min-height: 6vw;
+    }
+    
+    a{
+        color: $text-white-color !important;
+        text-decoration: none !important;
+    }
+
+    a:hover{
+        color: $component-hover-color !important;
+        text-decoration: underline !important;
+    }
+
+
+}
+

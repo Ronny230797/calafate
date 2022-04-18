@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function typeDish() {
+export default function TypeDish() {
   return (
     <React.Fragment>
       <Container className="menu">
