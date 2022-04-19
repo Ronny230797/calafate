@@ -29,7 +29,14 @@ export default function DishesDisplay() {
     console.log(obj);
     var myID = parseInt(obj);
     const resultado = resDishesData.find((element) => element.platoID === myID);
-    setpostDataOrderDetails([...postDataOrderDetails, resultado]);
+    let newOrder = {
+      platoID: resultado.platoID,
+      plato_Bebida_Nombre: resultado.plato_Bebida_Nombre,
+      amount: 1,
+      descriptionOrder: "",
+      orderDate: new Date().toISOString()
+    }
+    setpostDataOrderDetails([...postDataOrderDetails, newOrder]);
   };
 
   const handleDeleteDish = (obj) => {
@@ -39,12 +46,28 @@ export default function DishesDisplay() {
       (element) => element.platoID !== myID
     );
     console.log({ resultado });
-    if(resultado.length > 0){
+    if (resultado.length > 0) {
       setpostDataOrderDetails(resultado);
-    }else {
+    } else {
       setpostDataOrderDetails([]);
     }
-    
+  };
+
+  const handleUpdateDish = (ID, NewAmount) => {
+    var myID = parseInt(ID);
+    console.log(myID);
+    console.log(NewAmount);
+    const updateDish = postDataOrderDetails.map((uploadData) => {
+      if (uploadData.platoID === myID) {
+        return {
+          ...uploadData,
+          amount: NewAmount,
+        };
+      }
+      return uploadData;
+    });
+    console.log(updateDish)
+    setpostDataOrderDetails(updateDish);
   };
 
   useEffect(() => {
@@ -86,7 +109,20 @@ export default function DishesDisplay() {
                         {AllDishesToPost.plato_Bebida_Nombre}
                       </ListGroup.Item>
                     </Col>
-                    <Col xs={2} xl={2}></Col>
+                    <Col xs={2} xl={2}>
+                      <FormControl
+                        size="lg"
+                        type="text"
+                        placeholder="Cantidad"
+                        value={AllDishesToPost.amount}
+                        onChange={(event) =>
+                          handleUpdateDish(
+                            AllDishesToPost.platoID,
+                            event.target.value
+                          )
+                        }
+                      />
+                    </Col>
                     <Col xs={4} xl={4}>
                       <Button
                         onClick={(event) =>
