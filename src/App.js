@@ -42,7 +42,11 @@ import AllProduct from './modules/admin/AllProduct';
 import Extra from './modules/admin/Extra';
 import InsertExtra from './modules/admin/InsertExtra';
 import AllExtra from './modules/admin/AllExtra';
-import DishesDisplay from './modules/waiter/dishesDisplay';
+import DishesDisplay from './modules/waiter/DishesDisplay';
+import AllOrder from './modules/waiter/AllOrder';
+import ModifyOrder from './modules/waiter/ModifyOrder';
+import BillingByOrder from './modules/Billing/BillingByOrder';
+import AllBillingOrder from './modules/Billing/AllBillingOrder';
 import { Routes, Route } from "react-router-dom";
 
 
@@ -96,6 +100,10 @@ export default function App() {
         <Route path="/InsertExtra" element={<InsertExtra />}></Route>
         <Route path="/AllExtra" element={<AllExtra />}></Route>
         <Route path="/DishesDisplay" element={<DishesDisplay />}></Route>
+        <Route path="/AllOrder" element={<AllOrder />}></Route>
+        <Route path="/ModifyOrder" element={<ModifyOrder />}></Route>
+        <Route path="/BillingByOrder" element={<BillingByOrder />}></Route>
+        <Route path="/AllBillingOrder" element={<AllBillingOrder />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>

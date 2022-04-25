@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
-export default function InsertUser(props) {
+export default function InsertUser() {
   const API_URL = "http://localhost:4000/Administration/Admin/InsertUser";
   const API_URL_Modify =
     "http://localhost:4000/Administration/Admin/ModifyUser";
@@ -52,8 +52,8 @@ export default function InsertUser(props) {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
       setresData(data);
-      console.log(data.status);
-      if (data.status == 200) {
+      console.log(response.status);
+      if (response.status == 200) {
         alert("Se ingreso correctamente");
       } else {
         alert("Ocurrio un error: " + response.status);
@@ -145,6 +145,7 @@ export default function InsertUser(props) {
                   Usuario_Second_Last_Name: newSecondLastname,
                   Usuario_Username: newUsername,
                 };
+                console.log(obj)
                 InsertRequest(obj);
               }
             }
@@ -224,7 +225,7 @@ export default function InsertUser(props) {
                       aria-label="FirstLastname"
                       value={newFirtLastname}
                       type="text"
-                      onChange={(event) => newFirtLastname(event.target.value)}
+                      onChange={(event) => setnewFirtLastname(event.target.value)}
                     />
                   </InputGroup>
                 </Col>
