@@ -8,6 +8,7 @@ import {
   InputGroup,
   FormControl,
   FormSelect,
+  Form
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
@@ -28,6 +29,8 @@ export default function InsertUser() {
   const [newFirtLastname, setnewFirtLastname] = useState("");
   const [newSecondLastname, setnewSecondLastname] = useState("");
   const [newUsername, setnewUsername] = useState("");
+  const [newUserPassWord, setnewUserPassWord] = useState("");
+  const [newUserPassWordValidate, setnewUserPassWordValidate] = useState("");
   const [restypeUserData, setrestypeUserData] = useState([]);
   const [isModify, setisModify] = useState(false);
   const location = useLocation();
@@ -55,6 +58,14 @@ export default function InsertUser() {
       console.log(response.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewFirstname("");
+        setnewSecondname("");
+        setnewFirtLastname("");
+        setnewSecondLastname("");
+        setnewUserPassWord("");
+        setnewUserPassWordValidate("");
+        setnewUsername("");
+        setnewTypeUserUser(0);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -75,7 +86,7 @@ export default function InsertUser() {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     setnewUsuarioID(data.usuario_ID);
     setnewTypeUserUser(data.fK_Tipo_Usuario_Usuario);
     setnewFirstname(data.firstName);
@@ -83,6 +94,8 @@ export default function InsertUser() {
     setnewFirtLastname(data.usuario_First_Last_Name);
     setnewSecondLastname(data.usuario_Second_Last_Name);
     setnewUsername(data.usuario_Username);
+    setnewUserPassWord(data.usuario_Password);
+    setnewUserPassWordValidate(data.usuario_Password);
   };
 
   const InsertEvent = async () => {
@@ -105,16 +118,25 @@ export default function InsertUser() {
                 if (newTypeUserUser === 0) {
                   alert("Ingrese el tipo de usuario.");
                 } else {
-                  let obj = {
-                    Usuario_ID: newUsuarioID,
-                    FK_Tipo_Usuario_Usuario: newTypeUserUser,
-                    FirstName: newFirstname,
-                    Usuario_Second_Name: newSecondname,
-                    Usuario_First_Last_Name: newFirtLastname,
-                    Usuario_Second_Last_Name: newSecondLastname,
-                    Usuario_Username: newUsername,
-                  };
-                  InsertRequest(obj);
+                  if (newUserPassWord.trim() === "") {
+                    alert("Ingrese la contraseña.");
+                  } else {
+                    if (newUserPassWord !== newUserPassWordValidate) {
+                      alert("Las dos contraseñas deben ser iguales.");
+                    } else {
+                      let obj = {
+                        usuario_ID: newUsuarioID,
+                        fK_Tipo_Usuario_Usuario: newTypeUserUser,
+                        firstName: newFirstname,
+                        usuario_Second_Name: newSecondname,
+                        usuario_First_Last_Name: newFirtLastname,
+                        usuario_Second_Last_Name: newSecondLastname,
+                        usuario_Username: newUsername,
+                        usuario_Password: newUserPassWord,
+                      };
+                      InsertRequest(obj);
+                    }
+                  }
                 }
               }
             }
@@ -137,16 +159,25 @@ export default function InsertUser() {
               if (newTypeUserUser === 0) {
                 alert("Ingrese el tipo de usuario.");
               } else {
-                let obj = {
-                  FK_Tipo_Usuario_Usuario: newTypeUserUser,
-                  FirstName: newFirstname,
-                  Usuario_Second_Name: newSecondname,
-                  Usuario_First_Last_Name: newFirtLastname,
-                  Usuario_Second_Last_Name: newSecondLastname,
-                  Usuario_Username: newUsername,
-                };
-                console.log(obj)
-                InsertRequest(obj);
+                if (newUserPassWord.trim() === "") {
+                  alert("Ingrese la contraseña.");
+                } else {
+                  if (newUserPassWord !== newUserPassWordValidate) {
+                    alert("Las dos contraseñas deben ser iguales.");
+                  } else {
+                    let obj = {
+                      fK_Tipo_Usuario_Usuario: newTypeUserUser,
+                      firstName: newFirstname,
+                      usuario_Second_Name: newSecondname,
+                      usuario_First_Last_Name: newFirtLastname,
+                      usuario_Second_Last_Name: newSecondLastname,
+                      usuario_Username: newUsername,
+                      usuario_Password: newUserPassWord,
+                    };
+                    console.log(obj);
+                    InsertRequest(obj);
+                  }
+                }
               }
             }
           }
@@ -156,7 +187,7 @@ export default function InsertUser() {
   };
 
   useEffect(() => {
-      console.log(objSelect)
+    console.log(objSelect);
     if (objSelect != null) {
       setisModify(true);
       getUserByIDRequest(objSelect);
@@ -175,6 +206,7 @@ export default function InsertUser() {
             <div className="InsertDish-card">
               <Row>
                 <Col xs={10} md={10}>
+                  <Form.Label>Ingrese el tipo de usuario que desea ingresar.</Form.Label>
                   <FormSelect
                     onChange={(event) => setnewTypeUserUser(event.target.value)}
                     aria-label="Tipo de platillo"
@@ -225,7 +257,9 @@ export default function InsertUser() {
                       aria-label="FirstLastname"
                       value={newFirtLastname}
                       type="text"
-                      onChange={(event) => setnewFirtLastname(event.target.value)}
+                      onChange={(event) =>
+                        setnewFirtLastname(event.target.value)
+                      }
                     />
                   </InputGroup>
                 </Col>
@@ -254,6 +288,38 @@ export default function InsertUser() {
                       value={newUsername}
                       type="text"
                       onChange={(event) => setnewUsername(event.target.value)}
+                    />
+                  </InputGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={10} md={10}>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Text>Contraseña</InputGroup.Text>
+                    <FormControl
+                      aria-label="userPassword"
+                      value={newUserPassWord}
+                      type="password"
+                      onChange={(event) =>
+                        setnewUserPassWord(event.target.value)
+                      }
+                    />
+                  </InputGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={10} md={10}>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Text>
+                      Vuelva a ingresar la contraseña
+                    </InputGroup.Text>
+                    <FormControl
+                      aria-label="userPasswordValidate"
+                      value={newUserPassWordValidate}
+                      type="password"
+                      onChange={(event) =>
+                        setnewUserPassWordValidate(event.target.value)
+                      }
                     />
                   </InputGroup>
                 </Col>

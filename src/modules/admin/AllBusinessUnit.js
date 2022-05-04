@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  ListGroup
-} from "react-bootstrap";
+import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function AllBusinessUnit() {
@@ -21,20 +15,32 @@ export default function AllBusinessUnit() {
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
+      alert("Ocurrio un error al cargar los datos... " + err);
     }
   };
 
   const deleteBusinessUnit = async (ID) => {
-    console.log(ID);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(ID),
-    };
-    const response = await fetch(API_URL_DELETE_BUSINESS_UNIT, requestOptions);
-    const data = await response.json();
+    try {
+      console.log(ID);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(
+        API_URL_DELETE_BUSINESS_UNIT,
+        requestOptions
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+      } else {
+        alert("Ocurrio un error al eliminar la unidad de negocio.");
+      }
+    } catch (error) {
+      alert("Ocurrio un error al eliminar: " + error)
+    }
   };
 
   useEffect(() => {
@@ -75,7 +81,7 @@ export default function AllBusinessUnit() {
                 ))}
               </ListGroup>
             </Col>
-          </Row>  
+          </Row>
         </Container>
       </React.Fragment>
     );

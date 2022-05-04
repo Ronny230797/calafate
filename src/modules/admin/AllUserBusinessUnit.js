@@ -22,30 +22,40 @@ export default function AllDishes() {
     if (response.status === 200) {
       const data = await response.json();
       setresData(data);
-    }else {
+    } else {
       setdataExists(false);
     }
   };
 
   const deleteUserBusinessUnit = async (ID) => {
-    console.log(ID);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(ID),
-    };
-    const response = await fetch(
-      API_URL_DELETE_USER_BUSINESS_UNIT,
-      requestOptions
-    );
-    const data = await response.json();
+    try {
+      console.log(ID);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(
+        API_URL_DELETE_USER_BUSINESS_UNIT,
+        requestOptions
+      );
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+      } else {
+        alert(
+          "Ocurrio un error al eliminar al usuario de la unidad de negocio."
+        );
+      }
+    } catch (error) {
+      alert("Ocurrio un error al eliminar: " + error)
+    }
   };
 
   useEffect(() => {
     getUserBusinessUnitRequest();
   }, []);
 
-  if(dataExists) {
+  if (dataExists) {
     return (
       <React.Fragment>
         <Container>
@@ -83,13 +93,13 @@ export default function AllDishes() {
         </Container>
       </React.Fragment>
     );
-  }else {
+  } else {
     return (
       <React.Fragment>
         <Container>
           <Row>
             <Col>
-            <h1>No se encontraron datos ingresados para este apartado</h1>
+              <h1>No se encontraron datos ingresados para este apartado</h1>
             </Col>
           </Row>
         </Container>

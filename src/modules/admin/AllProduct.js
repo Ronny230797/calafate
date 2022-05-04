@@ -29,14 +29,22 @@ export default function AllProduct() {
   };
 
   const deleteProduct = async (ID) => {
-    console.log(ID);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(ID),
-    };
-    const response = await fetch(API_URL_DELETE_PRODUCT, requestOptions);
-    const data = await response.json();
+    try {
+      console.log(ID);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(API_URL_DELETE_PRODUCT, requestOptions);
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+      } else {
+        alert("Ocurrio un error al eliminar el producto.");
+      }
+    } catch (error) {
+      alert("Ocurrio un error al eliminar: " + error);
+    }
   };
 
   useEffect(() => {

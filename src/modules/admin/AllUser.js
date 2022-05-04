@@ -29,14 +29,21 @@ export default function AllDishes() {
   };
 
   const deleteUser = async (ID) => {
-    console.log(ID);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(ID),
-    };
-    const response = await fetch(API_URL_DELETE_USER, requestOptions);
-    const data = await response.json();
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(API_URL_DELETE_USER, requestOptions);
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+      } else {
+        alert("Ocurrio un error al eliminar al usuario.");
+      }
+    } catch (error) {
+      alert("ocurrio un error: " + error)
+    }
   };
 
   useEffect(() => {

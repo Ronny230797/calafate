@@ -22,15 +22,21 @@ export default function AllTypeRole() {
   };
 
   const deleteTypeRole = async (ID) => {
-    console.log(ID);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(ID),
-    };
-    const response = await fetch(API_URL_DELETE_TYPE_ROLE, requestOptions);
-    if (response.status == 200) {
-      alert("Se elimino correctamente");
+    try {
+      console.log(ID);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(API_URL_DELETE_TYPE_ROLE, requestOptions);
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+      } else {
+        alert("Ocurrio un error al eliminar el tipo de role.");
+      }
+    } catch (error) {
+      alert("Ocurrio un error al eliminar: " + error)
     }
   };
 

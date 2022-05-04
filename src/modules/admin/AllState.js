@@ -21,15 +21,21 @@ export default function AllState() {
   };
 
   const deleteState = async (ID) => {
-    console.log(ID);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(ID),
-    };
-    const response = await fetch(API_URL_DELETE_STATE, requestOptions);
-    if (response.status == 200) {
-      alert("Se elimino correctamente");
+    try {
+      console.log(ID);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(API_URL_DELETE_STATE, requestOptions);
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+      } else {
+        alert("Ocurrio un error al eliminar el estado del platillo.");
+      }
+    } catch (error) {
+      alert("Ocurrio un errro al eliminar: " + error);
     }
   };
 
