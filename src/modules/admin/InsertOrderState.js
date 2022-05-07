@@ -8,9 +8,9 @@ import {
   InputGroup,
   FormControl,
   FormSelect,
+  Form
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-import DatePicker from "react-date-picker";
 
 export default function InsertOrderState(props) {
   const API_URL_Modify_ORDER_STATE =
@@ -115,23 +115,14 @@ export default function InsertOrderState(props) {
             <div className="InsertDish-card">
               <Row>
                 <Col xs={10} md={10}>
-                  <FormSelect
-                    onChange={(event) =>
-                      setnewOrderOrderState(event.target.value)
-                    }
-                    aria-label="OrderOrderState"
-                  >
-                    <option value={0}>Seleccione la orden.</option>
-                    {resOrderData.map((AllOrder) => (
-                      <option key={AllOrder.order_ID} value={AllOrder.order_ID}>
-                        {AllOrder.order_Description}
-                      </option>
-                    ))}
-                  </FormSelect>
+                  <Form.Label>Numero de la orden: {newOrderstateID}</Form.Label>
                 </Col>
               </Row>
               <Row>
                 <Col xs={10} md={10}>
+                  <Form.Text className="text-muted">
+                    Estado actual: {newStateOrderState}
+                  </Form.Text>
                   <FormSelect
                     onChange={(event) =>
                       setnewStateOrderState(event.target.value)
@@ -148,16 +139,6 @@ export default function InsertOrderState(props) {
                       </option>
                     ))}
                   </FormSelect>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <DatePicker
-                    onChange={setnewOrderStateDate}
-                    value={newOrderStateDate}
-                  >
-                    Seleccione la fecha.
-                  </DatePicker>
                 </Col>
               </Row>
               <Row>

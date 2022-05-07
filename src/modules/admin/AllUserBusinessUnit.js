@@ -41,6 +41,7 @@ export default function AllDishes() {
       );
       if (response.status === 200) {
         alert("Se elimino correctamente.");
+        window.location.reload(false);
       } else {
         alert(
           "Ocurrio un error al eliminar al usuario de la unidad de negocio."

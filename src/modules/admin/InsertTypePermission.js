@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -7,7 +7,6 @@ import {
   Button,
   InputGroup,
   FormControl,
-  FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
@@ -24,6 +23,7 @@ export default function InsertTypePermission() {
     useState([]);
   const [newTypePermissionID, setnewTypePermissionID] = useState([]);
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -40,6 +40,7 @@ export default function InsertTypePermission() {
       );
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -50,6 +51,9 @@ export default function InsertTypePermission() {
       );
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewTypePermissionID(0);
+        setnewTypePermissionName("");
+        setnewTypePermissionDescription("");
       } else {
         alert("Ocurrio un error: " + response.status);
       }

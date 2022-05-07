@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function AllTypeRole() {
-  const API_URL_GET_TYPE_ROLE =
-    "http://localhost:4000/Administration/Admin/GetAllTypeRole";
-  const API_URL_DELETE_TYPE_ROLE =
-    "http://localhost:4000/Administration/Admin/DeleteTypeRole";
+export default function AllPermissionRole() {
+  const API_URL_GET_PERMISSION_ROLE =
+    "http://localhost:4000/Administration/Admin/GetAllPermissionRole";
+  const API_URL_DELETE_Dish =
+    "http://localhost:4000/Administration/Admin/DeletePermissionRole";
   const [resData, setresData] = useState([]);
   const [dataExists, setdataExists] = useState(true);
 
-  const getTypeDishRequest = async () => {
+  const getPermissionRoleRequest = async () => {
     try {
-      const response = await fetch(API_URL_GET_TYPE_ROLE);
+      const response = await fetch(API_URL_GET_PERMISSION_ROLE);
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
+      alert("Ocurrio un error al cargar los datos o aun no existen... " + err);
     }
   };
 
-  const deleteTypeRole = async (ID) => {
+  const deletePermissionRole = async (ID) => {
     try {
       console.log(ID);
       const requestOptions = {
@@ -29,12 +36,12 @@ export default function AllTypeRole() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(ID),
       };
-      const response = await fetch(API_URL_DELETE_TYPE_ROLE, requestOptions);
+      const response = await fetch(API_URL_DELETE_Dish, requestOptions);
       if (response.status === 200) {
         alert("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar el tipo de role.");
+        alert("Ocurrio un error al eliminar el platillo.");
       }
     } catch (error) {
       alert("Ocurrio un error al eliminar: " + error)
@@ -42,7 +49,7 @@ export default function AllTypeRole() {
   };
 
   useEffect(() => {
-    getTypeDishRequest();
+    getPermissionRoleRequest();
   }, []);
 
   if (dataExists) {
@@ -52,23 +59,20 @@ export default function AllTypeRole() {
           <Row>
             <Col xs={12} md={12}>
               <ListGroup>
-                {resData.map((AllTypeRole) => (
-                  <Row key={AllTypeRole.tipo_Role_ID}>
+                {resData.map((AllPermissionRole) => (
+                  <Row key={AllPermissionRole.permiso_Role_ID}>
                     <Col xs={8} md={8}>
                       <ListGroup.Item>
-                        {AllTypeRole.tipo_Role_Name}
+                        Tipo de permiso: {AllPermissionRole.fK_TipoPermiso_Permiso_Role} - Tipo role: {AllPermissionRole.fK_TipoRole_Permiso_Role}
                       </ListGroup.Item>
                     </Col>
                     <Col xs={4} md={4}>
-                      <Link
-                        to="/InsertTypeRole"
-                        state={AllTypeRole.tipo_Role_ID}
-                      >
+                      <Link to="/InsertPermissionRole" state={AllPermissionRole.platoID}>
                         <Button>Modificar</Button>
                       </Link>
                       <Button
-                        value={AllTypeRole.tipo_Role_ID}
-                        onClick={(event) => deleteTypeRole(event.target.value)}
+                        value={AllPermissionRole.platoID}
+                        onClick={(event) => deletePermissionRole(event.target.value)}
                       >
                         Eliminar
                       </Button>

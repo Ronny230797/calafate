@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Container,
   Row,
@@ -13,13 +13,14 @@ import "../../styles/admin/InsertDish.scss";
 
 export default function InsertTypeDish(props) {
   const API_URL_INSERT_TYPE = "http://localhost:4000/Administration/Admin/InsertTypeDishDrink";
-  const API_URL_Modify_TYPE = "http://localhost:4000/Administration/Admin/ModifyDish";
+  const API_URL_Modify_TYPE = "http://localhost:4000/Administration/Admin/ModifyTypeDishDrink";
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetTypeDishDrinkByID";
 
   const [newTypeDishName, setnewTypeDishName] = useState("");
   const [newTypeDishID, setnewTypeDishID] = useState(0);
   const [newTypeDescriptionDish, setnewTypeDescriptionDish] = useState("");
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -33,6 +34,7 @@ export default function InsertTypeDish(props) {
       const response = await fetch(API_URL_Modify_TYPE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1)
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -40,6 +42,9 @@ export default function InsertTypeDish(props) {
       const response = await fetch(API_URL_INSERT_TYPE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewTypeDishID(0);
+        setnewTypeDishName("");
+        setnewTypeDescriptionDish("");
       } else {
         alert("Ocurrio un error: " + response.status);
       }

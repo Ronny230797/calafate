@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -29,6 +29,7 @@ export default function InsertUserBusinessUnit() {
   const [resUserData, setresUserData] = useState([]);
   const [resBusinessUnitData, setresBusinessUnitData] = useState([]);
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -45,6 +46,7 @@ export default function InsertUserBusinessUnit() {
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -55,6 +57,10 @@ export default function InsertUserBusinessUnit() {
       console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewBusinessUnitID(0);
+        setnewUserBusinessUnitID(0);
+        setnewUserID(0);
+        setnewDescription("");
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -200,7 +206,7 @@ export default function InsertUserBusinessUnit() {
               <Row>
                 <Col xs={10} md={10}>
                   <InputGroup className="mb-3">
-                    <InputGroup.Text>Agregue una descripción del local.</InputGroup.Text>
+                    <InputGroup.Text>Agregue una descripción de la asiganción.</InputGroup.Text>
                     <FormControl
                       aria-label="DescriptionBusinessUnit"
                       value={newDescription}
@@ -210,13 +216,6 @@ export default function InsertUserBusinessUnit() {
                       }
                     />
                   </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <DatePicker onChange={setnewCreateDate} value={newCreateDate}>
-                    Seleccione la fecha.
-                  </DatePicker>
                 </Col>
               </Row>
               <Button onClick={InsertEvent}>

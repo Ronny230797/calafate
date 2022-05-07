@@ -35,6 +35,7 @@ export default function AllTypePermission() {
       );
       if (response.status === 200) {
         alert("Se elimino correctamente.");
+        window.location.reload(false);
       } else {
         alert("Ocurrio un error al eliminar el tipo de permiso.");
       }

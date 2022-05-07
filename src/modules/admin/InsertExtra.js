@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -25,6 +25,7 @@ export default function InsertExtra() {
   const [newExtraDescription, setnewExtraDescription] = useState("");
   const [resProductData, setresProductData] = useState([]);
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -40,6 +41,7 @@ export default function InsertExtra() {
       setresData(data);
       if (response.status === 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -50,6 +52,10 @@ export default function InsertExtra() {
       console.log(data.status);
       if (response.status === 200) {
         alert("Se ingreso correctamente");
+        setnewExtraID(0);
+        setnewExtraName("");
+        setnewExtraDescription("");
+        setnewFKProductoExtra(0);
       } else {
         alert("Ocurrio un error: " + response.status);
       }

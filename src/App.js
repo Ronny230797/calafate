@@ -18,9 +18,13 @@ import InsertTypeRole from './modules/admin/InsertTypeRole';
 import AllTypeRole from './modules/admin/AllTypeRole';
 import PermissionRole from './modules/admin/PermissionRole';
 import InsertPermissionRole from './modules/admin/InsertPermissionRole';
+import AllPermissionRole from './modules/admin/AllPermissionRole';
 import Role from './modules/admin/Role';
 import InsertRole from './modules/admin/InsertRole';
 import AllRole from './modules/admin/AllRole';
+import State from './modules/admin/State';
+import InsertState from './modules/admin/InsertState';
+import AllState from './modules/admin/AllState';
 import OrderState from './modules/admin/OrderState';
 import InsertOrderState from './modules/admin/InsertOrderState';
 import AllOrderState from './modules/admin/AllOrderState';
@@ -75,9 +79,13 @@ export default function App() {
         <Route path="/AllTypeRole" element={<AllTypeRole />}></Route>
         <Route path="/PermissionRole" element={<PermissionRole />}></Route>
         <Route path="/InsertPermissionRole" element={<InsertPermissionRole />}></Route>
+        <Route path="/AllPermissionRole" element={<AllPermissionRole />}></Route>
         <Route path="/Role" element={<Role />}></Route>
         <Route path="/InsertRole" element={<InsertRole />}></Route>
         <Route path="/AllRole" element={<AllRole />}></Route>
+        <Route path="/State" element={<State />}></Route>
+        <Route path="/InsertState" element={<InsertState />}></Route>
+        <Route path="/AllState" element={<AllState />}></Route>
         <Route path="/OrderState" element={<OrderState />}></Route>
         <Route path="/InsertOrderState" element={<InsertOrderState />}></Route>
         <Route path="/AllOrderState" element={<AllOrderState />}></Route>

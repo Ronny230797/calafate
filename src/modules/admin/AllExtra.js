@@ -39,6 +39,7 @@ export default function AllExtra() {
       const response = await fetch(API_URL_DELETE_PRODUCT, requestOptions);
       if (response.status === 200) {
         alert("Se elimino correctamente.");
+        window.location.reload(false);
       } else {
         alert("Ocurrio un error al eliminar la extra del platillo.");
       }

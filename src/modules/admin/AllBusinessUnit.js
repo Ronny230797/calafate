@@ -35,6 +35,7 @@ export default function AllBusinessUnit() {
       const data = await response.json();
       if (response.status === 200) {
         alert("Se elimino correctamente.");
+        window.location.reload(false);
       } else {
         alert("Ocurrio un error al eliminar la unidad de negocio.");
       }
@@ -63,7 +64,7 @@ export default function AllBusinessUnit() {
                     </Col>
                     <Col xs={4} md={4}>
                       <Link
-                        to="/InsertDish"
+                        to="/InsertBusinessUnit"
                         state={AllBusinessUnit.unidad_Negocio_ID}
                       >
                         <Button>Modificar</Button>

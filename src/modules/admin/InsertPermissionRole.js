@@ -8,11 +8,9 @@ import {
   InputGroup,
   FormControl,
   FormSelect,
-  Form,
-  FormGroup,
+  Form
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-import DatePicker from "react-date-picker";
 
 export default function InsertPermissionRole() {
   const API_URL_INSERT_PERMISSION_ROLE =
@@ -29,14 +27,12 @@ export default function InsertPermissionRole() {
   const [resTypePermissionData, setresTypePermissionData] = useState([]);
   const [resTypeRoleData, setresTypeRoleData] = useState([]);
 
-  const [newPermissionRoleName, setnewPermissionRoleName] = useState("");
   const [newTypePermission, setnewTypePermission] = useState(0);
   const [newTypeRole, setnewTypeRole] = useState(0);
   const [newPermissionRoleID, setnewPermissionRoleID] = useState(0);
-  const [newPermissionRoleDate, setnewPermissionRoleDate] = useState([]);
+  const [newPermissionRoleDate, setnewPermissionRoleDate] = useState(new Date());
   const [newPermissionRoleIsActive, setnewPermissionRoleIsActive] =
     useState(true);
-  const [DateValue, setDateValue] = useState(new Date());
   const [isModify, setisModify] = useState(false);
   const location = useLocation();
   const objSelect = location.state;
@@ -101,7 +97,6 @@ export default function InsertPermissionRole() {
     setnewTypeRole(data.fK_TipoRole_Permiso_Role);
     setnewPermissionRoleDate(data.dateCreated);
     setnewPermissionRoleIsActive(data.IsActive);
-    setnewPermissionRoleName(data.Permiso_Role_Name);
   };
 
   const InsertEvent = async () => {
@@ -119,11 +114,11 @@ export default function InsertPermissionRole() {
               alert("Seleccione si el permiso esta activo o no.");
             } else {
               let obj = {
-                Permiso_Role_ID: newPermissionRoleID,
-                Fk_TipoPermiso_Permiso_Role: newTypePermission,
-                Fk_TipoRole_Permiso_Role: newTypeRole,
-                DateCreated: DateValue,
-                IsActive: newPermissionRoleIsActive
+                permiso_Role_ID: newPermissionRoleID,
+                fk_TipoPermiso_Permiso_Role: newTypePermission,
+                fk_TipoRole_Permiso_Role: newTypeRole,
+                dateCreated: newPermissionRoleDate,
+                isActive: newPermissionRoleIsActive
               };
               InsertRequest(obj);
             }
@@ -144,9 +139,9 @@ export default function InsertPermissionRole() {
               alert("Seleccione si el permiso esta activo o no.");
             } else {
               let obj = {
-                Fk_TipoPermiso_Permiso_Role_Value: newTypePermission,
-                Fk_TipoRole_Permiso_Role_Value: newTypeRole,
-                DateCreated_Value: DateValue.toISOString(),
+                fk_TipoPermiso_Permiso_Role_Value: newTypePermission,
+                fk_TipoRole_Permiso_Role_Value: newTypeRole,
+                dateCreated_Value: newPermissionRoleDate,
                 isActive_Value: newPermissionRoleIsActive
               };
               InsertRequest(obj);
@@ -230,11 +225,6 @@ export default function InsertPermissionRole() {
                   <Form.Group className="mb-3">
                     <Form.Check type="checkbox" label="Esta activo" />
                   </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <DatePicker onChange={setDateValue} value={DateValue}>Seleccione la fecha.</DatePicker>
                 </Col>
               </Row>
               <Row>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Container,
   Row,
@@ -23,6 +23,7 @@ export default function InsertState() {
   const [newStateID, setnewStateID] = useState(0);
   const [newStateDescription, setnewStateDescription] = useState("");
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -36,6 +37,7 @@ export default function InsertState() {
       const response = await fetch(API_URL_Modify_STATE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -43,6 +45,9 @@ export default function InsertState() {
       const response = await fetch(API_URL_INSERT_STATE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewStateID(0);
+        setnewStateDescription("");
+        setnewStateName("");
       } else {
         alert("Ocurrio un error: " + response.status);
       }

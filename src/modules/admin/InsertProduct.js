@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -22,6 +22,7 @@ export default function InsertProduct() {
   const [newProductDescription, setnewProductDescription] = useState("");
   const [newProductAmount, setnewProductAmount] = useState(0);
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -37,6 +38,7 @@ export default function InsertProduct() {
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -47,6 +49,10 @@ export default function InsertProduct() {
       console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewProductID(0);
+        setnewProductName("");
+        setnewProductDescription("");
+        setnewProductAmount(0);
       } else {
         alert("Ocurrio un error: " + response.status);
       }

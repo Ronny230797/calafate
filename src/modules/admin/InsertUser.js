@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -33,6 +33,7 @@ export default function InsertUser() {
   const [newUserPassWordValidate, setnewUserPassWordValidate] = useState("");
   const [restypeUserData, setrestypeUserData] = useState([]);
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -48,6 +49,7 @@ export default function InsertUser() {
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }

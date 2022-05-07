@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -23,6 +23,7 @@ export default function InsertDish(props) {
   const [userTypeName, setuserTypeName] = useState("");
   const [userTypeDescription, setuserTypeDescription] = useState("");
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -38,6 +39,7 @@ export default function InsertDish(props) {
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -46,8 +48,11 @@ export default function InsertDish(props) {
       const data = await response.json();
       setresData(data);
       console.log(data.status);
-      if (data.status == 200) {
+      if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setuserTypeID(0);
+        setuserTypeName("");
+        setuserTypeDescription("");
       } else {
         alert("Ocurrio un error: " + response.status);
       }

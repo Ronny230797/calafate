@@ -14,6 +14,7 @@ export default function BillingByOrder() {
 
   const [resData, setresData] = useState([]);
   const [isError, setisError] = useState(false);
+  const [isUser, setisUser] = useState(true);
   const [totalPrice, settotalPrice] = useState(0);
   const [newFirstnameClient, setnewFirstnameClient] = useState("");
   const [newSecondnameClient, setnewSecondnameClient] = useState("");
@@ -43,96 +44,135 @@ export default function BillingByOrder() {
   };
 
   const paymentRequest = async () => {
-    if (
-      newFirstnameClient === "" &&
-      newFirstnameClient.trim() === "" &&
-      !isNaN(newFirstnameClient)
-    ) {
-      alert("Por favor no ingrese espacion en blanco o numeros en el nombre.");
-    } else {
-      console.log(!isNaN(newSecondnameClient));
-      if (!isNaN(newSecondnameClient)) {
+    if (!isUser) {
+      if (
+        newFirstnameClient === "" &&
+        newFirstnameClient.trim() === "" &&
+        !isNaN(newFirstnameClient)
+      ) {
         alert(
-          "Por favor no ingrese numeros en el Segundo nombre, u omita ingresarlo."
+          "Por favor no ingrese espacion en blanco o numeros en el nombre."
         );
       } else {
-        if (
-          newFirstLastnameClient === "" &&
-          newFirstLastnameClient.trim() === "" &&
-          !isNaN(newFirstLastnameClient)
-        ) {
+        console.log(!isNaN(newSecondnameClient));
+        if (!isNaN(newSecondnameClient)) {
           alert(
-            "Por favor no ingrese espacios en blanco o numeros en el primer apellido."
+            "Por favor no ingrese numeros en el Segundo nombre, u omita ingresarlo."
           );
         } else {
           if (
-            newSecondLastnameClient === "" &&
-            newSecondLastnameClient.trim() === "" &&
-            !isNaN(newSecondLastnameClient)
+            newFirstLastnameClient === "" &&
+            newFirstLastnameClient.trim() === "" &&
+            !isNaN(newFirstLastnameClient)
           ) {
             alert(
-              "Por favor no ingrese espacios en blanco o numeros en el segundo apellido."
+              "Por favor no ingrese espacios en blanco o numeros en el primer apellido."
             );
           } else {
-            let obj = {
-              fK_Tipo_Usuario_Usuario: "3",
-              firstName: newFirstnameClient,
-              usuario_Second_Name: newSecondnameClient,
-              usuario_First_Last_Name: newFirstLastnameClient,
-              usuario_Second_Last_Name: newSecondLastnameClient,
-              usuario_Password: "",
-              usuario_Username: ""
-            };
-
-            try {
-              const requestOptions = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(obj),
+            if (
+              newSecondLastnameClient === "" &&
+              newSecondLastnameClient.trim() === "" &&
+              !isNaN(newSecondLastnameClient)
+            ) {
+              alert(
+                "Por favor no ingrese espacios en blanco o numeros en el segundo apellido."
+              );
+            } else {
+              let obj = {
+                fK_Tipo_Usuario_Usuario: "3",
+                firstName: newFirstnameClient,
+                usuario_Second_Name: newSecondnameClient,
+                usuario_First_Last_Name: newFirstLastnameClient,
+                usuario_Second_Last_Name: newSecondLastnameClient,
+                usuario_Password: "",
+                usuario_Username: "",
               };
-              const response = await fetch(API_URL_INSERT_USER, requestOptions);
-              const data = await response.json();
-              if (response.status === 200 && data !== 0) {
-                let OrderUser = {
-                  FK_Order_Usuario_Order: objSelect,
-                  FK_Usuario_Usuario_Order: data,
-                };
+
+              try {
                 const requestOptions = {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(OrderUser),
+                  body: JSON.stringify(obj),
                 };
                 const response = await fetch(
-                  API_URL_INSERT_USER_ORDER,
+                  API_URL_INSERT_USER,
                   requestOptions
                 );
-                if (response.status === 200) {
+                const data = await response.json();
+                if (response.status === 200 && data !== 0) {
+                  let OrderUser = {
+                    FK_Order_Usuario_Order: objSelect,
+                    FK_Usuario_Usuario_Order: data,
+                  };
                   const requestOptions = {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(objSelect),
+                    body: JSON.stringify(OrderUser),
                   };
                   const response = await fetch(
-                    API_URL_MODIFY_ORDER_STATUS,
+                    API_URL_INSERT_USER_ORDER,
                     requestOptions
                   );
                   if (response.status === 200) {
-                    alert("Se realizo el pago.");
-                    navigate(-1);
+                    const requestOptions = {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(objSelect),
+                    };
+                    const response = await fetch(
+                      API_URL_MODIFY_ORDER_STATUS,
+                      requestOptions
+                    );
+                    if (response.status === 200) {
+                      alert("Se realizo el pago.");
+                      navigate(-1);
+                    } else {
+                      alert(
+                        "Ocurrio un error al cambiar el estado de la orden"
+                      );
+                    }
                   } else {
-                    alert("Ocurrio un error al cambiar el estado de la orden");
+                    alert("Ocurrio un error al asignar la orden al usuario.");
                   }
                 } else {
-                  alert("Ocurrio un error al asignar la orden al usuario.");
+                  alert("Ocurrio un error al ingresar al nuevo usuario.");
                 }
-              } else {
-                alert("Ocurrio un error al ingresar al nuevo usuario.");
+              } catch (error) {
+                alert("Ocurrio un error: " + error);
               }
-            } catch (error) {
-              alert("Ocurrio un error: " + error);
             }
           }
         }
+      }
+    } else {
+      let OrderUser = {
+        FK_Order_Usuario_Order: objSelect,
+        FK_Usuario_Usuario_Order: 2
+      };
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(OrderUser),
+      };
+      const response = await fetch(API_URL_INSERT_USER_ORDER, requestOptions);
+      if (response.status === 200) {
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(objSelect),
+        };
+        const response = await fetch(
+          API_URL_MODIFY_ORDER_STATUS,
+          requestOptions
+        );
+        if (response.status === 200) {
+          alert("Se realizo el pago.");
+          navigate(-1);
+        } else {
+          alert("Ocurrio un error al cambiar el estado de la orden");
+        }
+      } else {
+        alert("Ocurrio un error al asignar la orden al usuario.");
       }
     }
   };
@@ -164,8 +204,14 @@ export default function BillingByOrder() {
           <Row>
             <Col xs={12} xl={12}>
               <Form>
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  label="¿Agregar un usuario?"
+                  onClick={(event) => setisUser(!isUser)}
+                />
                 <Row>
-                  <Col>
+                  <Col xs={12} xl={12}>
                     <Form.Label>
                       Ingrese el primer nombre del cliente
                     </Form.Label>
@@ -175,6 +221,7 @@ export default function BillingByOrder() {
                         setnewFirstnameClient(event.target.value)
                       }
                       placeholder="Primer nombre"
+                      disabled={isUser}
                     />
                   </Col>
                   <Col>
@@ -185,6 +232,7 @@ export default function BillingByOrder() {
                         setnewSecondnameClient(event.target.value)
                       }
                       placeholder="Segundo nombre"
+                      disabled={isUser}
                     />
                     <Form.Text className="text-muted">*Opcional</Form.Text>
                   </Col>
@@ -198,6 +246,7 @@ export default function BillingByOrder() {
                         setnewFirstLastnameClient(event.target.value)
                       }
                       placeholder="Primer apellido"
+                      disabled={isUser}
                     />
                   </Col>
                   <Col>
@@ -208,6 +257,7 @@ export default function BillingByOrder() {
                         setnewSecondLastnameClient(event.target.value)
                       }
                       placeholder="Segundo apellido"
+                      disabled={isUser}
                     />
                   </Col>
                 </Row>

@@ -38,6 +38,7 @@ export default function AllDishes() {
       const response = await fetch(API_URL_DELETE_Dish, requestOptions);
       if (response.status === 200) {
         alert("Se elimino correctamente.");
+        window.location.reload(false);
       } else {
         alert("Ocurrio un error al eliminar el platillo.");
       }

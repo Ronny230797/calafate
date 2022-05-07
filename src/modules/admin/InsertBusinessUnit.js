@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -24,6 +24,7 @@ export default function InsertBusinessUnit() {
   const [newBusinessUnitDescription, setnewBusinessUnitDescription] =
     useState("");
   const [isModify, setisModify] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -39,6 +40,7 @@ export default function InsertBusinessUnit() {
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        navigate(-1);
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -49,6 +51,10 @@ export default function InsertBusinessUnit() {
       console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
+        setnewBusinessUnitID(0);
+        setnewBusinessUnitParent(0);
+        setnewBusinessUnitName("");
+        setnewBusinessUnitDescription("");
       } else {
         alert("Ocurrio un error: " + response.status);
       }
