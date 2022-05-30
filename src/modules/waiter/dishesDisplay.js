@@ -15,7 +15,7 @@ export default function DishesDisplay() {
   const API_URL_Modify =
     "http://localhost:4000/Administration/Admin/ModifyOrder";
   const API_URL_INSERT_OD =
-    'http://localhost:4000/Administration/Admin/InsertOrder_Details';
+    "http://localhost:4000/Administration/Admin/InsertOrder_Details";
   const [resDishesData, setresDishesData] = useState([]);
   const [postDataOrderDetails, setpostDataOrderDetails] = useState([]);
   const [dataExists, setdataExists] = useState(true);
@@ -47,9 +47,10 @@ export default function DishesDisplay() {
       let newOrder = {
         fK_Order_Order_Details: newOrderID,
         fK_Plato_Bebida_Order_Details: resultado.platoID,
-        plato_Bebida_Nombre: resultado.plato_Bebida_Nombre,
+        fK_Plato_Bebida_Order_Details_Name: resultado.plato_Bebida_Nombre,
         order_Details_Amount: 1,
-        order_Details_Description: "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate,
+        order_Details_Description:
+          "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate.toLocaleString('es-CR', {timeZone: 'America/Costa_Rica'}),
         order_Details_Date: newOrderDate,
       };
       setpostDataOrderDetails([...postDataOrderDetails, newOrder]);
@@ -85,13 +86,13 @@ export default function DishesDisplay() {
   };
 
   const InsertOrderDetailsEvent = async () => {
-    console.log({postDataOrderDetails})
+    console.log({ postDataOrderDetails });
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(postDataOrderDetails)
+      body: JSON.stringify(postDataOrderDetails),
     };
-    console.log(requestOptions)
+    console.log(requestOptions);
     const response = await fetch(API_URL_INSERT_OD, requestOptions);
     if (response.status === 200) {
       alert("Se agregaron los detalles de la orden.");
@@ -112,31 +113,28 @@ export default function DishesDisplay() {
           "No se cargaron los datos de forma adecuada, falta el identificador de la orden."
         );
       } else {
-        if (!isNaN(newNumberTable)) {
-          alert("No ingrese letras en el numero de mesa.");
+        if (!isNaN(newNumberTable) || newNumberTable === 0) {
+          alert("No ingrese letras en el numero de mesa o modifique el numero de la mesa.");
         } else {
-          var descriptionOrderDetails =
-            "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate;
-          setnewOrderDescription(descriptionOrderDetails);
           let obj = {
             Order_ID: newOrderID,
             Order_Date: newOrderDate,
             Numero_Mesa: newNumberTable,
-            Order_Description: "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate,
+            Order_Description: "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate.toLocaleString('es-CR', {timeZone: 'America/Costa_Rica'}),
+            Order_Total_Amount: 0,
           };
           handleInsertNewOrder(obj);
         }
       }
     } else {
-      if (isNaN(newNumberTable)) {
-        alert("No ingrese letras en el numero de mesa.");
+      if (isNaN(newNumberTable) || newNumberTable === 0) {
+        alert("No ingrese letras en el numero de mesa o modifique el numero de la mesa.");
       } else {
-        setnewOrderDescription("Mesa: " + newNumberTable + " - Fecha: " + newOrderDate);
-        console.log(newOrderDescription)
         let obj = {
           Order_Date: newOrderDate,
           Numero_Mesa: newNumberTable,
-          Order_Description: "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate,
+          Order_Description:"Mesa: " + newNumberTable + " - Fecha: " + newOrderDate.toLocaleString('es-CR', {timeZone: 'America/Costa_Rica'}),
+          Order_Total_Amount: 0,
         };
         handleInsertNewOrder(obj);
       }
@@ -144,7 +142,7 @@ export default function DishesDisplay() {
   };
 
   const handleInsertNewOrder = async (obj) => {
-    console.log(obj)
+    console.log(obj);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -234,7 +232,7 @@ export default function DishesDisplay() {
                     <Row key={AllDishesToPost.fK_Plato_Bebida_Order_Details}>
                       <Col xs={6} xl={6}>
                         <ListGroup.Item>
-                          {AllDishesToPost.plato_Bebida_Nombre}
+                          {AllDishesToPost.fK_Plato_Bebida_Order_Details_Name}
                         </ListGroup.Item>
                       </Col>
                       <Col xs={2} xl={2}>

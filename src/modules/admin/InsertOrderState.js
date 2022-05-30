@@ -29,6 +29,7 @@ export default function InsertOrderState(props) {
   const [newStateOrderState, setnewStateOrderState] = useState(0);
   const [newOrderStateDate, setnewOrderStateDate] = useState(new Date());
   const [newOrderStateDescription, setnewOrderStateDescription] = useState("");
+  const [newOrderStateStateName, setnewOrderStateStateName] = useState("");
   const location = useLocation();
   const objSelect = location.state;
 
@@ -39,7 +40,7 @@ export default function InsertOrderState(props) {
       body: JSON.stringify(obj),
     };
     const response = await fetch(API_URL_Modify_ORDER_STATE, requestOptions);
-    if (response.status == 200) {
+    if (response.status === 200) {
       alert("Se ingreso correctamente");
     } else {
       alert("Ocurrio un error: " + response.status);
@@ -56,6 +57,7 @@ export default function InsertOrderState(props) {
     const response = await fetch(API_URL_GET_STATE);
     const data = await response.json();
     setresStateData(data);
+    console.log(data)
   };
 
   const getOrderStateByIDRequest = async (ID) => {
@@ -71,7 +73,8 @@ export default function InsertOrderState(props) {
     setnewOrderOrderState(data.fK_Order_Order_Estado);
     setnewStateOrderState(data.fK_Estado_Order_Estado);
     setnewOrderStateDate(data.order_Estado_Date);
-    setnewOrderStateDescription(data.Order_Estado_Description);
+    setnewOrderStateDescription(data.order_Estado_Description);
+    setnewOrderStateStateName(data.fK_Estado_Order_Estado_Name)
   };
 
   const InsertEvent = async () => {
@@ -93,6 +96,7 @@ export default function InsertOrderState(props) {
               fK_Estado_Order_Estado: newStateOrderState,
               order_Estado_Date: newOrderStateDate,
               order_Estado_Description: newOrderStateDescription,
+              fK_Estado_Order_Estado_Name: newOrderStateStateName
             };
             InsertRequest(obj);
           }
@@ -121,7 +125,7 @@ export default function InsertOrderState(props) {
               <Row>
                 <Col xs={10} md={10}>
                   <Form.Text className="text-muted">
-                    Estado actual: {newStateOrderState}
+                    Estado actual: {newOrderStateStateName}
                   </Form.Text>
                   <FormSelect
                     onChange={(event) =>
@@ -132,8 +136,8 @@ export default function InsertOrderState(props) {
                     <option value={0}>Seleccione el estado de la orden.</option>
                     {resStateData.map((AllState) => (
                       <option
-                        key={AllState.Estado_ID}
-                        value={AllState.Estado_ID}
+                        key={AllState.estado_ID}
+                        value={AllState.estado_ID}
                       >
                         {AllState.estado_Name}
                       </option>

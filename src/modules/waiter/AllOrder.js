@@ -33,7 +33,7 @@ export default function AllOrder() {
                   <Row key={AllOrder.order_ID}>
                     <Col xs={8} md={8}>
                       <ListGroup.Item>
-                        {AllOrder.order_Description}
+                        Numero de mesa: {AllOrder.numero_Mesa} - Fecha: {AllOrder.order_Date.toLocaleString('es-CR', {timeZone: 'America/Costa_Rica'})} - Total: {AllOrder.order_Total_Amount}
                       </ListGroup.Item>
                     </Col>
                     <Col xs={4} md={4}>
