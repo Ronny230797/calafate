@@ -13,8 +13,8 @@ export default function AllBillingOrder() {
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
+      alert("Ocurrio un error al cargar los datos... " + err);
     }
   };
 
@@ -33,7 +33,7 @@ export default function AllBillingOrder() {
                   <Row key={AllOrder.order_ID}>
                     <Col xs={8} md={8}>
                       <ListGroup.Item>
-                        {AllOrder.order_Description}
+                        {AllOrder.order_Description} - Total de compra: {AllOrder.order_Total_Amount}
                       </ListGroup.Item>
                     </Col>
                     <Col xs={4} md={4}>

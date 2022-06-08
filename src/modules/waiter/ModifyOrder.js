@@ -38,7 +38,6 @@ export default function NewOrder() {
       setresDishesData(data);
     } catch (err) {
       alert("Ocurrio un error al cargar los datos... " + err);
-      /**setdataExists(false);*/
     }
   };
 
@@ -61,35 +60,19 @@ export default function NewOrder() {
       (element) => element.fK_Plato_Bebida_Order_Details === resultado.platoID
     );
 
+    console.log(resultado)
     if (alreadyExists === undefined) {
-      let newOrder = [
-        {
+      let newOrder = {
           fK_Order_Order_Details: objSelect,
           fK_Plato_Bebida_Order_Details: resultado.platoID,
-          plato_Bebida_Nombre: resultado.plato_Bebida_Nombre,
+          fK_Plato_Bebida_Order_Details_Name: resultado.plato_Bebida_Nombre,
           order_Details_Amount: 1,
           order_Details_Description:
             "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate,
           order_Details_Date: new Date(),
-        },
-      ];
-      console.log(newOrder);
-      try {
-        const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newOrder),
         };
-        const response = await fetch(API_URL_INSERT_OD, requestOptions);
-        if (response.status === 200) {
-          alert("Se agrego el nuevo platillo correctamente");
-          window.location.reload(false);
-        } else {
-          alert("Ocurrio un error: " + response.status);
-        }
-      } catch (error) {
-        alert("Ocurrio un error: " + error);
-      }
+      console.log(newOrder);
+      setpostDataOrderDetails([...postDataOrderDetails, newOrder]);
     } else {
       alert("Ya se agrego este platillo, modifica la cantidad.");
     }
@@ -116,30 +99,17 @@ export default function NewOrder() {
   };
 
   const handleUpdateDish = async (ID, NewAmount) => {
-    if (!isNaN(NewAmount)) {
-      var myID = parseInt(ID);
-      const resultado = postDataOrderDetails.find((element) => element.fK_Plato_Bebida_Order_Details === myID);
-      resultado.order_Details_Amount = NewAmount;
-      try {
-        console.log(resultado);
-        const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(resultado),
+    var myID = parseInt(ID);
+    const updateDish = postDataOrderDetails.map((uploadData) => {
+      if (uploadData.fK_Plato_Bebida_Order_Details === myID) {
+        return {
+          ...uploadData,
+          order_Details_Amount: NewAmount,
         };
-        const response = await fetch(API_URL_Modify, requestOptions);
-        if (response.status === 200) {
-          alert("Se modifico la cantidad del platillo correctamente");
-          window.location.reload(false);
-        } else {
-          alert("Ocurrio un error: " + response.status);
-        }
-      } catch (error) {
-        alert("Ocurrio un error: " + error);
       }
-    } else {
-      alert("No ingrese letras en la cantidad de platillos.");
-    }
+      return uploadData;
+    });
+    setpostDataOrderDetails(updateDish);
   };
 
   useEffect(() => {
@@ -217,9 +187,7 @@ export default function NewOrder() {
                     <Col xs={4} xl={4}>
                       <Button
                         onClick={(event) =>
-                          handleDeleteDish(
-                            AllDishesToPost.fK_Plato_Bebida_Order_Details
-                          )
+                          handleDeleteDish(AllDishesToPost.order_Details_ID)
                         }
                       >
                         Eliminar

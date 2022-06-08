@@ -16,6 +16,8 @@ export default function BillingByOrder() {
   const [isError, setisError] = useState(false);
   const [isUser, setisUser] = useState(true);
   const [totalPrice, settotalPrice] = useState(0);
+  const [subTotal, setsubTotal] = useState(0);
+  const [IVA, setIVA] = useState(0);
   const [newFirstnameClient, setnewFirstnameClient] = useState("");
   const [newSecondnameClient, setnewSecondnameClient] = useState("");
   const [newFirstLastnameClient, setnewFirstLastnameClient] = useState("");
@@ -38,9 +40,12 @@ export default function BillingByOrder() {
     var tempTotalPrice = 0;
     data.map(
       (billing) =>
-        (tempTotalPrice = tempTotalPrice + parseInt(billing.plato_Bebida_Price))
+        (tempTotalPrice = tempTotalPrice + parseInt(billing.plato_Bebida_Price * billing.order_Details_Amount))
     );
-    settotalPrice(tempTotalPrice);
+    let IVACalc = tempTotalPrice*0.13;
+    setsubTotal(tempTotalPrice);
+    setIVA(IVACalc)
+    settotalPrice(tempTotalPrice+IVACalc);
   };
 
   const paymentRequest = async () => {
@@ -286,15 +291,19 @@ export default function BillingByOrder() {
                       <td>{BillingInformation.plato_Bebida_Price}</td>
                     </tr>
                   ))}
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Precio Total: {totalPrice}</td>
-                  </tr>
                 </tbody>
               </Table>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} xl={12}>
+              <hr/>
+              <div>
+                <label>Subtotal: {subTotal}</label><br/>
+                <label>IVA: {IVA}</label><br/>
+                <label>Descuento: </label><br/>
+                <label>Total: {totalPrice}</label><br/>
+              </div>
             </Col>
           </Row>
           <Row>
