@@ -7,7 +7,7 @@ import {
   ListGroup,
   FormControl,
 } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function NewOrder() {
   const API_URL_INSERT_OD =
@@ -28,6 +28,7 @@ export default function NewOrder() {
   const [newOrderDate, setnewOrderDate] = useState(new Date());
   const [newOrderID, setnewOrderID] = useState(0);
 
+  const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
 
@@ -63,16 +64,16 @@ export default function NewOrder() {
     console.log(resultado)
     if (alreadyExists === undefined) {
       let newOrder = {
+          order_Details_ID: 0,
           fK_Order_Order_Details: objSelect,
           fK_Plato_Bebida_Order_Details: resultado.platoID,
           fK_Plato_Bebida_Order_Details_Name: resultado.plato_Bebida_Nombre,
           order_Details_Amount: 1,
-          order_Details_Description:
-            "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate,
-          order_Details_Date: new Date(),
+          order_Details_Description: "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate.toLocaleString("es-CR", { timeZone: "America/Costa_Rica",}),
+          order_Details_Date: newOrderDate,
         };
       console.log(newOrder);
-      setpostDataOrderDetails([...postDataOrderDetails, newOrder]);
+      setpostDataOrderDetails([...postDataOrderDetails, newOrder])
     } else {
       alert("Ya se agrego este platillo, modifica la cantidad.");
     }
@@ -111,6 +112,29 @@ export default function NewOrder() {
     });
     setpostDataOrderDetails(updateDish);
   };
+
+  const fetchModifyOrderDetails = async () => {
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({postDataOrderDetails}),
+      };
+
+      console.log(postDataOrderDetails);
+      const response = await fetch(API_URL_Modify, requestOptions);
+      if(response.status === 200) {
+        alert("Se modificaron los detalles de la orden.");
+        navigate(-1);
+      }else {
+        alert(
+          "Ocurrio un error al intentar modificar los platillos de la orden."
+        );
+      }
+    } catch (error) {
+      
+    }
+  }
 
   useEffect(() => {
     console.log(objSelect);
@@ -164,10 +188,10 @@ export default function NewOrder() {
             <Col xs={6} xl={6}>
               <ListGroup>
                 {postDataOrderDetails.map((AllDishesToPost) => (
-                  <Row key={AllDishesToPost.fK_Plato_Bebida_Order_Details}>
+                  <Row key={AllDishesToPost.order_Details_ID}>
                     <Col xs={6} xl={6}>
                       <ListGroup.Item>
-                        {AllDishesToPost.order_Details_Description}
+                        {AllDishesToPost.fK_Plato_Bebida_Order_Details_Name}
                       </ListGroup.Item>
                     </Col>
                     <Col xs={2} xl={2}>
@@ -196,6 +220,11 @@ export default function NewOrder() {
                   </Row>
                 ))}
               </ListGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+            <Button onClick={fetchModifyOrderDetails}>Modificar orden</Button>
             </Col>
           </Row>
         </Container>
