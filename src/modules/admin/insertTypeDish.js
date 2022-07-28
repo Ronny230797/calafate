@@ -52,7 +52,7 @@ export default function InsertTypeDish(props) {
       const response = await fetch(API_URL_Modify_TYPE, requestOptions);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
-        navigate(-1)
+        window.location.reload();
       } else {
         alert("Ocurrio un error: " + response.status);
       }
