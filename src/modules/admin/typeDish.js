@@ -3,6 +3,7 @@ import { Table, Input, Space } from "antd";
 import axios from "axios";
 import { useTableSearch } from "../../components/useTableSearch";
 import InsertTypeDish from "../admin/InsertTypeDish";
+import AppBar from '../../components/appbar-basic';
 import "../../styles/generic/table.scss"; 
 
 const { Search } = Input;
@@ -48,6 +49,10 @@ export default function App() {
 
   return (
     <div>
+      <AppBar />
+      <div className="title-page">
+        <h1>Tipo Platillo</h1>
+          </div>
       <div className="container-search">
       <Search className='search'
         onChange={e => setSearchVal(e.target.value)}
