@@ -20,7 +20,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '1px solid #000',
   boxShadow: 24,
   pt: 2,
   px: 4,
@@ -157,10 +157,10 @@ export default function InsertTypeDish(props) {
                       <Col xs={10} md={10}>
                         <InputGroup className="mb-3">
                           <InputGroup.Text>
-                            Nombre del tipo de platillo/Bebida
+                            Nombre
                           </InputGroup.Text>
                           <FormControl
-                            aria-label="TipoPlatillo/BebidaNombre"
+                            aria-label="Nombre"
                             value={newTypeDishName}
                             type="text"
                             onChange={(event) => setnewTypeDishName(event.target.value)}
@@ -172,10 +172,10 @@ export default function InsertTypeDish(props) {
                       <Col xs={10} md={10}>
                         <InputGroup className="mb-3">
                           <InputGroup.Text>
-                            Descripcion del tipo platillo/Bebida
+                            Descripcion
                           </InputGroup.Text>
                           <FormControl
-                            aria-label="TipoPlatoDescripción"
+                            aria-label="Descripcion"
                             value={newTypeDescriptionDish}
                             type="text"
                             onChange={(event) =>

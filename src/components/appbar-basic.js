@@ -9,7 +9,7 @@ const ResponsiveAppBar = () => {
             <LinkContainer to="/">
                 <Navbar.Brand>Calafate</Navbar.Brand>
             </LinkContainer>
-
+            
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
