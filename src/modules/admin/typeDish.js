@@ -22,6 +22,30 @@ export default function App() {
     retrieve: fetchUsers
   });
 
+  const API_URL_DELETE_TYPE_Dish =
+  "http://localhost:4000/Administration/Admin/DeleteTypeDishDrink";
+
+  const deleteTypeDish = async (ID) => {
+    try {
+      console.log(ID);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ID),
+      };
+      const response = await fetch(API_URL_DELETE_TYPE_Dish, requestOptions);
+      if (response.status === 200) {
+        alert("Se elimino correctamente.");
+        window.location.reload();
+      } else {
+        alert("Ocurrio un error al eliminar el tipo de platillo.");
+      }
+    } catch (error) {
+      alert("Ocurrio un error al eliminar: " + error);
+    }
+  };
+
+
   return (
     <div>
       <div>
@@ -54,7 +78,7 @@ export default function App() {
         <Column title="Eliminar" key="eliminar"
           render={(_, record) => (
             <Space size="middle">
-              <a onClick={()=>alert('eliminar')}>Eliminar {record.tipo_Plato_Bebida_Name}</a>
+              <a onClick={() => deleteTypeDish(record.tipo_Plato_Bebida_ID)}>Eliminar</a>
             </Space>
           )}
         />
