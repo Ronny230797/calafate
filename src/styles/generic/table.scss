@@ -1,0 +1,66 @@
+@import "../_theme.scss";
+
+.table{
+    width: 100% !important;
+    padding: 0 5%;
+
+    table{
+        width: 100% !important;
+    }
+
+    tr{
+       border-bottom: 1px solid black;
+    }
+
+    td{
+        padding: 1vw 0.2vw;
+    }
+
+    th{
+        width: 20%;
+    }
+
+    a{
+        color: red !important;
+        padding: 0.7vw;
+    }
+
+    a:hover{
+        cursor: pointer;
+        background-color: rgba($color: red, $alpha: 0.1);
+        padding: 0.7vw;
+    }
+
+}
+
+.container-search{
+    padding: 5% 27% 0 5%;
+    display: flex;
+    justify-content: space-between;
+
+
+    .ant-input-search{
+        width: 50vw;
+
+
+        input{
+            width: 70%;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border: solid 1px black;
+            padding: 0.5vw 1vw;
+        }
+
+        span{
+            button{
+                background-color: transparent;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border: solid 1px black;
+                padding: 0.5vw 1vw;
+            }
+        }
+
+    }
+
+}

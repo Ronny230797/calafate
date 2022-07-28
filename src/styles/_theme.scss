@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@1,200&display=swap');
 
-$background-color: #1C1B1B;
+$background-color: #ffffff;
 $text-white-color: #ffffff;
 $text-black-color: #000000;
 $secondary-color: 	#C0C0C0;
@@ -23,7 +23,7 @@ body{
     }
 
     h1, h2, h3, span, p {
-        color: $text-white-color;
+        color: $text-black-color;
     }
 
     .row{
@@ -59,7 +59,7 @@ body{
 //Button Secondary
 .button-secondary{
     background-color: transparent;
-    color: $text-white-color;
+    color: $text-black-color;
 }
 
 //App-Bar
@@ -75,12 +75,28 @@ body{
 //Input-Group
 .input-group{
     input{
-        caret-color: $text-white-color;
-        color: $text-white-color;
+        caret-color: $text-black-color;
+        color:$text-black-color;
     }
 
     input:focus{
-        caret-color: $text-white-color;
-        color: $text-white-color;
+        caret-color: $text-black-color;
+        color: $text-black-color;
     }
+}
+
+//Title Pages
+
+.title-page{
+    text-align: center;
+    text-decoration: underline;
+    h1{
+        font-weight: bold;
+    }
+}
+
+//Modal 
+
+.MuiBox-root{
+    width: 80% !important;
 }

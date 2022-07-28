@@ -25,7 +25,7 @@ export default function Login() {
         if(resData == false || resData == undefined){
             alert('No se puedo verificar su identidad');
         }else{
-            window.location.href='/admin';
+            window.location.href='/WelcomeCenter';
         }
 
     };
