@@ -22,11 +22,13 @@
 
     a{
         color: red !important;
+        padding: 0.7vw;
     }
 
     a:hover{
         cursor: pointer;
-        text-decoration: underline !important;
+        background-color: rgba($color: red, $alpha: 0.1);
+        padding: 0.7vw;
     }
 
 }
