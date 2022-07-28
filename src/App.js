@@ -51,6 +51,11 @@ import AllOrder from './modules/waiter/AllOrder';
 import ModifyOrder from './modules/waiter/ModifyOrder';
 import BillingByOrder from './modules/Billing/BillingByOrder';
 import AllBillingOrder from './modules/Billing/AllBillingOrder';
+import WelcomeCenter from './modules/generic/WelcomeCenter';
+import DishesCenter from './modules/generic/DishesCenter';
+import SalesCenter from './modules/generic/SalesCenter';
+import UsersCenter from './modules/generic/UsersCenter';
+
 import { Routes, Route } from "react-router-dom";
 
 
@@ -112,6 +117,11 @@ export default function App() {
         <Route path="/ModifyOrder" element={<ModifyOrder />}></Route>
         <Route path="/BillingByOrder" element={<BillingByOrder />}></Route>
         <Route path="/AllBillingOrder" element={<AllBillingOrder />}></Route>
+        <Route path="/WelcomeCenter" element={<WelcomeCenter />}></Route>
+        <Route path="/UsersCenter" element={<UsersCenter />}></Route>
+        <Route path="/DishesCenter" element={<DishesCenter />}></Route>
+        <Route path="/SalesCenter" element={<SalesCenter />}></Route>
+
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>

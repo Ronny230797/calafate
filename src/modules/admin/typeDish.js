@@ -1,34 +1,42 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Table, Input } from "antd";
+import axios from "axios";
+import { userColumns } from "../../components/columns";
+import { useTableSearch } from "../../components/useTableSearch";
 
-export default function TypeDish() {
+const { Search } = Input;
+
+const fetchUsers = async () => {
+  const { data } = await axios.get(
+    "http://localhost:4000/Administration/Admin/GetAllTypeDishDrink"
+  );
+  return { data };
+};
+
+export default function App() {
+  const [searchVal, setSearchVal] = useState(null);
+
+  const { filteredData, loading } = useTableSearch({
+    searchVal,
+    retrieve: fetchUsers
+  });
+
   return (
-    <React.Fragment>
-      <Container className="menu">
-        <Row>
-          <Col xs={6} md={6}>
-            <div className="card-cotainer">
-              <p>Insertar nuevo tipo de platillo/Bebida</p>
-              <Link to="/InsertTypeDish"><Button>Acceder</Button></Link>
-            </div>
-          </Col>
-          <Col xs={6} md={6}>
-            <div className="card-cotainer">
-              <p>Modificar o Eliminar existentes</p>
-              <Link to="/AllTypeDish"><Button>Acceder</Button></Link>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={6} md={6}>
-            <div className="card-cotainer">
-              <p>Buscador</p>
-              <Link to="/InsertDish"><Button>Acceder</Button></Link>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </React.Fragment>
+    <>
+      <Search
+        onChange={e => setSearchVal(e.target.value)}
+        placeholder="Search"
+        enterButton
+        style={{ position: "sticky", top: "0", left: "0" }}
+      />
+      <br /> <br />
+      <Table
+        rowKey="tipo_Plato_Bebida_ID"
+        dataSource={filteredData}
+        columns={userColumns}
+        loading={loading}
+        pagination={false}
+      />
+    </>
   );
 }
