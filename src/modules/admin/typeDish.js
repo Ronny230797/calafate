@@ -3,6 +3,7 @@ import { Table, Input, Space, Tag } from "antd";
 import axios from "axios";
 import { userColumns } from "../../components/columns";
 import { useTableSearch } from "../../components/useTableSearch";
+import InsertTypeDish from "../admin/InsertTypeDish";
 
 const { Search } = Input;
 const { Column } = Table;
@@ -22,13 +23,17 @@ export default function App() {
   });
 
   return (
-    <>
+    <div>
+      <div>
       <Search
         onChange={e => setSearchVal(e.target.value)}
         placeholder="Search"
         enterButton
         style={{ position: "sticky", top: "0", left: "0" }}
       />
+      <InsertTypeDish />
+      </div>
+
       <br /> <br />
       <Table
         dataSource={filteredData}
@@ -52,6 +57,6 @@ export default function App() {
           )}
         />
       </Table>
-    </>
+    </div>
   );
 }
