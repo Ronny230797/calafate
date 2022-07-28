@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Table, Input, Space, Tag } from "antd";
+import { Table, Input, Space } from "antd";
 import axios from "axios";
-import { userColumns } from "../../components/columns";
 import { useTableSearch } from "../../components/useTableSearch";
 import InsertTypeDish from "../admin/InsertTypeDish";
+import "../../styles/generic/table.scss"; 
 
 const { Search } = Input;
 const { Column } = Table;
@@ -48,8 +48,8 @@ export default function App() {
 
   return (
     <div>
-      <div>
-      <Search
+      <div className="container-search">
+      <Search className='search'
         onChange={e => setSearchVal(e.target.value)}
         placeholder="Search"
         enterButton
@@ -59,7 +59,7 @@ export default function App() {
       </div>
 
       <br /> <br />
-      <Table
+      <Table className='table'
         dataSource={filteredData}
         pagination={false}
       >
