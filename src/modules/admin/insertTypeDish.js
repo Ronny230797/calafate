@@ -28,39 +28,7 @@ const style = {
 };
 
 
-
-function ChildModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <React.Fragment>
-      <Button onClick={handleOpen}>Confirmar</Button>
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 200 }}>
-          <h2 id="child-modal-title">Text in a child modal</h2>
-          <p id="child-modal-description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </p>
-          <Button onClick={handleClose}>Close Child Modal</Button>
-        </Box>
-      </Modal>
-    </React.Fragment>
-  );
-}
-
-export default function InsertTypeDish() {
+export default function InsertTypeDish(props) {
 
   const API_URL_INSERT_TYPE = "http://localhost:4000/Administration/Admin/InsertTypeDishDrink";
   const API_URL_Modify_TYPE = "http://localhost:4000/Administration/Admin/ModifyTypeDishDrink";
@@ -72,7 +40,7 @@ export default function InsertTypeDish() {
   const [isModify, setisModify] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const objSelect = location.state;
+  const objSelect = props.id;
 
   const InsertRequest = async (obj) => {
     const requestOptions = {
@@ -109,7 +77,6 @@ export default function InsertTypeDish() {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data)
     setnewTypeDishID(data.tipo_Plato_Bebida_ID);
     setnewTypeDishName(data.tipo_Plato_Bebida_Name);
     setnewTypeDescriptionDish(data.tipo_Plato_Bebida_Description);
@@ -153,7 +120,7 @@ export default function InsertTypeDish() {
   };
 
   useEffect(() => {
-    if (objSelect != null) {
+    if (objSelect != null  || objSelect != undefined) {
       setisModify(true);
       getTypeDishByIDRequest(objSelect);
     } else {
@@ -172,7 +139,7 @@ export default function InsertTypeDish() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Agregar</Button>
+      <Button onClick={handleOpen}>{isModify ? "Modificar" : "Agregar"}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -219,14 +186,13 @@ export default function InsertTypeDish() {
                       </Col>
                     </Row>
                     <Button onClick={InsertEvent}>
-                      {isModify ? "Modificar" : "Ingresar"}
+                      {isModify ? "Modificar" : "Agregar"}
                     </Button>
                   </div>
                 </Col>
               </Row>
             </Container>
           </React.Fragment>
-          <ChildModal />
         </Box>
       </Modal>
     </div>

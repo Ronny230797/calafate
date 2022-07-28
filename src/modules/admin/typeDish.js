@@ -45,7 +45,9 @@ export default function App() {
         <Column title="Modificar" key="modificar"
           render={(_, record) => (
             <Space size="middle">
-              <a onClick={()=>alert(`${record.tipo_Plato_Bebida_ID}`)}>Modificar {record.tipo_Plato_Bebida_Name}</a>
+              <InsertTypeDish  
+              id={record.tipo_Plato_Bebida_ID}
+              />
             </Space>
           )}
         />
