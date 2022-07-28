@@ -40,14 +40,14 @@ export default function App() {
         <Column title="Modificar" key="modificar"
           render={(_, record) => (
             <Space size="middle">
-              <button>Modificar {record.tipo_Plato_Bebida_Name}</button>
+              <a onClick={()=>alert(`${record.tipo_Plato_Bebida_ID}`)}>Modificar {record.tipo_Plato_Bebida_Name}</a>
             </Space>
           )}
         />
         <Column title="Eliminar" key="eliminar"
           render={(_, record) => (
             <Space size="middle">
-              <button>Eliminar {record.tipo_Plato_Bebida_Name}</button>
+              <a onClick={()=>alert('eliminar')}>Eliminar {record.tipo_Plato_Bebida_Name}</a>
             </Space>
           )}
         />
