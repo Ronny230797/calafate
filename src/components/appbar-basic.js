@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const ResponsiveAppBar = () => {
 
-    const [logged, setLogged] = useState(true);
+    const [logged, setLogged] = useState(false);
 
     return (
         <>
