@@ -63,6 +63,7 @@ export default function InsertTypeDish(props) {
         setnewTypeDishID(0);
         setnewTypeDishName("");
         setnewTypeDescriptionDish("");
+        window.location.reload();
       } else {
         alert("Ocurrio un error: " + response.status);
       }
