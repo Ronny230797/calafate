@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Table, Input, Space } from "antd";
 import axios from "axios";
 import { useTableSearch } from "../../components/useTableSearch";
-import InsertTypeDish from "../admin/InsertTypeDish";
+import InsertTypeDish from "./InsertTypeDish";
 import AppBar from '../../components/appbar-basic';
 import "../../styles/generic/table.scss"; 
 

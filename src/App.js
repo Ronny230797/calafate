@@ -8,7 +8,7 @@ import Dishes from './modules/admin/Dishes';
 import InsertDish from './modules/admin/InsertDish';
 import AllDishes from './modules/admin/AllDishes';
 import TypeDish from './modules/admin/typeDish';
-import InsertTypeDish from './modules/admin/insertTypeDish';
+import InsertTypeDish from './modules/admin/InsertTypeDish';
 import AllTypeDish from './modules/admin/AllTypeDish';
 import TypePermission from './modules/admin/TypePermission';
 import InsertTypePermission from './modules/admin/InsertTypePermission';
