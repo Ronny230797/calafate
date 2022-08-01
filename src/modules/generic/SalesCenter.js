@@ -1,22 +1,86 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../styles/admin/admin.scss";
-import "../../styles/admin/table-order.scss"
+import "../../styles/admin/table-order.scss";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 
 export default function SalesCenter() {
   const n1 = 1;
   const n2 = 4;
   const n3 = 7;
+  const API_URL_GET_ORDER =
+    "http://localhost:4000/Administration/Admin/GetAllOrderActive";
+  const [resData, setresData] = useState([]);
+  const [dataExists, setdataExists] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [tableToPay, setTableToPay] = useState(0);
+
+  const onOpenModal = () => {
+    setOpen(true);
+  };
+
+  const onCloseModal = () => {
+    setOpen(false);
+  };
+
+  const getOrderRequest = async () => {
+    try {
+      const response = await fetch(API_URL_GET_ORDER);
+      const data = await response.json();
+      console.log(data)
+      await setresData(data);
+    } catch (err) {
+      setdataExists(false);
+      alert("Ocurrio un error al cargar los datos... " + err);
+    }
+  };
+
+  const ClickTable = async (i) => {
+    await getOrderRequest();
+
+    if (dataExists) {
+      console.log(resData)
 
 
-  const ClickTable = (i) => {
-    alert(`Mesa ${i}`)
+      if (resData.find(obj => obj.numero_Mesa == i)) {
+        alert(`Mesa Ocupada`)
+        let result = resData.filter(x => x.numero_Mesa == i);
+        console.log(result[0])
+        setTableToPay(result[0].order_ID);
+        PayOrder();
+      } else {
+        alert(`Mesa Disponible`)
+        setTableToPay(i);
+      }
+
+    } else {
+      alert(`No data`)
+    }
+
+
+
+  }
+
+  const PayOrder = () => {
+    setOpen(true);
+
   }
 
   return (
     <React.Fragment>
       <Container className="admin">
+        <Modal open={open} onClose={onCloseModal}>
+          <h2>Mesa Ocupada</h2>
+          <p>
+            La mesa se encuentra ocupada...
+            <br />
+            <Link to="/BillingByOrder" state={tableToPay}>
+              <Button>Pagar</Button>
+            </Link>
+          </p>
+        </Modal>
         <Row>
           {
             Array.apply(null, { length: 3 }).map((e, i) => (
