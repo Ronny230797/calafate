@@ -109,7 +109,7 @@ export default function SalesCenter() {
           <p>
             La mesa se encuentra disponible...
             <br />
-            <Link to="/" state={tableToPay}>
+            <Link to="/DishesDisplay" state={tableToPay}>
               <Button>Tomar Orden</Button>
             </Link>
           </p>

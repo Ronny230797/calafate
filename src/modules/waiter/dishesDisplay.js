@@ -8,17 +8,22 @@ import {
   FormControl,
   InputGroup,
 } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function DishesDisplay() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  let idMesa = location.state;
   const API_GET = "http://localhost:4000/waiter/Dishes/GetAllDishes";
   const API_URL_INSERT_OD =
     "http://localhost:4000/waiter/Dishes/InsertOrderDetails";
   const [resDishesData, setresDishesData] = useState([]);
   const [postDataOrderDetails, setpostDataOrderDetails] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-  const [newNumberTable, setnewNumberTable] = useState(0);
+  const [newNumberTable, setnewNumberTable] = useState(idMesa);
   const [newOrderDescription, setnewOrderDescription] = useState("");
   const [newOrderDate, setnewOrderDate] = useState(new Date());
+
 
   const getAllDishesRequest = async () => {
     try {
@@ -122,7 +127,9 @@ export default function DishesDisplay() {
                   <FormControl
                     placeholder="Numero de mesa"
                     aria-label="TableNumber"
+                    defaultValue={idMesa}
                     values={newNumberTable}
+                    disabled={true}
                     onChange={(event) =>
                       setnewNumberTable(event.target.value)}
                   />
