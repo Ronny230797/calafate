@@ -1,0 +1,23 @@
+@import "../_theme.scss";
+
+
+.table-order{
+    border-radius: 50%;
+    border: 1px solid $text-black-color;
+    height: 20vw;
+    width: 20vw;
+    h1, h3{
+        top: 5vw;
+        position: relative;
+        text-align: center;
+    }
+
+    h1{
+        font-size: 4vw;
+    }
+
+    h3{
+        font-size: 3.5vw;
+    }
+
+}
