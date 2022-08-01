@@ -14,15 +14,24 @@ export default function SalesCenter() {
     "http://localhost:4000/Administration/Admin/GetAllOrderActive";
   const [resData, setresData] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-  const [open, setOpen] = useState(false);
+  const [openBusy, setOpenBusy] = useState(false);
+  const [openFree, setOpenFree] = useState(false);
   const [tableToPay, setTableToPay] = useState(0);
 
-  const onOpenModal = () => {
-    setOpen(true);
+  const onOpenBusyModal = () => {
+    setOpenBusy(true);
   };
 
-  const onCloseModal = () => {
-    setOpen(false);
+  const onCloseBusyModal = () => {
+    setOpenBusy(false);
+  };
+
+  const onOpenFreeModal = () => {
+    setOpenFree(true);
+  };
+
+  const onCloseFreeModal = () => {
+    setOpenFree(false);
   };
 
   const getOrderRequest = async () => {
@@ -53,6 +62,7 @@ export default function SalesCenter() {
       } else {
         alert(`Mesa Disponible`)
         setTableToPay(i);
+        NewOrder();
       }
 
     } else {
@@ -63,21 +73,38 @@ export default function SalesCenter() {
 
   }
 
+  const NewOrder = () =>{
+    setOpenFree(true);
+  }
+
   const PayOrder = () => {
-    setOpen(true);
+    setOpenBusy(true);
 
   }
 
   return (
     <React.Fragment>
       <Container className="admin">
-        <Modal open={open} onClose={onCloseModal}>
+        <Link to="/AllBillingOrder">
+          <Button>Ver mesas activas</Button>
+        </Link>
+        <Modal open={openBusy} onClose={onCloseBusyModal}>
           <h2>Mesa Ocupada</h2>
           <p>
             La mesa se encuentra ocupada...
             <br />
             <Link to="/BillingByOrder" state={tableToPay}>
               <Button>Pagar</Button>
+            </Link>
+          </p>
+        </Modal>
+        <Modal open={openFree} onClose={onCloseFreeModal}>
+          <h2>Mesa Disponible</h2>
+          <p>
+            La mesa se encuentra disponible...
+            <br />
+            <Link to="/" state={tableToPay}>
+              <Button>Tomar Orden</Button>
             </Link>
           </p>
         </Modal>
