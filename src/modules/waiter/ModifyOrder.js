@@ -122,7 +122,10 @@ export default function NewOrder() {
       };
 
       console.log(postDataOrderDetails);
+      console.log('here')
+      console.log(requestOptions)
       const response = await fetch(API_URL_Modify, requestOptions);
+      console.log(response)
       if(response.status === 200) {
         alert("Se modificaron los detalles de la orden.");
         navigate(-1);

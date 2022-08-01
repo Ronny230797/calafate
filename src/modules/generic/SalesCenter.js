@@ -73,7 +73,7 @@ export default function SalesCenter() {
 
   }
 
-  const NewOrder = () =>{
+  const NewOrder = () => {
     setOpenFree(true);
   }
 
@@ -95,6 +95,12 @@ export default function SalesCenter() {
             <br />
             <Link to="/BillingByOrder" state={tableToPay}>
               <Button>Pagar</Button>
+            </Link>
+            <Link
+              to="/ModifyOrder"
+              state={tableToPay}
+            >
+              <Button>Editar</Button>
             </Link>
           </p>
         </Modal>
