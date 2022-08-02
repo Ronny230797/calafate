@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Container,
   Row,
   Col,
-  Button,
   InputGroup,
   FormControl,
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
-export default function InsertDish(props) {
-  const API_URL = "http://localhost:4000/Administration/Admin/InsertUserType";
-  const API_URL_Modify =
-    "http://localhost:4000/Administration/Admin/ModifyUserType";
-  const API_URL_GET_ByID =
-    "http://localhost:4000/Administration/Admin/GetUserTypeByID";
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '1px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
+
+export default function InsertTypeUser(props) {
+
+  const API_URL_INSERT_TYPE_USER = "http://localhost:4000/Administration/Admin/InsertUserType";
+  const API_URL_Modify_TYPE_USER = "http://localhost:4000/Administration/Admin/ModifyUserType";
+  const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetUserTypeByID";
 
   const [resData, setresData] = useState([]);
   const [userTypeID, setuserTypeID] = useState(0);
@@ -25,7 +41,7 @@ export default function InsertDish(props) {
   const [isModify, setisModify] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const objSelect = location.state;
+  const objSelect = props.id;
 
   const InsertRequest = async (obj) => {
     const requestOptions = {
@@ -34,17 +50,17 @@ export default function InsertDish(props) {
       body: JSON.stringify(obj),
     };
     if (isModify) {
-      const response = await fetch(API_URL_Modify, requestOptions);
+      const response = await fetch(API_URL_Modify_TYPE_USER, requestOptions);
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
-        navigate(-1);
+        window.location.reload();
       } else {
         alert("Ocurrio un error: " + response.status);
       }
     } else {
-      const response = await fetch(API_URL, requestOptions);
+      const response = await fetch(API_URL_INSERT_TYPE_USER, requestOptions);
       const data = await response.json();
       setresData(data);
       console.log(data.status);
@@ -53,6 +69,7 @@ export default function InsertDish(props) {
         setuserTypeID(0);
         setuserTypeName("");
         setuserTypeDescription("");
+        window.location.reload();
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -60,6 +77,7 @@ export default function InsertDish(props) {
   };
 
   const getUserTypeByIDRequest = async (ID) => {
+    
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -110,7 +128,7 @@ export default function InsertDish(props) {
   };
 
   useEffect(() => {
-    if (objSelect != null) {
+    if (objSelect != null || objSelect != undefined) {
       setisModify(true);
       getUserTypeByIDRequest(objSelect);
     } else {
@@ -118,49 +136,71 @@ export default function InsertDish(props) {
     }
   }, []);
 
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <React.Fragment>
-      <Container className="InsertDish">
-        <Row>
-          <Col xs={12} md={12}>
-            <div className="InsertDish-card">
+    <div>
+      <Button onClick={handleOpen}>{isModify ? "Modificar" : "Agregar"}</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <Box sx={{ ...style, width: 400 }}>
+          <h2 id="parent-modal-title">Nuevo Tipo Usuario</h2>
+          <React.Fragment>
+            <Container className="InsertDish">
               <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Nombre del tipo usuario</InputGroup.Text>
-                    <FormControl
-                      aria-label="userType"
-                      value={userTypeName}
-                      type="text"
-                      onChange={(event) => setuserTypeName(event.target.value)}
-                    />
-                  </InputGroup>
+                <Col xs={12} md={12}>
+                  <div className="InsertDish-card">
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Nombre del tipo usuario</InputGroup.Text>
+                          <FormControl
+                            aria-label="userType"
+                            value={userTypeName}
+                            type="text"
+                            onChange={(event) => setuserTypeName(event.target.value)}
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>
+                            Descripcion del tipo de usuario
+                          </InputGroup.Text>
+                          <FormControl
+                            aria-label="userTypeDescription"
+                            value={userTypeDescription}
+                            type="text"
+                            onChange={(event) =>
+                              setuserTypeDescription(event.target.value)
+                            }
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Button onClick={InsertEvent}>
+                      {isModify ? "Modificar" : "Ingresar"}
+                    </Button>
+                  </div>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>
-                      Descripcion del tipo de usuario
-                    </InputGroup.Text>
-                    <FormControl
-                      aria-label="userTypeDescription"
-                      value={userTypeDescription}
-                      type="text"
-                      onChange={(event) =>
-                        setuserTypeDescription(event.target.value)
-                      }
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Button onClick={InsertEvent}>
-                {isModify ? "Modificar" : "Ingresar"}
-              </Button>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </React.Fragment>
+            </Container>
+          </React.Fragment>
+        </Box>
+      </Modal>
+    </div>
   );
 }

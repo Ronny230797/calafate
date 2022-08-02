@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Container,
   Row,
   Col,
-  Button,
   InputGroup,
   FormControl,
   FormSelect,
@@ -12,14 +14,27 @@ import {
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 
-export default function InsertUser() {
-  const API_URL = "http://localhost:4000/Administration/Admin/InsertUser";
-  const API_URL_Modify =
-    "http://localhost:4000/Administration/Admin/ModifyUser";
-  const API_URL_GET_Type =
-    "http://localhost:4000/Administration/Admin/GetAllUserType";
-  const API_URL_GET_ByID =
-    "http://localhost:4000/Administration/Admin/GetAllUserByID";
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '1px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
+
+export default function InsertUser(props) {
+
+  const API_URL_INSERT_USER = "http://localhost:4000/Administration/Admin/InsertUser";
+  const API_URL_Modify_USER = "http://localhost:4000/Administration/Admin/ModifyUser";
+  const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetAllUserByID";
+  const API_URL_GET_Type = "http://localhost:4000/Administration/Admin/GetAllUserType";
 
   const [resData, setresData] = useState([]);
   const [newUsuarioID, setnewUsuarioID] = useState(0);
@@ -35,7 +50,7 @@ export default function InsertUser() {
   const [isModify, setisModify] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const objSelect = location.state;
+  const objSelect = props.id;
 
   const InsertRequest = async (obj) => {
     const requestOptions = {
@@ -44,17 +59,17 @@ export default function InsertUser() {
       body: JSON.stringify(obj),
     };
     if (isModify) {
-      const response = await fetch(API_URL_Modify, requestOptions);
+      const response = await fetch(API_URL_Modify_USER, requestOptions);
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
-        navigate(-1);
+        window.location.reload();
       } else {
         alert("Ocurrio un error: " + response.status);
       }
     } else {
-      const response = await fetch(API_URL, requestOptions);
+      const response = await fetch(API_URL_INSERT_USER, requestOptions);
       const data = await response.json();
       setresData(data);
       console.log(response.status);
@@ -68,6 +83,7 @@ export default function InsertUser() {
         setnewUserPassWordValidate("");
         setnewUsername("");
         setnewTypeUserUser(0);
+        window.location.reload();
       } else {
         alert("Ocurrio un error: " + response.status);
       }
@@ -189,8 +205,7 @@ export default function InsertUser() {
   };
 
   useEffect(() => {
-    console.log(objSelect);
-    if (objSelect != null) {
+    if (objSelect != null || objSelect != undefined) {
       setisModify(true);
       getUserByIDRequest(objSelect);
       getTypeUserRequest();
@@ -200,139 +215,161 @@ export default function InsertUser() {
     }
   }, []);
 
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <React.Fragment>
-      <Container className="InsertDish">
-        <Row>
-          <Col xs={12} md={12}>
-            <div className="InsertDish-card">
+    <div>
+      <Button onClick={handleOpen}>{isModify ? "Modificar" : "Agregar"}</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <Box sx={{ ...style, width: 400 }}>
+          <h2 id="parent-modal-title">Nuevo Tipo Platillo</h2>
+          <React.Fragment>
+            <Container className="InsertDish">
               <Row>
-                <Col xs={10} md={10}>
-                  <Form.Label>Ingrese el tipo de usuario que desea ingresar.</Form.Label>
-                  <FormSelect
-                    onChange={(event) => setnewTypeUserUser(event.target.value)}
-                    aria-label="Tipo de platillo"
-                  >
-                    <option value={0}>Seleccione el tipo usuario</option>
-                    {restypeUserData.map((TypeUser) => (
-                      <option
-                        key={TypeUser.tipo_Usuario_ID}
-                        value={TypeUser.tipo_Usuario_ID}
-                      >
-                        {TypeUser.tipo_Usuario_Name}
-                      </option>
-                    ))}
-                  </FormSelect>
+                <Col xs={12} md={12}>
+                  <div className="InsertDish-card">
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <Form.Label>Ingrese el tipo de usuario que desea ingresar.</Form.Label>
+                        <FormSelect
+                          onChange={(event) => setnewTypeUserUser(event.target.value)}
+                          aria-label="Tipo de platillo"
+                        >
+                          <option value={0}>Seleccione el tipo usuario</option>
+                          {restypeUserData.map((TypeUser) => (
+                            <option
+                              key={TypeUser.tipo_Usuario_ID}
+                              value={TypeUser.tipo_Usuario_ID}
+                            >
+                              {TypeUser.tipo_Usuario_Name}
+                            </option>
+                          ))}
+                        </FormSelect>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Primer nombre</InputGroup.Text>
+                          <FormControl
+                            aria-label="Firstname"
+                            value={newFirstname}
+                            type="text"
+                            onChange={(event) => setnewFirstname(event.target.value)}
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Segundo nombre</InputGroup.Text>
+                          <FormControl
+                            aria-label="Secondname"
+                            value={newSecondname}
+                            type="text"
+                            onChange={(event) => setnewSecondname(event.target.value)}
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Primer apellido</InputGroup.Text>
+                          <FormControl
+                            aria-label="FirstLastname"
+                            value={newFirtLastname}
+                            type="text"
+                            onChange={(event) =>
+                              setnewFirtLastname(event.target.value)
+                            }
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Segundo apellido</InputGroup.Text>
+                          <FormControl
+                            aria-label="SecondLastname"
+                            value={newSecondLastname}
+                            type="text"
+                            onChange={(event) =>
+                              setnewSecondLastname(event.target.value)
+                            }
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Nombre de usuario</InputGroup.Text>
+                          <FormControl
+                            aria-label="username"
+                            value={newUsername}
+                            type="text"
+                            onChange={(event) => setnewUsername(event.target.value)}
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>Contraseña</InputGroup.Text>
+                          <FormControl
+                            aria-label="userPassword"
+                            value={newUserPassWord}
+                            type="password"
+                            onChange={(event) =>
+                              setnewUserPassWord(event.target.value)
+                            }
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={10} md={10}>
+                        <InputGroup className="mb-3">
+                          <InputGroup.Text>
+                            Vuelva a ingresar la contraseña
+                          </InputGroup.Text>
+                          <FormControl
+                            aria-label="userPasswordValidate"
+                            value={newUserPassWordValidate}
+                            type="password"
+                            onChange={(event) =>
+                              setnewUserPassWordValidate(event.target.value)
+                            }
+                          />
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <Button onClick={InsertEvent}>
+                      {isModify ? "Modificar" : "Ingresar"}
+                    </Button>
+                  </div>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Primer nombre</InputGroup.Text>
-                    <FormControl
-                      aria-label="Firstname"
-                      value={newFirstname}
-                      type="text"
-                      onChange={(event) => setnewFirstname(event.target.value)}
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Segundo nombre</InputGroup.Text>
-                    <FormControl
-                      aria-label="Secondname"
-                      value={newSecondname}
-                      type="text"
-                      onChange={(event) => setnewSecondname(event.target.value)}
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Primer apellido</InputGroup.Text>
-                    <FormControl
-                      aria-label="FirstLastname"
-                      value={newFirtLastname}
-                      type="text"
-                      onChange={(event) =>
-                        setnewFirtLastname(event.target.value)
-                      }
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Segundo apellido</InputGroup.Text>
-                    <FormControl
-                      aria-label="SecondLastname"
-                      value={newSecondLastname}
-                      type="text"
-                      onChange={(event) =>
-                        setnewSecondLastname(event.target.value)
-                      }
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Nombre de usuario</InputGroup.Text>
-                    <FormControl
-                      aria-label="username"
-                      value={newUsername}
-                      type="text"
-                      onChange={(event) => setnewUsername(event.target.value)}
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Contraseña</InputGroup.Text>
-                    <FormControl
-                      aria-label="userPassword"
-                      value={newUserPassWord}
-                      type="password"
-                      onChange={(event) =>
-                        setnewUserPassWord(event.target.value)
-                      }
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={10} md={10}>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>
-                      Vuelva a ingresar la contraseña
-                    </InputGroup.Text>
-                    <FormControl
-                      aria-label="userPasswordValidate"
-                      value={newUserPassWordValidate}
-                      type="password"
-                      onChange={(event) =>
-                        setnewUserPassWordValidate(event.target.value)
-                      }
-                    />
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Button onClick={InsertEvent}>
-                {isModify ? "Modificar" : "Ingresar"}
-              </Button>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </React.Fragment>
+            </Container>
+          </React.Fragment>
+        </Box>
+      </Modal>
+    </div>
   );
 }

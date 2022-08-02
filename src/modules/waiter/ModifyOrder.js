@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -50,7 +51,7 @@ export default function NewOrder() {
     };
     const response = await fetch(API_GET_BY_ID_ORDER_DETAILS, requestOptions);
     const data = await response.json();
-    console.log(data);
+    console.log({data});
     setpostDataOrderDetails(data);
   };
 
@@ -124,7 +125,9 @@ export default function NewOrder() {
       console.log(postDataOrderDetails);
       console.log('here')
       console.log(requestOptions)
-      const response = await fetch(API_URL_Modify, requestOptions);
+
+      const response = await axios.post(API_URL_Modify, postDataOrderDetails);
+      /*const response = await fetch(API_URL_Modify, requestOptions);*/
       console.log(response)
       if(response.status === 200) {
         alert("Se modificaron los detalles de la orden.");
