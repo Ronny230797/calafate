@@ -21,7 +21,7 @@ export default function BillingByOrder() {
   const [totalPrice, settotalPrice] = useState(0);
   const [subTotal, setsubTotal] = useState(0);
   const [IVA, setIVA] = useState(0);
-  const [newFirstnameClient, setnewFirstnameClient] = useState("");
+  const [newFirstnameClient, setnewFirstnameClient] = useState("Contado");
   const [newSecondnameClient, setnewSecondnameClient] = useState("");
   const [newFirstLastnameClient, setnewFirstLastnameClient] = useState("");
   const [newSecondLastnameClient, setnewSecondLastnameClient] = useState("");
@@ -45,10 +45,10 @@ export default function BillingByOrder() {
       (billing) =>
         (tempTotalPrice = tempTotalPrice + parseInt(billing.plato_Bebida_Price * billing.order_Details_Amount))
     );
-    let IVACalc = tempTotalPrice*0.13;
+    let IVACalc = tempTotalPrice * 0.13;
     setsubTotal(tempTotalPrice);
     setIVA(IVACalc)
-    settotalPrice(tempTotalPrice+IVACalc);
+    settotalPrice(tempTotalPrice + IVACalc);
   };
 
   const paymentRequest = async () => {
@@ -185,13 +185,19 @@ export default function BillingByOrder() {
     }
   };
 
-  const Print = () =>{     
+  const Print = () => {
     //console.log('print');  
     let printContents = document.getElementById('ticketprint').innerHTML;
     let originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
     window.print();
-   document.body.innerHTML = originalContents; 
+    document.body.innerHTML = originalContents;
+  }
+
+  function DateTime() {
+    var myCurrentDate = new Date();
+    var date = myCurrentDate.getFullYear() + '-' + (myCurrentDate.getMonth()+1) + '-' + myCurrentDate.getDate() +' '+ myCurrentDate.getHours()+':'+ myCurrentDate.getMinutes()+':'+ myCurrentDate.getSeconds();
+    return date;
   }
 
   useEffect(() => {
@@ -206,7 +212,7 @@ export default function BillingByOrder() {
     return (
       <React.Fragment>
         <Container>
-        <AppBarLogged />
+          <AppBarLogged />
           <Row>
             <Col>
               <h1>No se encontraron datos ingresados para este apartado</h1>
@@ -219,30 +225,30 @@ export default function BillingByOrder() {
     return (
       <React.Fragment>
         <Container>
-        <AppBarLogged />
+          <AppBarLogged />
           <div id='ticketprint' className='ticket'>
             <h3>Restaurante Calafate</h3>
-            <span>Identificacion Juridica: 23232345</span><br/>
-            <span>Order: 1234567890</span><br/>
-            <span>Fecha: 23/07/1997</span><br/>
-            <span>Contado</span><br/>
-            <hr/>
+            <span>Identificacion Juridica: 23232345</span><br />
+            <span>Order: 1234567890</span><br />
+            <span>Fecha: {DateTime()}</span><br />
+            <span>{newFirstnameClient} {newSecondnameClient} {newFirstLastnameClient} {newSecondLastnameClient}</span><br />
+            <hr />
             <span>Cantidad  Producto  Precio</span>
-            <hr/>
+            <hr />
             {resData.map((BillingInformation) => (
-<div>
-              <label>{BillingInformation.order_Details_Amount}  {BillingInformation.plato_Bebida_Name}  ₡{BillingInformation.plato_Bebida_Price}</label><br/>
+              <div>
+                <label>{BillingInformation.order_Details_Amount}  {BillingInformation.plato_Bebida_Name}  ₡{BillingInformation.plato_Bebida_Price}</label><br />
               </div>
 
-                  ))}
-            
-            <hr/>
+            ))}
+
+            <hr />
             <div>
-                <label>Subtotal: ₡{subTotal}</label><br/>
-                <label>IVA: ₡{IVA}</label><br/>
-                <label>Descuento: </label><br/>
-                <label>Total: ₡{totalPrice}</label><br/>
-              </div>
+              <label>Subtotal: ₡{subTotal}</label><br />
+              <label>IVA: ₡{IVA}</label><br />
+              <label>Descuento: </label><br />
+              <label>Total: ₡{totalPrice}</label><br />
+            </div>
           </div>
           <Row>
             <Col xs={12} xl={12}>
@@ -335,12 +341,12 @@ export default function BillingByOrder() {
           </Row>
           <Row>
             <Col xs={12} xl={12}>
-              <hr/>
+              <hr />
               <div>
-                <label>Subtotal: ₡{subTotal}</label><br/>
-                <label>IVA: ₡{IVA}</label><br/>
-                <label>Descuento: </label><br/>
-                <label>Total: ₡{totalPrice}</label><br/>
+                <label>Subtotal: ₡{subTotal}</label><br />
+                <label>IVA: ₡{IVA}</label><br />
+                <label>Descuento: </label><br />
+                <label>Total: ₡{totalPrice}</label><br />
               </div>
             </Col>
           </Row>
