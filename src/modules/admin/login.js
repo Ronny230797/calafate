@@ -21,29 +21,31 @@ export default function Login() {
         };
         loginRequest(obj);
 
-        if (resData == false || resData == undefined) {
-            alert.show('No se puedo verificar su identidad');
-        } else {
-            localStorage.removeItem('ABRLGN');
-            localStorage.setItem('ABRLGN', true);
-            window.location.href = '/WelcomeCenter';
-        }
-
     };
 
 
 
-    const loginRequest = async (obj) => {
+    const loginRequest = (obj) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(obj)
         };
 
-        const response = await fetch(API_URL, requestOptions);
+        const response = fetch(API_URL, requestOptions)
+        .then((data) => {
+            console.log(data)
+            setresData(data.json());
+            if ((resData != false && resData != undefined) && (data.status == 200 || data.status == 204)) {
+                
+                localStorage.removeItem('ABRLGN');
+                localStorage.setItem('ABRLGN', true);
+                window.location.href = '/WelcomeCenter';
+            } else {
+                alert.show('No se puedo verificar su identidad');
+            }
+        });
 
-        const data = await response.json();
-        setresData(data);
     }
 
     return (

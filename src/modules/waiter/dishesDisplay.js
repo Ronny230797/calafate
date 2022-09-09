@@ -105,6 +105,7 @@ export default function DishesDisplay() {
       alert.show("Se agregaron los detalles de la orden.");
       setpostDataOrderDetails([]);
       setnewNumberTable(0);
+      navigate(-1);
     } else {
       alert.show("Ocurrio un error: " + response.status);
     }

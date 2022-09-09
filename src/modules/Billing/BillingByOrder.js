@@ -185,6 +185,7 @@ export default function BillingByOrder() {
   };
 
   const Print = () => {
+    paymentRequest();
     let printContents = document.getElementById('ticketprint').innerHTML;
     let originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
@@ -359,7 +360,7 @@ export default function BillingByOrder() {
           <Row>
             <Col xs={12} xl={12}>
               <Button onClick={paymentRequest}>Pagar</Button>
-              <Button onClick={Print}>Pagar Ticket</Button>
+              <Button onClick={Print}>Ticket</Button>
             </Col>
           </Row>
         </Container>

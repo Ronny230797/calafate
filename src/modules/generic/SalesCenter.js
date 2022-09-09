@@ -52,18 +52,18 @@ export default function SalesCenter() {
     if (dataExists) {
 
       if (resData.find(obj => obj.numero_Mesa == i)) {
-        alert(`Mesa Ocupada`)
+        alert.show(`Mesa Ocupada`)
         let result = resData.filter(x => x.numero_Mesa == i);
         setTableToPay(result[0].order_ID);
         PayOrder();
       } else {
-        alert(`Mesa Disponible`)
+        alert.show(`Mesa Disponible`)
         setTableToPay(i);
         NewOrder();
       }
 
     } else {
-      alert(`No data`)
+      alert.show(`No data`)
     }
 
 

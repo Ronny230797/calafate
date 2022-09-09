@@ -27,7 +27,7 @@ const ResponsiveAppBar = () => {
                             <Nav.Link >Platos</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/SalesCenter">
-                            <Nav.Link >Ventas</Nav.Link>
+                            <Nav.Link >Ordenes</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/mainchart">
                             <Nav.Link >Reporte</Nav.Link>
