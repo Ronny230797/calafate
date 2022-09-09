@@ -9,6 +9,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import AppBarLogged from '../../components/appbar-logged.js';
 
 export default function DishesDisplay() {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ export default function DishesDisplay() {
     return (
       <React.Fragment>
         <Container>
+          <AppBarLogged />
           <Row>
             <Col xs={4} xl={4}>
               <div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppBarLogged from '../../components/appbar-logged.js';
 
 export default function AllOrder() {
   const API_URL_GET_ORDER =
@@ -26,6 +27,7 @@ export default function AllOrder() {
     return (
       <React.Fragment>
         <Container>
+          <AppBarLogged />
           <Row>
             <Col xs={12} md={12}>
               <ListGroup>

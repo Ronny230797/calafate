@@ -19,24 +19,19 @@ const ResponsiveAppBar = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
                         <LinkContainer to="/">
-                            <Nav.Link >Home</Nav.Link>
+                            <Nav.Link >Admin</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/menu">
-                            <Nav.Link >Menu</Nav.Link>
+                            <Nav.Link >Ventas</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/contact">
                             <Nav.Link >Contacto</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/logincalafate">
-                            <Nav.Link >Ingresar</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
 
         </>
-
-
 
     );
 };

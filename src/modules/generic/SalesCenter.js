@@ -5,6 +5,7 @@ import "../../styles/admin/admin.scss";
 import "../../styles/admin/table-order.scss";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import AppBarLogged from '../../components/appbar-logged.js';
 
 export default function SalesCenter() {
   const n1 = 1;
@@ -85,6 +86,7 @@ export default function SalesCenter() {
   return (
     <React.Fragment>
       <Container className="admin">
+        <AppBarLogged />
         <Link to="/AllBillingOrder">
           <Button>Ver mesas activas</Button>
         </Link>

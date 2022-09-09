@@ -3,7 +3,7 @@ import { Table, Input, Space } from "antd";
 import axios from "axios";
 import { useTableSearch } from "../../components/useTableSearch";
 import InsertRole from "./InsertRole";
-import AppBar from '../../components/appbar-basic';
+import AppBarLogged from '../../components/appbar-logged.js';
 import "../../styles/generic/table.scss"; 
 
 const { Search } = Input;
@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <div>
-      <AppBar />
+      <AppBarLogged />
       <div className="title-page">
         <h1>Roles</h1>
           </div>
