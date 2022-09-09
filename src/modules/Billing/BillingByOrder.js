@@ -200,6 +200,16 @@ export default function BillingByOrder() {
     return date;
   }
 
+  function GetOrder(){
+    console.log(resData[0])
+    let order = -1 ;
+    if(resData[0] != undefined){
+       order = resData[0].order_ID;
+    }
+
+    return order;
+  }
+
   useEffect(() => {
     console.log(objSelect);
     if (objSelect != null) {
@@ -229,7 +239,7 @@ export default function BillingByOrder() {
           <div id='ticketprint' className='ticket'>
             <h3>Restaurante Calafate</h3>
             <span>Identificacion Juridica: 23232345</span><br />
-            <span>Order: 1234567890</span><br />
+            <span>Order: {GetOrder()}</span><br />
             <span>Fecha: {DateTime()}</span><br />
             <span>{newFirstnameClient} {newSecondnameClient} {newFirstLastnameClient} {newSecondLastnameClient}</span><br />
             <hr />
