@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppBarLogged from '../../components/appbar-logged.js';
-
+import { useAlert } from "react-alert";
 export default function NewOrder() {
   const API_URL_INSERT_OD =
     "http://localhost:4000/Administration/Admin/InsertOrder_Details";
@@ -24,7 +24,7 @@ export default function NewOrder() {
   const [resDishesData, setresDishesData] = useState([]);
   const [postDataOrderDetails, setpostDataOrderDetails] = useState([]);
   const [isError, setisError] = useState(false);
-
+  const alert = useAlert();
   const [newNumberTable, setnewNumberTable] = useState(0);
   const [newOrderDescription, setnewOrderDescription] = useState("");
   const [newOrderDate, setnewOrderDate] = useState(new Date());
@@ -40,7 +40,7 @@ export default function NewOrder() {
       const data = await response.json();
       setresDishesData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
     }
   };
 
@@ -75,7 +75,7 @@ export default function NewOrder() {
         };
       setpostDataOrderDetails([...postDataOrderDetails, newOrder])
     } else {
-      alert("Ya se agrego este platillo, modifica la cantidad.");
+      alert.show("Ya se agrego este platillo, modifica la cantidad.");
     }
   };
 
@@ -89,13 +89,13 @@ export default function NewOrder() {
       };
       const response = await fetch(API_DELETE_ORDER_DETAILS, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al borrar el detalle de compra... ");
+        alert.show("Ocurrio un error al borrar el detalle de compra... ");
       }
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
     }
   };
 
@@ -126,7 +126,7 @@ export default function NewOrder() {
       /*const response = await fetch(API_URL_Modify, requestOptions);*/
 
       if(response.status === 200) {
-        alert("Se modificaron los detalles de la orden.");
+        alert.show("Se modificaron los detalles de la orden.");
         navigate(-1);
       }else {
         alert(

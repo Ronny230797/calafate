@@ -12,6 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
+import { useAlert } from "react-alert";
 
 const style = {
   position: 'absolute',
@@ -41,7 +42,7 @@ export default function InsertTypeDish(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = props.id;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -51,21 +52,21 @@ export default function InsertTypeDish(props) {
     if (isModify) {
       const response = await fetch(API_URL_Modify_TYPE, requestOptions);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_TYPE, requestOptions);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewTypeDishID(0);
         setnewTypeDishName("");
         setnewTypeDescriptionDish("");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -86,13 +87,13 @@ export default function InsertTypeDish(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newTypeDishName == "") {
-        alert("Por favor ingrese el nombre")
+        alert.show("Por favor ingrese el nombre")
       } else {
         if (newTypeDishID == 0) {
-          alert("Ocurrio un error al cargar los datos...")
+          alert.show("Ocurrio un error al cargar los datos...")
         } else {
           if (newTypeDescriptionDish == "") {
-            alert("Por favor ingrese la descripción...")
+            alert.show("Por favor ingrese la descripción...")
           } else {
             let obj = {
               tipo_Plato_Bebida_ID: newTypeDishID,
@@ -105,10 +106,10 @@ export default function InsertTypeDish(props) {
       }
     } else {
       if (newTypeDishName == "") {
-        alert("Por favor ingrese el nombre")
+        alert.show("Por favor ingrese el nombre")
       } else {
         if (newTypeDescriptionDish == "") {
-          alert("Por favor ingrese la descripción...")
+          alert.show("Por favor ingrese la descripción...")
         } else {
           let obj = {
             tipo_Plato_Bebida_Name: newTypeDishName,

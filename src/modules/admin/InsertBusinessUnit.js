@@ -12,6 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
+import { useAlert } from "react-alert";
 
 const style = {
   position: 'absolute',
@@ -34,7 +35,7 @@ export default function InsertBusinessUnit(props) {
   const API_URL_Modify_BUSINESS_UNIT = "http://localhost:4000/Administration/Admin/ModifyBusinessUnit";
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetBusinessUnitByID";
 
-
+  const alert = useAlert();
   const [resData, setresData] = useState([]);
   const [newBusinessUnitID, setnewBusinessUnitID] = useState(0);
   const [newBusinessUnitParent, setnewBusinessUnitParent] = useState(0);
@@ -56,23 +57,23 @@ export default function InsertBusinessUnit(props) {
       const response = await fetch(API_URL_Modify_BUSINESS_UNIT, requestOptions);
       const data = await response.json();
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_BUSINESS_UNIT, requestOptions);
       const data = await response.json();
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewBusinessUnitID(0);
         setnewBusinessUnitParent(0);
         setnewBusinessUnitName("");
         setnewBusinessUnitDescription("");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -94,13 +95,13 @@ export default function InsertBusinessUnit(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newBusinessUnitID === 0) {
-        alert("ocurrio un problema cargando los datos.");
+        alert.show("ocurrio un problema cargando los datos.");
       } else {
         if (newBusinessUnitName === "") {
-          alert("Ingrese el nombre por favor.");
+          alert.show("Ingrese el nombre por favor.");
         } else {
           if (newBusinessUnitDescription === "") {
-            alert("Ingrese la descripción por favor.");
+            alert.show("Ingrese la descripción por favor.");
           } else {
             let obj = {
               Unidad_Negocio_ID: newBusinessUnitID,
@@ -113,10 +114,10 @@ export default function InsertBusinessUnit(props) {
       }
     } else {
       if (newBusinessUnitName === "") {
-        alert("Ingrese el nombre por favor.");
+        alert.show("Ingrese el nombre por favor.");
       } else {
         if (newBusinessUnitDescription === "") {
-          alert("Ingrese la descripción por favor.");
+          alert.show("Ingrese la descripción por favor.");
         } else {
           let obj = {
             Unidad_Negocio_Name: newBusinessUnitName,

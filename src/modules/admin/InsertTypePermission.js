@@ -9,6 +9,8 @@ import {
   FormControl,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
+import { useAlert } from "react-alert";
+
 
 export default function InsertTypePermission() {
   const API_URL_INSERT_TYPE_PERMISSION =
@@ -26,7 +28,7 @@ export default function InsertTypePermission() {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -39,10 +41,10 @@ export default function InsertTypePermission() {
         requestOptions
       );
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         navigate(-1);
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(
@@ -50,12 +52,12 @@ export default function InsertTypePermission() {
         requestOptions
       );
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewTypePermissionID(0);
         setnewTypePermissionName("");
         setnewTypePermissionDescription("");
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -76,13 +78,13 @@ export default function InsertTypePermission() {
   const InsertEvent = async () => {
     if (isModify) {
       if (newTypePermissionName == "") {
-        alert("Por favor ingrese el nombre");
+        alert.show("Por favor ingrese el nombre");
       } else {
         if (newTypePermissionID == 0) {
-          alert("Ocurrio un error al cargar los datos...");
+          alert.show("Ocurrio un error al cargar los datos...");
         } else {
           if (newTypePermissionDescription == "") {
-            alert("Por favor ingrese la descripción...");
+            alert.show("Por favor ingrese la descripción...");
           } else {
             let obj = {
               Tipo_Permiso_ID: newTypePermissionID,
@@ -95,10 +97,10 @@ export default function InsertTypePermission() {
       }
     } else {
       if (newTypePermissionName == "") {
-        alert("Por favor ingrese el nombre");
+        alert.show("Por favor ingrese el nombre");
       } else {
         if (newTypePermissionDescription == "") {
-          alert("Por favor ingrese la descripción...");
+          alert.show("Por favor ingrese la descripción...");
         } else {
           let obj = {
             Tipo_Permiso_Name: newTypePermissionName,

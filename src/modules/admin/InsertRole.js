@@ -12,7 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -36,7 +36,7 @@ export default function InsertRole(props) {
   const API_URL_GET_USER = "http://localhost:4000/Administration/Admin/GetAllUser";
   const API_URL_GET_TYPE_ROLE = "http://localhost:4000/Administration/Admin/GetAllTypeRole";
 
-
+  const alert = useAlert();
   const [resUserData, setresUserData] = useState([]);
   const [resTypeRoleData, setresTypeRoleData] = useState([]);
   const [newRoleID, setnewRoleID] = useState(0);
@@ -61,23 +61,23 @@ export default function InsertRole(props) {
       console.log("Modificando...");
       const response = await fetch(API_URL_Modify_ROLE, requestOptions);
       if (response.status === 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       console.log("Insertando...");
       const response = await fetch(API_URL_INSERT_ROLE, requestOptions);
       if (response.status === 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewRoleID(0);
         setnewTypeRoleRole(0);
         setnewUserRole(0);
         setnewRoleDescription("");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -114,19 +114,19 @@ export default function InsertRole(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newRoleID === 0) {
-        alert("Hubo un error al cargar los datos...");
+        alert.show("Hubo un error al cargar los datos...");
       } else {
         if (newUserRole === 0) {
-          alert("Por favor ingrese el Tipo de permiso");
+          alert.show("Por favor ingrese el Tipo de permiso");
         } else {
           if (newTypeRoleRole === 0) {
-            alert("Por favor ingrese el Tipo de role");
+            alert.show("Por favor ingrese el Tipo de role");
           } else {
             if (DateValue === null) {
-              alert("Ingrese una fecha valida");
+              alert.show("Ingrese una fecha valida");
             } else {
               if (newRoleDescription === "") {
-                alert("Ingrese una descripción valida");
+                alert.show("Ingrese una descripción valida");
               } else {
                 let obj = {
                   Role_ID: newRoleID,
@@ -145,16 +145,16 @@ export default function InsertRole(props) {
       }
     } else {
       if (newUserRole === 0) {
-        alert("Por favor ingrese el Tipo de permiso");
+        alert.show("Por favor ingrese el Tipo de permiso");
       } else {
         if (newTypeRoleRole === 0) {
-          alert("Por favor ingrese el Tipo de role");
+          alert.show("Por favor ingrese el Tipo de role");
         } else {
           if (DateValue === null) {
-            alert("Ingrese una fecha valida");
+            alert.show("Ingrese una fecha valida");
           } else {
             if (newRoleDescription === "") {
-              alert("Ingrese una descripción valida");
+              alert.show("Ingrese una descripción valida");
             } else {
               let obj = {
                 FK_Usuario_Role: newUserRole,

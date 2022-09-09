@@ -6,7 +6,7 @@ import "../../styles/admin/table-order.scss";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import AppBarLogged from '../../components/appbar-logged.js';
-
+import { useAlert } from "react-alert";
 export default function SalesCenter() {
   const n1 = 1;
   const n2 = 4;
@@ -18,7 +18,7 @@ export default function SalesCenter() {
   const [openBusy, setOpenBusy] = useState(false);
   const [openFree, setOpenFree] = useState(false);
   const [tableToPay, setTableToPay] = useState(0);
-
+  const alert = useAlert();
   const onOpenBusyModal = () => {
     setOpenBusy(true);
   };
@@ -42,7 +42,7 @@ export default function SalesCenter() {
       await setresData(data);
     } catch (err) {
       setdataExists(false);
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
     }
   };
 

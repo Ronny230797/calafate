@@ -12,7 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -41,7 +41,7 @@ export default function InsertTypeRole(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = props.id;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -51,21 +51,21 @@ export default function InsertTypeRole(props) {
     if (isModify) {
       const response = await fetch(API_URL_Modify_TYPE_ROLE, requestOptions);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_TYPE_ROLE, requestOptions);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewTypeRoleID(0);
         setnewTypeRoleName("");
         setnewTypeDescriptionRole("");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -86,13 +86,13 @@ export default function InsertTypeRole(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newTypeRoleName == "") {
-        alert("Por favor ingrese el nombre");
+        alert.show("Por favor ingrese el nombre");
       } else {
         if (newTypeRoleID == 0) {
-          alert("Ocurrio un error al cargar los datos...");
+          alert.show("Ocurrio un error al cargar los datos...");
         } else {
           if (newTypeDescriptionRole == "") {
-            alert("Por favor ingrese la descripción...");
+            alert.show("Por favor ingrese la descripción...");
           } else {
             let obj = {
               tipo_Role_ID: newTypeRoleID,
@@ -105,10 +105,10 @@ export default function InsertTypeRole(props) {
       }
     } else {
       if (newTypeRoleName == "") {
-        alert("Por favor ingrese el nombre");
+        alert.show("Por favor ingrese el nombre");
       } else {
         if (newTypeDescriptionRole == "") {
-          alert("Por favor ingrese la descripción...");
+          alert.show("Por favor ingrese la descripción...");
         } else {
           let obj = {
             tipo_Role_Name: newTypeRoleName,

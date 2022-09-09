@@ -12,7 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -42,7 +42,7 @@ export default function InsertTypeUser(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = props.id;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -54,23 +54,23 @@ export default function InsertTypeUser(props) {
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_TYPE_USER, requestOptions);
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setuserTypeID(0);
         setuserTypeName("");
         setuserTypeDescription("");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -92,13 +92,13 @@ export default function InsertTypeUser(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (userTypeName === "") {
-        alert("Ingrese el nombre, por favor");
+        alert.show("Ingrese el nombre, por favor");
       } else {
         if (userTypeDescription === "") {
-          alert("Ingrese la descripción, por favor.");
+          alert.show("Ingrese la descripción, por favor.");
         } else {
           if (userTypeID === 0) {
-            alert("No se cargaron los datos correctamente.");
+            alert.show("No se cargaron los datos correctamente.");
           } else {
             let obj = {
               Tipo_Usuario_ID: userTypeID,
@@ -111,10 +111,10 @@ export default function InsertTypeUser(props) {
       }
     } else {
       if (userTypeName === "") {
-        alert("Ingrese el nombre, por favor");
+        alert.show("Ingrese el nombre, por favor");
       } else {
         if (userTypeDescription === "") {
-          alert("Ingrese la descripción, por favor.");
+          alert.show("Ingrese la descripción, por favor.");
         } else {
           let obj = {
             Tipo_Usuario_Name: userTypeName,

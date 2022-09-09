@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useAlert } from "react-alert";
 export default function AllState() {
   const API_URL_GET_STATE = "http://localhost:4000/Administration/Admin/GetAllState";
   const API_URL_DELETE_STATE = "http://localhost:4000/Administration/Admin/DeleteState";
   const [resData, setresData] = useState([]);
   const [objSelect, setObjSelect] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-
+  const alert = useAlert();
   const getStateRequest = async () => {
     try {
       const response = await fetch(API_URL_GET_STATE);
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
@@ -29,13 +29,13 @@ export default function AllState() {
       };
       const response = await fetch(API_URL_DELETE_STATE, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar el estado del platillo.");
+        alert.show("Ocurrio un error al eliminar el estado del platillo.");
       }
     } catch (error) {
-      alert("Ocurrio un errro al eliminar: " + error);
+      alert.show("Ocurrio un errro al eliminar: " + error);
     }
   };
 

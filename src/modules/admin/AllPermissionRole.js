@@ -24,7 +24,7 @@ export default function AllPermissionRole() {
       setresData(data);
     } catch (err) {
       setdataExists(false);
-      alert("Ocurrio un error al cargar los datos o aun no existen... " + err);
+      alert.show("Ocurrio un error al cargar los datos o aun no existen... " + err);
     }
   };
 
@@ -37,13 +37,13 @@ export default function AllPermissionRole() {
       };
       const response = await fetch(API_URL_DELETE_Dish, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar el platillo.");
+        alert.show("Ocurrio un error al eliminar el platillo.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error)
+      alert.show("Ocurrio un error al eliminar: " + error)
     }
   };
 

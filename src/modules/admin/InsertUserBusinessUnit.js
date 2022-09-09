@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
 import DatePicker from "react-date-picker";
+import { useAlert } from "react-alert";
 
 export default function InsertUserBusinessUnit() {
   const API_URL = "http://localhost:4000/Administration/Admin/InsertUserBusinessUnit";
@@ -32,7 +33,7 @@ export default function InsertUserBusinessUnit() {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -44,23 +45,23 @@ export default function InsertUserBusinessUnit() {
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         navigate(-1);
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewBusinessUnitID(0);
         setnewUserBusinessUnitID(0);
         setnewUserID(0);
         setnewDescription("");
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -95,16 +96,16 @@ export default function InsertUserBusinessUnit() {
   const InsertEvent = async () => {
     if (isModify) {
       if (newUserBusinessUnitID === 0) {
-        alert("No se cargaron los datos de manera correcta.");
+        alert.show("No se cargaron los datos de manera correcta.");
       } else {
         if (newUserID === 0) {
-          alert("Inserte el usuario a asignar.");
+          alert.show("Inserte el usuario a asignar.");
         } else {
           if (newBusinessUnitID === 0) {
-            alert("Seleccione el local a asignar.");
+            alert.show("Seleccione el local a asignar.");
           } else {
             if (newDescription === 0) {
-              alert("Agregue una descripción válida.");
+              alert.show("Agregue una descripción válida.");
             } else {
               let obj = {
                 usuario_Unidad_Negocio_ID: newUserBusinessUnitID,
@@ -120,13 +121,13 @@ export default function InsertUserBusinessUnit() {
       }
     } else {
       if (newUserID === 0) {
-        alert("Inserte el usuario a asignar.");
+        alert.show("Inserte el usuario a asignar.");
       } else {
         if (newBusinessUnitID === 0) {
-          alert("Seleccione el local a asignar.");
+          alert.show("Seleccione el local a asignar.");
         } else {
           if (newDescription === 0) {
-            alert("Agregue una descripción válida.");
+            alert.show("Agregue una descripción válida.");
           } else {
             let obj = {
               fK_Usuario_Usuario_Unidad_Negocio: newUserID,

@@ -13,7 +13,7 @@ import {
   Form
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -36,7 +36,7 @@ export default function InsertPermissionRole(props) {
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetPermissionRoleByID";
   const API_URL_GET_TYPE_PERMISSION = "http://localhost:4000/Administration/Admin/GetAllTypePermission";
   const API_URL_GET_TYPE_ROLE = "http://localhost:4000/Administration/Admin/GetAllTypeRole";
-
+  const alert = useAlert();
   const [resTypePermissionData, setresTypePermissionData] = useState([]);
   const [resTypeRoleData, setresTypeRoleData] = useState([]);
   const [newTypePermission, setnewTypePermission] = useState(0);
@@ -64,10 +64,10 @@ export default function InsertPermissionRole(props) {
         requestOptions
       );
       if (response.status === 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       console.log("Insertando...")
@@ -76,9 +76,9 @@ export default function InsertPermissionRole(props) {
         requestOptions
       );
       if (response.status === 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -115,16 +115,16 @@ export default function InsertPermissionRole(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newTypePermission === 0) {
-        alert("Por favor ingrese el Tipo de permiso");
+        alert.show("Por favor ingrese el Tipo de permiso");
       } else {
         if (newTypeRole === 0) {
-          alert("Por favor ingrese el Tipo de role");
+          alert.show("Por favor ingrese el Tipo de role");
         } else {
           if (newPermissionRoleDate === null) {
-            alert("Ingrese una fecha valida");
+            alert.show("Ingrese una fecha valida");
           } else {
             if (newPermissionRoleIsActive === null) {
-              alert("Seleccione si el permiso esta activo o no.");
+              alert.show("Seleccione si el permiso esta activo o no.");
             } else {
               let obj = {
                 permiso_Role_ID: newPermissionRoleID,
@@ -142,16 +142,16 @@ export default function InsertPermissionRole(props) {
       }
     } else {
       if (newTypePermission === 0) {
-        alert("Por favor ingrese el Tipo de permiso");
+        alert.show("Por favor ingrese el Tipo de permiso");
       } else {
         if (newTypeRole === 0) {
-          alert("Por favor ingrese el Tipo de role");
+          alert.show("Por favor ingrese el Tipo de role");
         } else {
           if (newPermissionRoleDate === null) {
-            alert("Ingrese una fecha valida");
+            alert.show("Ingrese una fecha valida");
           } else {
             if (newPermissionRoleIsActive === null) {
-              alert("Seleccione si el permiso esta activo o no.");
+              alert.show("Seleccione si el permiso esta activo o no.");
             } else {
               let obj = {
                 fk_TipoPermiso_Permiso_Role: newTypePermission,

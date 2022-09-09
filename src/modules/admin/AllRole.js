@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 export default function AllRole() {
   const API_URL_GET_ROLE =
@@ -9,14 +10,14 @@ export default function AllRole() {
     "http://localhost:4000/Administration/Admin/DeleteRole";
   const [resData, setresData] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-
+  const alert = useAlert();
   const getRoleRequest = async () => {
     try {
       const response = await fetch(API_URL_GET_ROLE);
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
@@ -30,13 +31,13 @@ export default function AllRole() {
       };
       const response = await fetch(API_URL_DELETE_ROLE, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar el role.");
+        alert.show("Ocurrio un error al eliminar el role.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error)
+      alert.show("Ocurrio un error al eliminar: " + error)
     }
   };
 

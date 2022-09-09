@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AppBarLogged from '../../components/appbar-logged.js';
-
+import { useAlert } from "react-alert";
 export default function AllBillingOrder() {
+  const alert = useAlert();
   const API_URL_GET_ORDER =
     "http://localhost:4000/Administration/Admin/GetAllOrderActive";
   const [resData, setresData] = useState([]);
@@ -15,7 +16,7 @@ export default function AllBillingOrder() {
       setresData(data);
     } catch (err) {
       setdataExists(false);
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
     }
   };
 

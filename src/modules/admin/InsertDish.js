@@ -12,7 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -35,7 +35,7 @@ export default function InsertDish(props) {
   const API_URL_GET_Type = "http://localhost:4000/Administration/Admin/GetAllTypeDishDrink";
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetDishByID";
 
-
+  const alert = useAlert();
   const [typeDishData, setTypeDishData] = useState([]);
   const [typeNewDish, setTypeNewDish] = useState(0);
   const [IDNewDish, setIDNewDish] = useState([]);
@@ -58,16 +58,16 @@ export default function InsertDish(props) {
       const response = await fetch(API_URL_Modify_DISH, requestOptions);
       const data = await response.json();
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_DISH, requestOptions);
       const data = await response.json();
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setIDNewDish(0);
         setNameNewDish("");
         setTypeNewDish(0);
@@ -75,7 +75,7 @@ export default function InsertDish(props) {
         setPriceNewDish(0);
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -103,7 +103,7 @@ export default function InsertDish(props) {
 
   const InsertEvent = async () => {
     if (typeNewDish == 0) {
-      alert("No se selecciono el tipo de platillo");
+      alert.show("No se selecciono el tipo de platillo");
     } else {
       if (isModify) {
         let obj = {

@@ -8,6 +8,7 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 export default function AllProduct() {
   const API_URL_GET_PRODUCT =
@@ -15,7 +16,7 @@ export default function AllProduct() {
   const API_URL_DELETE_PRODUCT =
     "http://localhost:4000/Administration/Admin/DeleteProduct";
   const [resData, setresData] = useState([]);
-
+  const alert = useAlert();
   const [dataExists, setdataExists] = useState(true);
   const getProductRequest = async () => {
     try {
@@ -23,7 +24,7 @@ export default function AllProduct() {
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
@@ -37,13 +38,13 @@ export default function AllProduct() {
       };
       const response = await fetch(API_URL_DELETE_PRODUCT, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar el producto.");
+        alert.show("Ocurrio un error al eliminar el producto.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error);
+      alert.show("Ocurrio un error al eliminar: " + error);
     }
   };
 

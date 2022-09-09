@@ -104,3 +104,10 @@ body{
 button.btn-primary{
     margin: 1vw 3vw;
 }
+
+//Alert bkground
+.alert {
+    // Add extra styles which is matched with your theme
+    background-color:$text-black-color;
+    color: $text-white-color;
+  }

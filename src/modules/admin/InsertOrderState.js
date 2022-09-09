@@ -13,7 +13,7 @@ import {
   Form
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -49,7 +49,7 @@ export default function InsertOrderState(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = props.id;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -58,10 +58,10 @@ export default function InsertOrderState(props) {
     };
     const response = await fetch(API_URL_Modify_ORDER_STATE, requestOptions);
     if (response.status === 200) {
-      alert("Se modifico correctamente");
+      alert.show("Se modifico correctamente");
       window.location.reload();
     } else {
-      alert("Ocurrio un error: " + response.status);
+      alert.show("Ocurrio un error: " + response.status);
     }
   };
 
@@ -95,16 +95,16 @@ export default function InsertOrderState(props) {
 
   const InsertEvent = async () => {
     if (newOrderstateID === 0) {
-      alert("Ocurrio un error al cargar los datos.");
+      alert.show("Ocurrio un error al cargar los datos.");
     } else {
       if (newOrderOrderState === 0) {
-        alert("No se ingreso la orden que desea modificar.");
+        alert.show("No se ingreso la orden que desea modificar.");
       } else {
         if (newStateOrderState === 0) {
-          alert("No se ingreso el estado a modificar.");
+          alert.show("No se ingreso el estado a modificar.");
         } else {
           if (newOrderStateDescription === "") {
-            alert("Ingrese una descripción");
+            alert.show("Ingrese una descripción");
           } else {
             let obj = {
               order_Estado_ID: newOrderstateID,

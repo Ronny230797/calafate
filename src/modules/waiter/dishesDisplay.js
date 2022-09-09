@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppBarLogged from '../../components/appbar-logged.js';
-
+import { useAlert } from "react-alert";
 export default function DishesDisplay() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +24,7 @@ export default function DishesDisplay() {
   const [newNumberTable, setnewNumberTable] = useState(idMesa);
   const [newOrderDescription, setnewOrderDescription] = useState("");
   const [newOrderDate, setnewOrderDate] = useState(new Date());
-
+  const alert = useAlert();
 
   const getAllDishesRequest = async () => {
     try {
@@ -32,7 +32,7 @@ export default function DishesDisplay() {
       const data = await response.json();
       setresDishesData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
@@ -60,7 +60,7 @@ export default function DishesDisplay() {
       };
       setpostDataOrderDetails([...postDataOrderDetails, newOrder]);
     } else {
-      alert("Ya se agrego este platillo, modifica la cantidad.");
+      alert.show("Ya se agrego este platillo, modifica la cantidad.");
     }
   };
 
@@ -102,11 +102,11 @@ export default function DishesDisplay() {
     };
     const response = await fetch(API_URL_INSERT_OD, requestOptions);
     if (response.status === 200) {
-      alert("Se agregaron los detalles de la orden.");
+      alert.show("Se agregaron los detalles de la orden.");
       setpostDataOrderDetails([]);
       setnewNumberTable(0);
     } else {
-      alert("Ocurrio un error: " + response.status);
+      alert.show("Ocurrio un error: " + response.status);
     }
   };
 

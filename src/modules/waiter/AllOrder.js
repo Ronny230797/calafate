@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AppBarLogged from '../../components/appbar-logged.js';
-
+import { useAlert } from "react-alert";
 export default function AllOrder() {
   const API_URL_GET_ORDER =
     "http://localhost:4000/Administration/Admin/GetAllOrder";
@@ -14,11 +14,11 @@ export default function AllOrder() {
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
-
+  const alert = useAlert();
   useEffect(() => {
     getOrderRequest();
   }, []);

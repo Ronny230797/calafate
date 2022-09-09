@@ -5,12 +5,16 @@ import App from "./App"
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import "../src/styles/index.scss";
 import { positions, Provider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+// import AlertTemplate from "react-alert-template-basic";
 
 const options = {
   timeout: 5000,
-  position: positions.TOP_RIGHT,
+  position: positions.BOTTOM_CENTER,
 };
+
+const AlertTemplate = ({ message }) => (
+  <div className="alert">{message}</div>
+);
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

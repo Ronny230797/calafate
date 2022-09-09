@@ -4,7 +4,7 @@ import { Container, Col, Row, Form, Table, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../styles/billing/ticket.scss";
 import AppBarLogged from '../../components/appbar-logged.js';
-
+import { useAlert } from "react-alert";
 export default function BillingByOrder() {
   const API_URL_GET_BILLINGS =
     "http://localhost:4000/Administration/Admin/GetBillings";
@@ -25,7 +25,7 @@ export default function BillingByOrder() {
   const [newSecondnameClient, setnewSecondnameClient] = useState("");
   const [newFirstLastnameClient, setnewFirstLastnameClient] = useState("");
   const [newSecondLastnameClient, setnewSecondLastnameClient] = useState("");
-
+  const alert = useAlert();
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
@@ -131,7 +131,7 @@ export default function BillingByOrder() {
                       requestOptions
                     );
                     if (response.status === 200) {
-                      alert("Se realizo el pago.");
+                      alert.show("Se realizo el pago.");
                       navigate(-1);
                     } else {
                       alert(
@@ -139,13 +139,13 @@ export default function BillingByOrder() {
                       );
                     }
                   } else {
-                    alert("Ocurrio un error al asignar la orden al usuario.");
+                    alert.show("Ocurrio un error al asignar la orden al usuario.");
                   }
                 } else {
-                  alert("Ocurrio un error al ingresar al nuevo usuario.");
+                  alert.show("Ocurrio un error al ingresar al nuevo usuario.");
                 }
               } catch (error) {
-                alert("Ocurrio un error: " + error);
+                alert.show("Ocurrio un error: " + error);
               }
             }
           }
@@ -173,13 +173,13 @@ export default function BillingByOrder() {
           requestOptions
         );
         if (response.status === 200) {
-          alert("Se realizo el pago.");
+          alert.show("Se realizo el pago.");
           navigate(-1);
         } else {
-          alert("Ocurrio un error al cambiar el estado de la orden");
+          alert.show("Ocurrio un error al cambiar el estado de la orden");
         }
       } else {
-        alert("Ocurrio un error al asignar la orden al usuario.");
+        alert.show("Ocurrio un error al asignar la orden al usuario.");
       }
     }
   };

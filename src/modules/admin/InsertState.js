@@ -10,7 +10,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 export default function InsertState() {
   const API_URL_INSERT_STATE =
     "http://localhost:4000/Administration/Admin/InsertState";
@@ -26,7 +26,7 @@ export default function InsertState() {
   const navigate = useNavigate();
   const location = useLocation();
   const objSelect = location.state;
-
+  const alert = useAlert();
   const InsertRequest = async (obj) => {
     const requestOptions = {
       method: "POST",
@@ -36,20 +36,20 @@ export default function InsertState() {
     if (isModify) {
       const response = await fetch(API_URL_Modify_STATE, requestOptions);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         navigate(-1);
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_STATE, requestOptions);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewStateID(0);
         setnewStateDescription("");
         setnewStateName("");
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -70,13 +70,13 @@ export default function InsertState() {
   const InsertEvent = async () => {
     if (isModify) {
       if (newStateName == "") {
-        alert("Por favor ingrese el nombre");
+        alert.show("Por favor ingrese el nombre");
       } else {
         if (newStateID == 0) {
-          alert("Ocurrio un error al cargar los datos...");
+          alert.show("Ocurrio un error al cargar los datos...");
         } else {
           if (newStateDescription == "") {
-            alert("Por favor ingrese la descripción...");
+            alert.show("Por favor ingrese la descripción...");
           } else {
             let obj = {
               estado_ID: newStateID,
@@ -89,10 +89,10 @@ export default function InsertState() {
       }
     } else {
       if (newStateName == "") {
-        alert("Por favor ingrese el nombre");
+        alert.show("Por favor ingrese el nombre");
       } else {
         if (newStateDescription == "") {
-          alert("Por favor ingrese la descripción...");
+          alert.show("Por favor ingrese la descripción...");
         } else {
           let obj = {
             estado_Name: newStateName,

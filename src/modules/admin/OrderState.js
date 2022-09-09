@@ -5,6 +5,7 @@ import { useTableSearch } from "../../components/useTableSearch";
 import InsertOrderState from "./InsertOrderState";
 import AppBar from '../../components/appbar-basic';
 import "../../styles/generic/table.scss"; 
+import { useAlert } from "react-alert";
 
 const { Search } = Input;
 const { Column } = Table;
@@ -22,7 +23,7 @@ export default function App() {
     searchVal,
     retrieve: fetchUsers
   });
-
+  const alert = useAlert();
   const API_URL_DELETE_ORDER_STATE = "";
 
   const deleteOrderState = async (ID) => {
@@ -34,13 +35,13 @@ export default function App() {
       };
       const response = await fetch(API_URL_DELETE_ORDER_STATE, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload();
       } else {
-        alert("Ocurrio un error al eliminar el tipo de platillo.");
+        alert.show("Ocurrio un error al eliminar el tipo de platillo.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error);
+      alert.show("Ocurrio un error al eliminar: " + error);
     }
   };
 

@@ -8,14 +8,14 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useAlert } from "react-alert";
 export default function AllDishes() {
   const API_URL_GET_USER_BUSINESS_UNIT =
     "http://localhost:4000/Administration/Admin/GetAllUserBusinessUnit";
   const API_URL_DELETE_USER_BUSINESS_UNIT =
     "http://localhost:4000/Administration/Admin/DeleteUserBusinessUnit";
   const [resData, setresData] = useState([]);
-
+  const alert = useAlert();
   const [dataExists, setdataExists] = useState(true);
   const getUserBusinessUnitRequest = async () => {
     const response = await fetch(API_URL_GET_USER_BUSINESS_UNIT);
@@ -39,7 +39,7 @@ export default function AllDishes() {
         requestOptions
       );
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
         alert(
@@ -47,7 +47,7 @@ export default function AllDishes() {
         );
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error)
+      alert.show("Ocurrio un error al eliminar: " + error)
     }
   };
 

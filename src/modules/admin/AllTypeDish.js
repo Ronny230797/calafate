@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useAlert } from "react-alert";
 export default function AllTypeDish() {
   const API_URL_GET_TYPE_Dish =
     "http://localhost:4000/Administration/Admin/GetAllTypeDishDrink";
@@ -10,14 +10,14 @@ export default function AllTypeDish() {
   const [resData, setresData] = useState([]);
   const [objSelect, setObjSelect] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-
+  const alert = useAlert();
   const getTypeDishRequest = async () => {
     try {
       const response = await fetch(API_URL_GET_TYPE_Dish);
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
@@ -31,13 +31,13 @@ export default function AllTypeDish() {
       };
       const response = await fetch(API_URL_DELETE_TYPE_Dish, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload();
       } else {
-        alert("Ocurrio un error al eliminar el tipo de platillo.");
+        alert.show("Ocurrio un error al eliminar el tipo de platillo.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error);
+      alert.show("Ocurrio un error al eliminar: " + error);
     }
   };
 

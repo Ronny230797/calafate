@@ -5,7 +5,7 @@ import { useTableSearch } from "../../components/useTableSearch";
 import InsertPermissionRole from "./InsertPermissionRole";
 import AppBar from '../../components/appbar-basic';
 import "../../styles/generic/table.scss"; 
-
+import { useAlert } from "react-alert";
 const { Search } = Input;
 const { Column } = Table;
 const fetchUsers = async () => {
@@ -22,7 +22,7 @@ export default function App() {
     searchVal,
     retrieve: fetchUsers
   });
-
+  const alert = useAlert();
   const API_URL_DELETE_PERMISSION_ROLE =
   "http://localhost:4000/Administration/Admin/DeletePermissionRole";
 
@@ -35,13 +35,13 @@ export default function App() {
       };
       const response = await fetch(API_URL_DELETE_PERMISSION_ROLE, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload();
       } else {
-        alert("Ocurrio un error al eliminar el permiso.");
+        alert.show("Ocurrio un error al eliminar el permiso.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error);
+      alert.show("Ocurrio un error al eliminar: " + error);
     }
   };
 

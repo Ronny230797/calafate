@@ -13,7 +13,7 @@ import {
   Form
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -35,7 +35,7 @@ export default function InsertUser(props) {
   const API_URL_Modify_USER = "http://localhost:4000/Administration/Admin/ModifyUser";
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetAllUserByID";
   const API_URL_GET_Type = "http://localhost:4000/Administration/Admin/GetAllUserType";
-
+  const alert = useAlert();
   const [resData, setresData] = useState([]);
   const [newUsuarioID, setnewUsuarioID] = useState(0);
   const [newTypeUserUser, setnewTypeUserUser] = useState(0);
@@ -63,17 +63,17 @@ export default function InsertUser(props) {
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_USER, requestOptions);
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewFirstname("");
         setnewSecondname("");
         setnewFirtLastname("");
@@ -84,7 +84,7 @@ export default function InsertUser(props) {
         setnewTypeUserUser(0);
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -117,28 +117,28 @@ export default function InsertUser(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newUsuarioID === 0) {
-        alert("Ocurrio un error al cargar los datos.");
+        alert.show("Ocurrio un error al cargar los datos.");
       } else {
         if (newFirstname === "") {
-          alert("Ingrese el nombre por favor.");
+          alert.show("Ingrese el nombre por favor.");
         } else {
           if (newFirtLastname === "") {
-            alert("Ingrese el primer apellido.");
+            alert.show("Ingrese el primer apellido.");
           } else {
             if (newSecondLastname === "") {
-              alert("Ingrese el segundo apellido");
+              alert.show("Ingrese el segundo apellido");
             } else {
               if (newUsername === "") {
-                alert("Ingrese el nombre de usuario.");
+                alert.show("Ingrese el nombre de usuario.");
               } else {
                 if (newTypeUserUser === 0) {
-                  alert("Ingrese el tipo de usuario.");
+                  alert.show("Ingrese el tipo de usuario.");
                 } else {
                   if (newUserPassWord.trim() === "") {
-                    alert("Ingrese la contraseña.");
+                    alert.show("Ingrese la contraseña.");
                   } else {
                     if (newUserPassWord !== newUserPassWordValidate) {
-                      alert("Las dos contraseñas deben ser iguales.");
+                      alert.show("Las dos contraseñas deben ser iguales.");
                     } else {
                       let obj = {
                         usuario_ID: newUsuarioID,
@@ -161,25 +161,25 @@ export default function InsertUser(props) {
       }
     } else {
       if (newFirstname === "") {
-        alert("Ingrese el nombre por favor.");
+        alert.show("Ingrese el nombre por favor.");
       } else {
         if (newFirtLastname === "") {
-          alert("Ingrese el primer apellido.");
+          alert.show("Ingrese el primer apellido.");
         } else {
           if (newSecondLastname === "") {
-            alert("Ingrese el segundo apellido");
+            alert.show("Ingrese el segundo apellido");
           } else {
             if (newUsername === "") {
-              alert("Ingrese el nombre de usuario.");
+              alert.show("Ingrese el nombre de usuario.");
             } else {
               if (newTypeUserUser === 0) {
-                alert("Ingrese el tipo de usuario.");
+                alert.show("Ingrese el tipo de usuario.");
               } else {
                 if (newUserPassWord.trim() === "") {
-                  alert("Ingrese la contraseña.");
+                  alert.show("Ingrese la contraseña.");
                 } else {
                   if (newUserPassWord !== newUserPassWordValidate) {
-                    alert("Las dos contraseñas deben ser iguales.");
+                    alert.show("Las dos contraseñas deben ser iguales.");
                   } else {
                     let obj = {
                       fK_Tipo_Usuario_Usuario: newTypeUserUser,

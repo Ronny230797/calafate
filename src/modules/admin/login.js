@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/admin/login.scss";
-
+import { useAlert } from "react-alert";
 
 
 export default function Login() {
@@ -13,7 +13,7 @@ export default function Login() {
     const [resData, setresData] = useState([]);
     const [username, setusername] = useState('');
     const [password, setpassword] = useState('');
-
+    const alert = useAlert();
 
     const loginEvenet = () => {
         let obj = {
@@ -22,7 +22,7 @@ export default function Login() {
         loginRequest(obj);
 
         if (resData == false || resData == undefined) {
-            alert('No se puedo verificar su identidad');
+            alert.show('No se puedo verificar su identidad');
         } else {
             localStorage.removeItem('ABRLGN');
             localStorage.setItem('ABRLGN', true);

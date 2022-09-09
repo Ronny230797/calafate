@@ -10,12 +10,12 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 export default function InsertProduct() {
   const API_URL = "http://localhost:4000/Administration/Admin/InsertProduct";
   const API_URL_Modify = "http://localhost:4000/Administration/Admin/ModifyProduct";
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetProductByID";
-
+  const alert = useAlert();
   const [resData, setresData] = useState([]);
   const [newProductID, setnewProductID] = useState(0);
   const [newProductName, setnewProductName] = useState("");
@@ -37,23 +37,23 @@ export default function InsertProduct() {
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         navigate(-1);
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
       setresData(data);
       if (response.status == 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewProductID(0);
         setnewProductName("");
         setnewProductDescription("");
         setnewProductAmount(0);
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -75,16 +75,16 @@ export default function InsertProduct() {
   const InsertEvent = async () => {
     if (isModify) {
       if (newProductID === 0) {
-        alert("No se cargaron los datos correctamente.");
+        alert.show("No se cargaron los datos correctamente.");
       } else {
         if (newProductName === "") {
-          alert("Ingrese el nombre del producto por favor.");
+          alert.show("Ingrese el nombre del producto por favor.");
         } else {
           if (newProductDescription === "") {
-            alert("Ingrese una descripción del producto por favor.");
+            alert.show("Ingrese una descripción del producto por favor.");
           } else {
             if (newProductAmount === 0) {
-              alert("Ingrese la cantidad de producto.");
+              alert.show("Ingrese la cantidad de producto.");
             } else {
               let obj = {
                 producto_ID: newProductID,
@@ -99,13 +99,13 @@ export default function InsertProduct() {
       }
     } else {
       if (newProductName === "") {
-        alert("Ingrese el nombre del producto por favor.");
+        alert.show("Ingrese el nombre del producto por favor.");
       } else {
         if (newProductDescription === "") {
-          alert("Ingrese una descripción del producto por favor.");
+          alert.show("Ingrese una descripción del producto por favor.");
         } else {
           if (newProductAmount === 0) {
-            alert("Ingrese la cantidad de producto.");
+            alert.show("Ingrese la cantidad de producto.");
           } else {
             let obj = {
               producto_Name: newProductName,

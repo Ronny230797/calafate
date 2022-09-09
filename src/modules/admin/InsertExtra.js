@@ -12,7 +12,7 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import "../../styles/admin/InsertDish.scss";
-
+import { useAlert } from "react-alert";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -35,7 +35,7 @@ export default function InsertExtra(props) {
   const API_URL_GET_ByID = "http://localhost:4000/Administration/Admin/GetExtraByID";
   const API_URL_GET_PRODUCT = "http://localhost:4000/Administration/Admin/GetAllProduct";
 
-
+  const alert = useAlert();
   const [resData, setresData] = useState([]);
   const [newExtraID, setnewExtraID] = useState(0);
   const [newFKProductoExtra, setnewFKProductoExtra] = useState(0);
@@ -57,23 +57,23 @@ export default function InsertExtra(props) {
       const response = await fetch(API_URL_Modify_EXTRA, requestOptions);
       const data = await response.json();
       if (response.status === 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     } else {
       const response = await fetch(API_URL_INSERT_EXTRA, requestOptions);
       const data = await response.json();
       if (response.status === 200) {
-        alert("Se ingreso correctamente");
+        alert.show("Se ingreso correctamente");
         setnewExtraID(0);
         setnewExtraName("");
         setnewExtraDescription("");
         setnewFKProductoExtra(0);
         window.location.reload();
       } else {
-        alert("Ocurrio un error: " + response.status);
+        alert.show("Ocurrio un error: " + response.status);
       }
     }
   };
@@ -101,16 +101,16 @@ export default function InsertExtra(props) {
   const InsertEvent = async () => {
     if (isModify) {
       if (newExtraID === 0) {
-        alert("No se cargaron los datos correctamente.");
+        alert.show("No se cargaron los datos correctamente.");
       } else {
         if (newFKProductoExtra === 0) {
-          alert("Ingrese el producto al que esta relacionada esta extra.");
+          alert.show("Ingrese el producto al que esta relacionada esta extra.");
         } else {
           if (newExtraName === "") {
-            alert("Ingrese el nombre de la extra.");
+            alert.show("Ingrese el nombre de la extra.");
           } else {
             if (newExtraDescription === "") {
-              alert("Ingrese la descripción de la extra.");
+              alert.show("Ingrese la descripción de la extra.");
             } else {
               let obj = {
                 extra_ID: newExtraID,
@@ -125,13 +125,13 @@ export default function InsertExtra(props) {
       }
     } else {
       if (newFKProductoExtra === 0) {
-        alert("Ingrese el producto al que esta relacionada esta extra.");
+        alert.show("Ingrese el producto al que esta relacionada esta extra.");
       } else {
         if (newExtraName === "") {
-          alert("Ingrese el nombre de la extra.");
+          alert.show("Ingrese el nombre de la extra.");
         } else {
           if (newExtraDescription === "") {
-            alert("Ingrese la descripción de la extra.");
+            alert.show("Ingrese la descripción de la extra.");
           } else {
             let obj = {
               fK_Producto_Extra: newFKProductoExtra,

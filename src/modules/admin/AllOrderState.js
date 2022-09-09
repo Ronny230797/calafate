@@ -14,7 +14,7 @@ export default function AllOrderState() {
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setisError(true);
     }
   };

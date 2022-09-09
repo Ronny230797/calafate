@@ -8,6 +8,7 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 export default function AllExtra() {
   const API_URL_GET_PRODUCT =
@@ -16,7 +17,7 @@ export default function AllExtra() {
     "http://localhost:4000/Administration/Admin/DeleteExtra";
   const [resData, setresData] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-
+  const alert = useAlert();
   const getExtraRequest = async () => {
     try {
       const response = await fetch(API_URL_GET_PRODUCT);
@@ -37,13 +38,13 @@ export default function AllExtra() {
       };
       const response = await fetch(API_URL_DELETE_PRODUCT, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar la extra del platillo.");
+        alert.show("Ocurrio un error al eliminar la extra del platillo.");
       }
     } catch (error) {
-      alert("Ocurrio un errro al eliminar: " + error);
+      alert.show("Ocurrio un errro al eliminar: " + error);
     }
   };
 

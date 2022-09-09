@@ -8,7 +8,7 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useAlert } from "react-alert";
 export default function AllDishes() {
   const API_URL_GET_USER =
     "http://localhost:4000/Administration/Admin/GetAllUser";
@@ -16,14 +16,14 @@ export default function AllDishes() {
     "http://localhost:4000/Administration/Admin/DeleteUser";
   const [resData, setresData] = useState([]);
   const [dataExists, setdataExists] = useState(true);
-
+  const alert = useAlert();
   const getUserRequest = async () => {
     try {
       const response = await fetch(API_URL_GET_USER);
       const data = await response.json();
       setresData(data);
     } catch (err) {
-      alert("Ocurrio un error al cargar los datos... " + err);
+      alert.show("Ocurrio un error al cargar los datos... " + err);
       setdataExists(false);
     }
   };
@@ -37,13 +37,13 @@ export default function AllDishes() {
       };
       const response = await fetch(API_URL_DELETE_USER, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload(false);
       } else {
-        alert("Ocurrio un error al eliminar al usuario.");
+        alert.show("Ocurrio un error al eliminar al usuario.");
       }
     } catch (error) {
-      alert("ocurrio un error: " + error)
+      alert.show("ocurrio un error: " + error)
     }
   };
 

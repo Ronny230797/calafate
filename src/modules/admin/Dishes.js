@@ -5,7 +5,7 @@ import { useTableSearch } from "../../components/useTableSearch";
 import InsertDish from "./InsertDish";
 import AppBarLogged from '../../components/appbar-logged.js';
 import "../../styles/generic/table.scss"; 
-
+import { useAlert } from "react-alert";
 const { Search } = Input;
 const { Column } = Table;
 const fetchUsers = async () => {
@@ -17,7 +17,7 @@ const fetchUsers = async () => {
 
 export default function App() {
   const [searchVal, setSearchVal] = useState(null);
-
+  const alert = useAlert();
   const { filteredData, loading } = useTableSearch({
     searchVal,
     retrieve: fetchUsers
@@ -35,13 +35,13 @@ export default function App() {
       };
       const response = await fetch(API_URL_DELETE_Dish, requestOptions);
       if (response.status === 200) {
-        alert("Se elimino correctamente.");
+        alert.show("Se elimino correctamente.");
         window.location.reload();
       } else {
-        alert("Ocurrio un error al eliminar el platillo.");
+        alert.show("Ocurrio un error al eliminar el platillo.");
       }
     } catch (error) {
-      alert("Ocurrio un error al eliminar: " + error);
+      alert.show("Ocurrio un error al eliminar: " + error);
     }
   };
 
