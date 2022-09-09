@@ -42,35 +42,35 @@ body{
 }
 
 //Button Primary
-.button-primary{
-    background-color: $component-color;
-    border-color: $component-color;
-    color: $text-black-color;
-    margin-top: 1vw;
-}
+// .button-primary{
+//     background-color: $component-color;
+//     border-color: $component-color;
+//     color: $text-black-color;
+//     margin-top: 1vw;
+// }
 
-.button-primary:hover {
-    background-color: $component-hover-color;
-    border-color: $component-hover-color;
-    font-weight: bold;
-}
+// .button-primary:hover {
+//     background-color: $component-hover-color;
+//     border-color: $component-hover-color;
+//     font-weight: bold;
+// }
 
 
 //Button Secondary
-.button-secondary{
-    background-color: transparent;
-    color: $text-black-color;
-}
+// .button-secondary{
+//     background-color: transparent;
+//     color: $text-black-color;
+// }
 
 //App-Bar
-.navbar{
-    background-color: $secondary-color !important;
-    margin-top: 1vw;
-    margin-bottom: 2vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border-radius: 4px;
-}
+// .navbar{
+//     background-color: $secondary-color !important;
+//     margin-top: 1vw;
+//     margin-bottom: 2vw;
+//     padding-left: 2vw;
+//     padding-right: 2vw;
+//     border-radius: 4px;
+// }
 
 //Input-Group
 .input-group{
