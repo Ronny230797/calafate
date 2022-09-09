@@ -46,7 +46,6 @@ export default function InsertProduct() {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
       setresData(data);
-      console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
         setnewProductID(0);
@@ -67,7 +66,6 @@ export default function InsertProduct() {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewProductID(data.producto_ID);
     setnewProductName(data.producto_Name);
     setnewProductDescription(data.producto_Description);
@@ -122,7 +120,6 @@ export default function InsertProduct() {
   };
 
   useEffect(() => {
-    console.log(objSelect);
     if (objSelect != null) {
       setisModify(true);
       getProductByIDRequest(objSelect);

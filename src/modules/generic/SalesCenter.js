@@ -39,7 +39,6 @@ export default function SalesCenter() {
     try {
       const response = await fetch(API_URL_GET_ORDER);
       const data = await response.json();
-      console.log(data)
       await setresData(data);
     } catch (err) {
       setdataExists(false);
@@ -51,13 +50,10 @@ export default function SalesCenter() {
     await getOrderRequest();
 
     if (dataExists) {
-      console.log(resData)
-
 
       if (resData.find(obj => obj.numero_Mesa == i)) {
         alert(`Mesa Ocupada`)
         let result = resData.filter(x => x.numero_Mesa == i);
-        console.log(result[0])
         setTableToPay(result[0].order_ID);
         PayOrder();
       } else {

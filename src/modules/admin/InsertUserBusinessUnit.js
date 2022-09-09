@@ -34,7 +34,6 @@ export default function InsertUserBusinessUnit() {
   const objSelect = location.state;
 
   const InsertRequest = async (obj) => {
-    console.log(obj)
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -54,7 +53,6 @@ export default function InsertUserBusinessUnit() {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
       setresData(data);
-      console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
         setnewBusinessUnitID(0);
@@ -87,7 +85,6 @@ export default function InsertUserBusinessUnit() {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewUserBusinessUnitID(data.usuario_Unidad_Negocio_ID);
     setnewUserID(data.fK_Usuario_Usuario_Unidad_Negocio);
     setnewBusinessUnitID(data.fK_Unidad_Negocio_Usuario_Unidad_Negocio);
@@ -145,7 +142,6 @@ export default function InsertUserBusinessUnit() {
   };
 
   useEffect(() => {
-    console.log(objSelect);
     if (objSelect != null) {
       setisModify(true);
       getUserBusinessUnitByIDRequest(objSelect);

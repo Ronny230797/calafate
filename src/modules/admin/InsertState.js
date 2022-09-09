@@ -62,7 +62,6 @@ export default function InsertState() {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewStateID(data.estado_ID);
     setnewStateName(data.estado_Name);
     setnewStateDescription(data.estado_Description);

@@ -63,7 +63,6 @@ export default function InsertTypeUser(props) {
       const response = await fetch(API_URL_INSERT_TYPE_USER, requestOptions);
       const data = await response.json();
       setresData(data);
-      console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
         setuserTypeID(0);

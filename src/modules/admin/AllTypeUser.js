@@ -30,7 +30,6 @@ export default function AllTypeUser() {
 
   const deleteUserType = async (ID) => {
     try {
-      console.log(ID);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },

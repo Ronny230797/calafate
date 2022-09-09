@@ -72,7 +72,6 @@ export default function InsertUser(props) {
       const response = await fetch(API_URL_INSERT_USER, requestOptions);
       const data = await response.json();
       setresData(data);
-      console.log(response.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
         setnewFirstname("");
@@ -104,7 +103,6 @@ export default function InsertUser(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewUsuarioID(data.usuario_ID);
     setnewTypeUserUser(data.fK_Tipo_Usuario_Usuario);
     setnewFirstname(data.firstName);
@@ -192,7 +190,6 @@ export default function InsertUser(props) {
                       usuario_Username: newUsername,
                       usuario_Password: newUserPassWord,
                     };
-                    console.log(obj);
                     InsertRequest(obj);
                   }
                 }

@@ -68,7 +68,6 @@ export default function InsertTypePermission() {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewTypePermissionID(data.tipo_Permiso_ID);
     setnewTypePermissionName(data.tipo_Permiso_Name);
     setnewTypePermissionDescription(data.tipo_Permiso_Description);

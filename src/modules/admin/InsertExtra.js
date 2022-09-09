@@ -86,7 +86,6 @@ export default function InsertExtra(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewExtraID(data.extra_ID);
     setnewFKProductoExtra(data.fK_Producto_Extra);
     setnewExtraName(data.extra_Name);

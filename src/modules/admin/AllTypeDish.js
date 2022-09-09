@@ -24,7 +24,6 @@ export default function AllTypeDish() {
 
   const deleteTypeDish = async (ID) => {
     try {
-      console.log(ID);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },

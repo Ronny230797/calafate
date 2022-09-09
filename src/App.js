@@ -70,7 +70,6 @@ export default function App() {
   useEffect(() => {
 
       const item = localStorage.getItem('ABRLGN');
-      console.log(item)
       localStorage.setItem('ABRLGN', item);
       setLogged(item)
   }, []);

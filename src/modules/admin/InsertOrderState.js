@@ -75,7 +75,6 @@ export default function InsertOrderState(props) {
     const response = await fetch(API_URL_GET_STATE);
     const data = await response.json();
     setresStateData(data);
-    console.log(data)
   };
 
   const getOrderStateByIDRequest = async (ID) => {
@@ -86,7 +85,6 @@ export default function InsertOrderState(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewOrderstateID(data.order_Estado_ID);
     setnewOrderOrderState(data.fK_Order_Order_Estado);
     setnewStateOrderState(data.fK_Estado_Order_Estado);

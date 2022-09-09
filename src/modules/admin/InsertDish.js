@@ -66,7 +66,6 @@ export default function InsertDish(props) {
     } else {
       const response = await fetch(API_URL_INSERT_DISH, requestOptions);
       const data = await response.json();
-      console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
         setIDNewDish(0);
@@ -114,7 +113,6 @@ export default function InsertDish(props) {
           Plato_Bebida_Descripcion: descriptionNewDish,
           Precio: priceNewDish,
         };
-        console.log(obj);
         InsertRequest(obj);
       } else {
         let obj = {
@@ -123,7 +121,6 @@ export default function InsertDish(props) {
           Plato_Bebida_Descripcion: descriptionNewDish,
           Precio: priceNewDish,
         };
-        console.log(obj);
         InsertRequest(obj);
       }
     }

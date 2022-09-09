@@ -78,7 +78,6 @@ export default function InsertTypeRole(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewTypeRoleID(data.tipo_Role_ID);
     setnewTypeRoleName(data.tipo_Role_Name);
     setnewTypeDescriptionRole(data.tipo_Role_Description);

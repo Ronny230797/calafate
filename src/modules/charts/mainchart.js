@@ -15,8 +15,8 @@ export default function MainChart() {
     const alert = useAlert();
 
     const handleClick = (chart) => {
-        // setIsShown(chart);
-        alert.show(<div style={{ color: 'white' }}>Some Message</div>)
+        setIsShown(chart);
+        // alert.show(<div style={{ color: 'white' }}>Some Message</div>)
        
         
       };

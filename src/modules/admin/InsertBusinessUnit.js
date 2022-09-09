@@ -64,7 +64,6 @@ export default function InsertBusinessUnit(props) {
     } else {
       const response = await fetch(API_URL_INSERT_BUSINESS_UNIT, requestOptions);
       const data = await response.json();
-      console.log(data.status);
       if (response.status == 200) {
         alert("Se ingreso correctamente");
         setnewBusinessUnitID(0);

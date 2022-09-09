@@ -20,7 +20,6 @@ export default function Login() {
             Usuario_Password: password, Usuario_Username: username
         };
         loginRequest(obj);
-        console.log(resData);
 
         if (resData == false || resData == undefined) {
             alert('No se puedo verificar su identidad');

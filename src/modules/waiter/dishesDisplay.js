@@ -95,13 +95,11 @@ export default function DishesDisplay() {
       Numero_Mesa: newNumberTable,
       ListOrderDetails: postDataOrderDetails
     }
-    console.log({ dataObj });
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dataObj),
     };
-    console.log(requestOptions);
     const response = await fetch(API_URL_INSERT_OD, requestOptions);
     if (response.status === 200) {
       alert("Se agregaron los detalles de la orden.");

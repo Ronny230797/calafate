@@ -38,7 +38,6 @@ export default function BillingByOrder() {
     };
     const response = await fetch(API_URL_GET_BILLINGS, requestOptions);
     const data = await response.json();
-    console.log(data);
     setresData(data);
     var tempTotalPrice = 0;
     data.map(
@@ -186,7 +185,6 @@ export default function BillingByOrder() {
   };
 
   const Print = () => {
-    //console.log('print');  
     let printContents = document.getElementById('ticketprint').innerHTML;
     let originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
@@ -201,7 +199,6 @@ export default function BillingByOrder() {
   }
 
   function GetOrder(){
-    console.log(resData[0])
     let order = -1 ;
     if(resData[0] != undefined){
        order = resData[0].order_ID;
@@ -211,7 +208,6 @@ export default function BillingByOrder() {
   }
 
   useEffect(() => {
-    console.log(objSelect);
     if (objSelect != null) {
       getBillingRequest(objSelect);
     } else {

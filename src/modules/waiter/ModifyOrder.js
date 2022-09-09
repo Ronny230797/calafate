@@ -52,7 +52,6 @@ export default function NewOrder() {
     };
     const response = await fetch(API_GET_BY_ID_ORDER_DETAILS, requestOptions);
     const data = await response.json();
-    console.log({data});
     setpostDataOrderDetails(data);
   };
 
@@ -63,7 +62,7 @@ export default function NewOrder() {
       (element) => element.fK_Plato_Bebida_Order_Details === resultado.platoID
     );
 
-    console.log(resultado)
+
     if (alreadyExists === undefined) {
       let newOrder = {
           order_Details_ID: 0,
@@ -74,7 +73,6 @@ export default function NewOrder() {
           order_Details_Description: "Mesa: " + newNumberTable + " - Fecha: " + newOrderDate.toLocaleString("es-CR", { timeZone: "America/Costa_Rica",}),
           order_Details_Date: newOrderDate,
         };
-      console.log(newOrder);
       setpostDataOrderDetails([...postDataOrderDetails, newOrder])
     } else {
       alert("Ya se agrego este platillo, modifica la cantidad.");
@@ -123,13 +121,10 @@ export default function NewOrder() {
         body: JSON.stringify({postDataOrderDetails}),
       };
 
-      console.log(postDataOrderDetails);
-      console.log('here')
-      console.log(requestOptions)
 
       const response = await axios.post(API_URL_Modify, postDataOrderDetails);
       /*const response = await fetch(API_URL_Modify, requestOptions);*/
-      console.log(response)
+
       if(response.status === 200) {
         alert("Se modificaron los detalles de la orden.");
         navigate(-1);
@@ -144,7 +139,6 @@ export default function NewOrder() {
   }
 
   useEffect(() => {
-    console.log(objSelect);
     if (objSelect != null) {
       getOrderDetailsByIDRequest(objSelect);
       getAllDishesRequest();

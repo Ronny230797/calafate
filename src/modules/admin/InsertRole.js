@@ -52,7 +52,6 @@ export default function InsertRole(props) {
   const objSelect = props.id;
 
   const InsertRequest = async (obj) => {
-    console.log(obj);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -86,14 +85,12 @@ export default function InsertRole(props) {
   const getUsersRequest = async () => {
     const response = await fetch(API_URL_GET_USER);
     const data = await response.json();
-    console.log(data);
     setresUserData(data);
   };
 
   const getTypeRoleRequest = async () => {
     const response = await fetch(API_URL_GET_TYPE_ROLE);
     const data = await response.json();
-    console.log(data);
     setresTypeRoleData(data);
   };
 
@@ -105,7 +102,6 @@ export default function InsertRole(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewRoleID(data.role_ID);
     setnewUserRole(data.fK_Usuario_Role);
     setnewTypeRoleRole(data.fK_Tipo_Role_Role);

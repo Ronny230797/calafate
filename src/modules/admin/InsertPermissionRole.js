@@ -52,7 +52,6 @@ export default function InsertPermissionRole(props) {
   const objSelect = props.id;
 
   const InsertRequest = async (obj) => {
-    console.log(obj);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -87,14 +86,12 @@ export default function InsertPermissionRole(props) {
   const getTypePermissionRequest = async () => {
     const response = await fetch(API_URL_GET_TYPE_PERMISSION);
     const data = await response.json();
-    console.log(data);
     setresTypePermissionData(data);
   };
 
   const getTypeRoleRequest = async () => {
     const response = await fetch(API_URL_GET_TYPE_ROLE);
     const data = await response.json();
-    console.log(data);
     setresTypeRoleData(data);
   };
 
@@ -106,7 +103,6 @@ export default function InsertPermissionRole(props) {
     };
     const response = await fetch(API_URL_GET_ByID, requestOptions);
     const data = await response.json();
-    console.log(data);
     setnewPermissionRoleID(data.permiso_Role_ID);
     setnewTypePermission(data.fK_TipoPermiso_Permiso_Role);
     setnewTypePermissionName(data.tipo_Permiso_Name);
