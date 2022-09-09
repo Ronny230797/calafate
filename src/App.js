@@ -55,6 +55,7 @@ import WelcomeCenter from './modules/generic/WelcomeCenter';
 import DishesCenter from './modules/generic/DishesCenter';
 import SalesCenter from './modules/generic/SalesCenter';
 import UsersCenter from './modules/generic/UsersCenter';
+import MainChart from './modules/charts/mainchart.js';
 
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -140,6 +141,7 @@ export default function App() {
           <Route path="/UsersCenter" element={ logged=='true' ? <UsersCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
           <Route path="/DishesCenter" element={ logged=='true' ? <DishesCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
           <Route path="/SalesCenter" element={ logged=='true' ? <SalesCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/MainChart" element={ logged=='true' ? <MainChart /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
 
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

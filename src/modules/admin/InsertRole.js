@@ -207,7 +207,7 @@ export default function InsertRole(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{ ...style, width: 400, overflow: 'scroll', maxHeight: '90%' }}>
           <h2 id="parent-modal-title">Nuevo Tipo Platillo</h2>
           <React.Fragment>
             <Container className="InsertDish">
@@ -225,7 +225,9 @@ export default function InsertRole(props) {
                     </Row>
                     <Row>
                       <Col xs={10} md={10}>
-                        {isModify? <label>Usuario ha modificar: {newUsername} - Role actual: {newTypeRoleName}</label> : <label></label>}
+                      <InputGroup className="mb-3">
+                        {isModify? <InputGroup.Text>Usuario ha modificar: {newUsername} - Role actual: {newTypeRoleName}</InputGroup.Text> : <InputGroup.Text></InputGroup.Text>}
+                        </InputGroup>
                         <FormSelect
                           onChange={(event) => setnewUserRole(event.target.value)}
                           aria-label="UserInformation"

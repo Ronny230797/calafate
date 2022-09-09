@@ -363,7 +363,7 @@ export default function BillingByOrder() {
           <Row>
             <Col xs={12} xl={12}>
               <Button onClick={paymentRequest}>Pagar</Button>
-              <button type="button" onClick={Print} > Print Ticket</button>
+              <Button onClick={Print}>Pagar Ticket</Button>
             </Col>
           </Row>
         </Container>

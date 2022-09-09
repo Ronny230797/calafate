@@ -29,6 +29,9 @@ const ResponsiveAppBar = () => {
                         <LinkContainer to="/SalesCenter">
                             <Nav.Link >Ventas</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/mainchart">
+                            <Nav.Link >Reporte</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/" onClick={removeLocalS}>
                             <Nav.Link >Salir</Nav.Link>
                         </LinkContainer>

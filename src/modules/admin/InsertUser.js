@@ -233,7 +233,7 @@ export default function InsertUser(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{ ...style, width: 400, overflow: 'scroll', maxHeight: '90%' }}>
           <h2 id="parent-modal-title">Nuevo Tipo Platillo</h2>
           <React.Fragment>
             <Container className="InsertDish">
