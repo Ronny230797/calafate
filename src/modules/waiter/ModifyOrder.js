@@ -177,7 +177,7 @@ export default function NewOrder() {
               <ListGroup>
                 {resDishesData.map((AllDishes) => (
                   <Row key={AllDishes.platoID}>
-                    <Col xs={10} md={4}>
+                    <Col xs={10} md={8}>
                       <ListGroup.Item>
                         {AllDishes.plato_Bebida_Nombre}
                       </ListGroup.Item>
@@ -201,12 +201,12 @@ export default function NewOrder() {
               <ListGroup>
                 {postDataOrderDetails.map((AllDishesToPost) => (
                   <Row key={AllDishesToPost.order_Details_ID}>
-                    <Col xs={6} md={4}>
+                    <Col xs={6} md={6}>
                       <ListGroup.Item>
                         {AllDishesToPost.fK_Plato_Bebida_Order_Details_Name}
                       </ListGroup.Item>
                     </Col>
-                    <Col xs={4} md={4}>
+                    <Col xs={3} md={2}>
                       <FormControl
                         size="lg"
                         type="text"
@@ -220,7 +220,7 @@ export default function NewOrder() {
                         }
                       />
                     </Col>
-                    <Col xs={2} md={4}>
+                    <Col xs={3} md={4}>
                       <Button
                         onClick={(event) =>
                           handleDeleteDish(AllDishesToPost.order_Details_ID)
