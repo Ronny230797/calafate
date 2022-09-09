@@ -9,6 +9,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import AppBarLogged from '../../components/appbar-logged.js';
 
 export default function NewOrder() {
   const API_URL_INSERT_OD =
@@ -156,6 +157,7 @@ export default function NewOrder() {
     return (
       <React.Fragment>
         <Container>
+        <AppBarLogged />
           <Row>
             <Col>
               <h1>Ocurrio un error al cargar los detalles de la orden.</h1>
@@ -168,18 +170,19 @@ export default function NewOrder() {
     return (
       <React.Fragment>
         <Container>
+        <AppBarLogged />
           <Row>
-            <Col xs={6} xl={6}>
+            <Col xs={10} md={6}>
+               <h2>Añadir</h2>
               <ListGroup>
                 {resDishesData.map((AllDishes) => (
                   <Row key={AllDishes.platoID}>
-                    <Col xs={6} xl={6}>
+                    <Col xs={10} md={4}>
                       <ListGroup.Item>
                         {AllDishes.plato_Bebida_Nombre}
                       </ListGroup.Item>
                     </Col>
-                    <Col xs={2} xl={2}></Col>
-                    <Col xs={4} xl={4}>
+                    <Col xs={2} md={4}>
                       <Button
                         onClick={(event) => handleAddDish(event.target.value)}
                         value={AllDishes.platoID}
@@ -191,16 +194,19 @@ export default function NewOrder() {
                 ))}
               </ListGroup>
             </Col>
-            <Col xs={6} xl={6}>
+
+
+            <Col xs={10} md={6}>
+            <h2>Orden Actual</h2>
               <ListGroup>
                 {postDataOrderDetails.map((AllDishesToPost) => (
                   <Row key={AllDishesToPost.order_Details_ID}>
-                    <Col xs={6} xl={6}>
+                    <Col xs={6} md={4}>
                       <ListGroup.Item>
                         {AllDishesToPost.fK_Plato_Bebida_Order_Details_Name}
                       </ListGroup.Item>
                     </Col>
-                    <Col xs={2} xl={2}>
+                    <Col xs={4} md={4}>
                       <FormControl
                         size="lg"
                         type="text"
@@ -214,7 +220,7 @@ export default function NewOrder() {
                         }
                       />
                     </Col>
-                    <Col xs={4} xl={4}>
+                    <Col xs={2} md={4}>
                       <Button
                         onClick={(event) =>
                           handleDeleteDish(AllDishesToPost.order_Details_ID)
