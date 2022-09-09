@@ -57,12 +57,24 @@ import SalesCenter from './modules/generic/SalesCenter';
 import UsersCenter from './modules/generic/UsersCenter';
 
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 
 export default function App() {
 
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState();
+
+
+  useEffect(() => {
+
+      const item = localStorage.getItem('ABRLGN');
+      console.log(item)
+      localStorage.setItem('ABRLGN', item);
+      setLogged(item)
+  }, []);
+
+  
 
 
   return (
@@ -76,58 +88,58 @@ export default function App() {
 
 
 
-          <Route path="/admin" element={ logged ? <Admin /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/Dishes" element={ logged ? <Dishes /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertDish" element={ logged ? <InsertDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllDishes" element={ logged ? <AllDishes /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/TypeDish" element={ logged ? <TypeDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertTypeDish" element={ logged ? <InsertTypeDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllTypeDish" element={ logged ? <AllTypeDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/TypePermission" element={ logged ? <TypePermission /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertTypePermission" element={ logged ? <InsertTypePermission /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllTypePermission" element={ logged ? <AllTypePermission /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/TypeRole" element={ logged ? <TypeRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertTypeRole" element={ logged ? <InsertTypeRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllTypeRole" element={ logged ? <AllTypeRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/PermissionRole" element={ logged ? <PermissionRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertPermissionRole" element={ logged ? <InsertPermissionRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllPermissionRole" element={ logged ? <AllPermissionRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/Role" element={ logged ? <Role /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertRole" element={ logged ? <InsertRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllRole" element={ logged ? <AllRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/State" element={ logged ? <State /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertState" element={ logged ? <InsertState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllState" element={ logged ? <AllState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/OrderState" element={ logged ? <OrderState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertOrderState" element={ logged ? <InsertOrderState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllOrderState" element={ logged ? <AllOrderState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/BusinessUnit" element={ logged ? <BusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertBusinessUnit" element={ logged ? <InsertBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllBusinessUnit" element={ logged ? <AllBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/TypeUser" element={ logged ? <TypeUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertUserType" element={ logged ? <InsertTypeUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllTypeUser" element={ logged ? <AllTypeUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/User" element={ logged ? <User /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertUser" element={ logged ? <InsertUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllUser" element={ logged ? <AllUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/UserBusinessUnit" element={ logged ? <UserBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertUserBusinessUnit" element={ logged ? <InsertUserBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllUserBusinessUnit" element={ logged ? <AllUserBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/Product" element={ logged ? <Product /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertProduct" element={ logged ? <InsertProduct /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllProduct" element={ logged ? <AllProduct /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/Extra" element={ logged ? <Extra /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/InsertExtra" element={ logged ? <InsertExtra /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllExtra" element={ logged ? <AllExtra /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/DishesDisplay" element={ logged ? <DishesDisplay /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllOrder" element={ logged ? <AllOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/ModifyOrder" element={ logged ? <ModifyOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/BillingByOrder" element={ logged ? <BillingByOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/AllBillingOrder" element={ logged ? <AllBillingOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/WelcomeCenter" element={logged ? <WelcomeCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/UsersCenter" element={ logged ? <UsersCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/DishesCenter" element={ logged ? <DishesCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
-          <Route path="/SalesCenter" element={ logged ? <SalesCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/admin" element={ logged=='true' ? <Admin /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/Dishes" element={ logged=='true' ? <Dishes /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertDish" element={ logged=='true' ? <InsertDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllDishes" element={ logged=='true' ? <AllDishes /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/TypeDish" element={ logged=='true' ? <TypeDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertTypeDish" element={ logged=='true' ? <InsertTypeDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllTypeDish" element={ logged=='true' ? <AllTypeDish /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/TypePermission" element={ logged=='true' ? <TypePermission /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertTypePermission" element={ logged=='true' ? <InsertTypePermission /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllTypePermission" element={ logged=='true' ? <AllTypePermission /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/TypeRole" element={ logged=='true' ? <TypeRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertTypeRole" element={ logged=='true' ? <InsertTypeRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllTypeRole" element={ logged=='true' ? <AllTypeRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/PermissionRole" element={ logged=='true' ? <PermissionRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertPermissionRole" element={ logged=='true' ? <InsertPermissionRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllPermissionRole" element={ logged=='true' ? <AllPermissionRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/Role" element={ logged=='true' ? <Role /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertRole" element={ logged=='true' ? <InsertRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllRole" element={ logged=='true' ? <AllRole /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/State" element={ logged=='true' ? <State /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertState" element={ logged=='true' ? <InsertState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllState" element={ logged=='true' ? <AllState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/OrderState" element={ logged=='true' ? <OrderState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertOrderState" element={ logged=='true' ? <InsertOrderState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllOrderState" element={ logged=='true' ? <AllOrderState /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/BusinessUnit" element={ logged=='true' ? <BusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertBusinessUnit" element={ logged=='true' ? <InsertBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllBusinessUnit" element={ logged=='true' ? <AllBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/TypeUser" element={ logged=='true' ? <TypeUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertUserType" element={ logged=='true' ? <InsertTypeUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllTypeUser" element={ logged=='true' ? <AllTypeUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/User" element={ logged=='true' ? <User /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertUser" element={ logged=='true' ? <InsertUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllUser" element={ logged=='true' ? <AllUser /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/UserBusinessUnit" element={ logged=='true' ? <UserBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertUserBusinessUnit" element={ logged=='true' ? <InsertUserBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllUserBusinessUnit" element={ logged=='true' ? <AllUserBusinessUnit /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/Product" element={ logged=='true' ? <Product /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertProduct" element={ logged=='true' ? <InsertProduct /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllProduct" element={ logged=='true' ? <AllProduct /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/Extra" element={ logged=='true' ? <Extra /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/InsertExtra" element={ logged=='true' ? <InsertExtra /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllExtra" element={ logged=='true' ? <AllExtra /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/DishesDisplay" element={ logged=='true' ? <DishesDisplay /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllOrder" element={ logged=='true' ? <AllOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/ModifyOrder" element={ logged=='true' ? <ModifyOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/BillingByOrder" element={ logged=='true' ? <BillingByOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/AllBillingOrder" element={ logged=='true' ? <AllBillingOrder /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/WelcomeCenter" element={logged=='true' ? <WelcomeCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/UsersCenter" element={ logged=='true' ? <UsersCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/DishesCenter" element={ logged=='true' ? <DishesCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
+          <Route path="/SalesCenter" element={ logged=='true' ? <SalesCenter /> : <div>Debes hacer "Login" para ingresar a la vista ...</div>}></Route>
 
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

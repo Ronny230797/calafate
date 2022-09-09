@@ -22,10 +22,12 @@ export default function Login() {
         loginRequest(obj);
         console.log(resData);
 
-        if(resData == false || resData == undefined){
+        if (resData == false || resData == undefined) {
             alert('No se puedo verificar su identidad');
-        }else{
-            window.location.href='/WelcomeCenter';
+        } else {
+            localStorage.removeItem('ABRLGN');
+            localStorage.setItem('ABRLGN', true);
+            window.location.href = '/WelcomeCenter';
         }
 
     };

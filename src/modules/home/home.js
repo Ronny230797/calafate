@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Entrada from '../../assets/Entrada.jpg';
 import AppBar from '../../components/appbar-basic';
@@ -7,6 +7,10 @@ import "../../styles/home/home.scss";
 
 
 export default function Home() {
+    useEffect(() => {
+        localStorage.setItem('ABRLGN', false);                    
+      }, []);
+
     return (
         <React.Fragment >
             <Container className='home'>

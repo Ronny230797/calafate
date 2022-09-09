@@ -6,7 +6,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const ResponsiveAppBar = () => {
 
-    const [logged, setLogged] = useState(false);
+    const removeLocalS = () =>{
+        localStorage.removeItem('ABRLGN');
+    }
 
     return (
         <>
@@ -26,6 +28,9 @@ const ResponsiveAppBar = () => {
                         </LinkContainer>
                         <LinkContainer to="/SalesCenter">
                             <Nav.Link >Administrador de Ventas</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/" onClick={removeLocalS}>
+                            <Nav.Link >Salir</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
