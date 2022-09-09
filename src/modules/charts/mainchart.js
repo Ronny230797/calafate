@@ -1,19 +1,24 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Button, Alert } from "react-bootstrap";
 import "../../styles/admin/admin.scss";
 import AppBarLogged from '../../components/appbar-logged.js';
 import { PieChart } from '../charts/pie.js';
 import { VerticalBar } from '../charts/verticalbar.js';
 import { LineChart } from '../charts/line.js';
 import { useState } from 'react';
+import { useAlert } from "react-alert";
+
 
 export default function MainChart() {
 
     const [isShown, setIsShown] = useState('');
+    const alert = useAlert();
 
     const handleClick = (chart) => {
-        setIsShown(chart);
+        // setIsShown(chart);
+        alert.show(<div style={{ color: 'white' }}>Some Message</div>)
+       
+        
       };
 
     return (
