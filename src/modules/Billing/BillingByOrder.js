@@ -57,13 +57,13 @@ export default function BillingByOrder() {
         newFirstnameClient.trim() === "" &&
         !isNaN(newFirstnameClient)
       ) {
-        alert(
+        alert.show(
           "Por favor no ingrese espacion en blanco o numeros en el nombre."
         );
       } else {
         console.log(!isNaN(newSecondnameClient));
         if (!isNaN(newSecondnameClient)) {
-          alert(
+          alert.show(
             "Por favor no ingrese numeros en el Segundo nombre, u omita ingresarlo."
           );
         } else {
@@ -72,7 +72,7 @@ export default function BillingByOrder() {
             newFirstLastnameClient.trim() === "" &&
             !isNaN(newFirstLastnameClient)
           ) {
-            alert(
+            alert.show(
               "Por favor no ingrese espacios en blanco o numeros en el primer apellido."
             );
           } else {
@@ -81,7 +81,7 @@ export default function BillingByOrder() {
               newSecondLastnameClient.trim() === "" &&
               !isNaN(newSecondLastnameClient)
             ) {
-              alert(
+              alert.show(
                 "Por favor no ingrese espacios en blanco o numeros en el segundo apellido."
               );
             } else {
@@ -132,9 +132,11 @@ export default function BillingByOrder() {
                     );
                     if (response.status === 200) {
                       alert.show("Se realizo el pago.");
+                       Print();
                       navigate(-1);
+
                     } else {
-                      alert(
+                      alert.show(
                         "Ocurrio un error al cambiar el estado de la orden"
                       );
                     }
@@ -174,7 +176,8 @@ export default function BillingByOrder() {
         );
         if (response.status === 200) {
           alert.show("Se realizo el pago.");
-          navigate(-1);
+          Print();
+          window.location.href = '/AllBillingOrder';
         } else {
           alert.show("Ocurrio un error al cambiar el estado de la orden");
         }
@@ -185,12 +188,12 @@ export default function BillingByOrder() {
   };
 
   const Print = () => {
-    paymentRequest();
     let printContents = document.getElementById('ticketprint').innerHTML;
     let originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
+    // paymentRequest();
   }
 
   function DateTime() {
@@ -360,7 +363,7 @@ export default function BillingByOrder() {
           <Row>
             <Col xs={12} xl={12}>
               <Button onClick={paymentRequest}>Pagar</Button>
-              <Button onClick={Print}>Ticket</Button>
+              {/* <Button onClick={Print}>Ticket</Button> */}
             </Col>
           </Row>
         </Container>
