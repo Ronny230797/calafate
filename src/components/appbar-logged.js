@@ -11,21 +11,21 @@ const ResponsiveAppBar = () => {
     return (
         <>
             <Navbar collapseOnSelect expand="lg">
-                <LinkContainer to="/">
+                <LinkContainer to="/WelcomeCenter">
                     <Navbar.Brand>Calafate</Navbar.Brand>
                 </LinkContainer>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
-                        <LinkContainer to="/">
-                            <Nav.Link >Admin</Nav.Link>
+                        <LinkContainer to="/UsersCenter">
+                            <Nav.Link >Administrador de Usuarios</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/menu">
-                            <Nav.Link >Ventas</Nav.Link>
+                        <LinkContainer to="/DishesCenter">
+                            <Nav.Link >Administrador de Platos</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/contact">
-                            <Nav.Link >Contacto</Nav.Link>
+                        <LinkContainer to="/SalesCenter">
+                            <Nav.Link >Administrador de Ventas</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
